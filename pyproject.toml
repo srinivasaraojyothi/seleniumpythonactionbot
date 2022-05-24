@@ -6,7 +6,7 @@ name = "pythonSeleniumActionBot"
 version = "1.0.0"
 description = "Python selenium Wrapper"
 readme = "README.md"
-authors = [{ name = "Real Python", email = "srinivasaraojyothi@gmail.com" }]
+authors = [{ name = "Python selenium Wrapper", email = "srinivasaraojyothi@gmail.com" }]
 
 dependencies = [
     
