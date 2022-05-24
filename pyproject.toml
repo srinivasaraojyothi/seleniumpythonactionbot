@@ -6,6 +6,13 @@ name = "pythonSeleniumActionBot"
 version = "1.0.0"
 description = "Python selenium Wrapper"
 readme = "README.md"
-authors = [{ name = "Real Python", email = "info@realpython.com" }]
+authors = [{ name = "Real Python", email = "srinivasaraojyothi@gmail.com" }]
+
+dependencies = [
+    
+    "selenium"
+    
+]
+
 [project.urls]
 Homepage = "https://github.com/srinivasaraojyothi/seleniumpythonactionbot.git"
