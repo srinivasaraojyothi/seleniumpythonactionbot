@@ -2,8 +2,8 @@
 requires = ["setuptools>=61.0.0", "wheel"]
 build-backend = "setuptools.build_meta"
 [project]
-name = "pythonSeleniumActionBot"
-version = "1.0.0"
+name = "pyseleniumbot"
+version = "1.0.5"
 description = "Python selenium Wrapper"
 readme = "README.md"
 authors = [{ name = "Python selenium Wrapper", email = "srinivasaraojyothi@gmail.com" }]
@@ -32,4 +32,3 @@ push = true
     "{version}",
     "{pep440_version}",
 ]
-
