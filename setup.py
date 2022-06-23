@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="pyseleniumbot",                     # This is the name of the package
-    version="1.0.5",                        # The initial release version
+    version="1.0.7",                        # The initial release version
     author="srinivasaraojyothi@gmail.com",                     # Full name of the author
     description="pyseleniumbot - a wrapper based on selenium python",
     url = "https://github.com/srinivasaraojyothi/seleniumpythonactionbot.git",
@@ -18,7 +18,7 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],                                      # Information to filter the project on PyPi website
     python_requires='>=3.9',                # Minimum version requirement of the package
-    py_modules=["pyseleniumbot"],             # Name of the python package
-    package_dir={'':'pyseleniumbot/src'},     # Directory of the source code of the package
+    py_modules=["dragAndDrop","alerts","DropDown","webWaits","windowAndFrame","webElement","pollWait","session","mobAppium"],             # Name of the python package
+    package_dir={'pyseleniumbot.web':'pyseleniumbot/web', 'pyseleniumbot.mobile':'pyseleniumbot/mobile'},     # Directory of the source code of the package
     install_requires=[]                     # Install other dependencies if any
 )

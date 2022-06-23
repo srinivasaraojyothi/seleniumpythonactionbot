@@ -1,0 +1,4 @@
+testcase_id,crud_type,api_signature,headers,data,statuscode,errormessage,expected
+Test_1,POST,https://reqbin.com/echo/post/json,{‘Content-Type’: ‘application/json’},,,,
+Test_2,GET,https://reqbin.com/echo/get/json,Accept: application/json ,,,,
+Test_3,PUT,https://reqbin.com/echo/put/json,Content-Type: application/json ,,,,
