@@ -15,24 +15,30 @@ class DragAndDrop(customwebDriverwait):
         super().__init__(browser)
         self.browser = browser
     def dragAndDrop(self, sourcexpath, destinationxpath):
-        SourceelElementPresense=super().WaitFor_PresenseOf_Element_Located(sourcexpath)
-        SourceelElementVisibility=super().WaitFor_VisibilityOf_Element_Located(sourcexpath)
-        DestinationElementPresense=super().WaitFor_PresenseOf_Element_Located(destinationxpath)
-        DestinationElementVisibility=super().WaitFor_VisibilityOf_Element_Located(destinationxpath)
-        if(SourceelElementPresense & DestinationElementPresense ):
-            if(SourceelElementVisibility & DestinationElementVisibility):
-                sourceElement = self.browser.find_element(By.XPATH, sourcexpath)
-                destination = self.browser.find_element(By.XPATH, destinationxpath)
-                action_chains = ActionChains(self.browser)
-                action_chains.drag_and_drop(sourceElement, destination).perform()
+        try:
+            SourceelElementPresense=super().WaitFor_PresenseOf_Element_Located(sourcexpath)
+            SourceelElementVisibility=super().WaitFor_VisibilityOf_Element_Located(sourcexpath)
+            DestinationElementPresense=super().WaitFor_PresenseOf_Element_Located(destinationxpath)
+            DestinationElementVisibility=super().WaitFor_VisibilityOf_Element_Located(destinationxpath)
+            if(SourceelElementPresense & DestinationElementPresense ):
+                if(SourceelElementVisibility & DestinationElementVisibility):
+                    sourceElement = self.browser.find_element(By.XPATH, sourcexpath)
+                    destination = self.browser.find_element(By.XPATH, destinationxpath)
+                    action_chains = ActionChains(self.browser)
+                    action_chains.drag_and_drop(sourceElement, destination).perform()
+        except Exception as error:
+            raise error            
 
     def dragAndDropByOffset(self, sourcexpath, xoffset, yoffset):
-        SourceelElementPresense=super().WaitFor_PresenseOf_Element_Located(sourcexpath)
-        SourceelElementVisibility=super().WaitFor_VisibilityOf_Element_Located(sourcexpath)
-        if(SourceelElementPresense):
-            if(SourceelElementVisibility):
-                sourceElement = self.browser.find_element(By.XPATH, sourcexpath)
+        try:
+            SourceelElementPresense=super().WaitFor_PresenseOf_Element_Located(sourcexpath)
+            SourceelElementVisibility=super().WaitFor_VisibilityOf_Element_Located(sourcexpath)
+            if(SourceelElementPresense):
+                if(SourceelElementVisibility):
+                    sourceElement = self.browser.find_element(By.XPATH, sourcexpath)
 
-                action_chains = ActionChains(self.browser)
-                action_chains.drag_and_drop_by_offset(
-                    sourceElement, xoffset, yoffset).perform()
+                    action_chains = ActionChains(self.browser)
+                    action_chains.drag_and_drop_by_offset(
+                        sourceElement, xoffset, yoffset).perform()
+        except Exception as error:
+            raise error                

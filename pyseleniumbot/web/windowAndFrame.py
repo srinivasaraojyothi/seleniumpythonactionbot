@@ -50,4 +50,3 @@ class frameAndWindow(customwebDriverwait):
         except Exception as error:
             raise error            
     # navigating
-
