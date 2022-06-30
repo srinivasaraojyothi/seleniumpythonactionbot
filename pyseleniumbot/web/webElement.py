@@ -9,7 +9,11 @@ from selenium.webdriver.common.alert import Alert
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.select import Select
 from pyseleniumbot.web.webWaits import customwebDriverwait
-
+from selenium.webdriver.remote.webdriver import WebDriver
+import cv2
+import numpy as np
+import easyocr
+import matplotlib.pyplot as plt
 
 class common(customwebDriverwait):
 
@@ -269,8 +273,52 @@ class common(customwebDriverwait):
         actions = ActionChains(self.browser)
         element = common.webdriverWait(self, xpath)
         actions.send_keys_to_element(element, keys_to_send)
+        '''
+        Gets the full document screenshot of the current window as a base64 encoded string
+        which is useful in embedded images in HTML.
 
+        Usage:	
+        driver.get_full_page_screenshot_as_base64()
+        '''
+    def get_screenshot_ofcurrentActive_page_in_base64(self):
+        return self.browser.get_full_page_screenshot_as_base64()
 
+        '''
+        Saves a full document screenshot of the current window to a PNG image file. Returns
+        False if there is any IOError, else returns True. Use full paths in your filename.
+        Args:	
+        filename: The full path you wish to save your screenshot to. This should end with a .png extension.
+        Usage:	
+        driver.get_full_page_screenshot_as_file('/Screenshots/foo.png')
+        '''
+    def get_screenshot_ofcurrentActive_page_asFile(self,filename:str):
+        return self.browser.get_full_page_screenshot_as_file(filename)    
+        '''get_full_page_screenshot_as_png() → str
+        Gets the full document screenshot of the current window as a binary data.
 
+        Usage:	
+        driver.get_full_page_screenshot_as_png()
+        '''
+    def get_screenshot_ofcurrentActive_page_asPNG(self):
+        return self.browser.get_full_page_screenshot_as_png()
 
+        ''' 
+        Saves a screenshot of the current window to a PNG image file. Returns
+        False if there is any IOError, else returns True. Use full paths in your filename.
+        Args:	
+        filename: The full path you wish to save your screenshot to. This should end with a .png extension.
+        Usage:	
+        driver.save_screenshot('/Screenshots/foo.png')
+        '''
+    def screenshot_save_full_page_screenshot(self,filename):
+        return self.browser.save_screenshot(filename)
 
+    '''
+    returns the embedded text in the image.
+    It returns a list of detected text, with each text element containing three types of information. 
+    Which are: the text, its bounding box vertices, and the confidence level of the text detection
+    '''    
+    def get_embeddedText_from_image(self,path:str):
+         reader= easyocr.Reader(['en'])
+         return reader.readtext(path)    
+    
