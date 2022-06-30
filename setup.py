@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="pyseleniumbot",                     # This is the name of the package
-    version="1.0.7",                        # The initial release version
+    version="1.0.13",                        # The initial release version
     author="srinivasaraojyothi@gmail.com",                     # Full name of the author
     description="pyseleniumbot - a wrapper based on selenium python",
     url = "https://github.com/srinivasaraojyothi/seleniumpythonactionbot.git",
