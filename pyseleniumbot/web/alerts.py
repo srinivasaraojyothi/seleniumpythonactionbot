@@ -21,22 +21,34 @@ class browserAlerts(customwebDriverwait):
     # Use this class to interact with alert prompts. 
     # It contains methods for dismissing, accepting, inputting, and getting text from alert prompts.   
     def acceptAlert(self):
-        alertPresence= super().WaitForAlert_is_present()
-        if(alertPresence):
-            Alert(self.browser).accept()
+        try:
+            alertPresence= super().WaitForAlert_is_present()
+            if(alertPresence):
+                Alert(self.browser).accept()
+        except Exception as error:
+            raise error                
     def dismissAlert(self):
-        alertPresence= super().WaitForAlert_is_present()
-        if(alertPresence):
-            Alert(self.browser).dismiss() 
+        try:
+            alertPresence= super().WaitForAlert_is_present()
+            if(alertPresence):
+                Alert(self.browser).dismiss() 
+        except Exception as error:
+            raise error                
     def getAlertText(self):
-        alertPresence= super().WaitForAlert_is_present()
-        if(alertPresence):
-            alertText=Alert(self.browser).text
-            return alertText
+        try:
+            alertPresence= super().WaitForAlert_is_present()
+            if(alertPresence):
+                alertText=Alert(self.browser).text
+                return alertText
+        except Exception as error:
+            raise error                
     def sendKeystoAlert(self,keysToSend):
-        alertPresence= super().WaitForAlert_is_present()
-        name_prompt = Alert(self.browser)
-        name_prompt.send_keys(keysToSend)
+        try:
+            alertPresence= super().WaitForAlert_is_present()
+            name_prompt = Alert(self.browser)
+            name_prompt.send_keys(keysToSend)
+        except Exception as error:
+            raise error            
     # Special Keys
     #The Keys implementation.
     ''' yet to complete'''

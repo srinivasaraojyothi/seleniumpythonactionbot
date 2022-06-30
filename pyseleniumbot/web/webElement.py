@@ -27,28 +27,41 @@ class common(customwebDriverwait):
         return self.browser.find_elements(By.XPATH, xpath)
 
     def findElementBy(self, xpath):
-        self.browser.presence_of_element_located(xpath)
-        self.browser.visibility_of_element_located(xpath)
-        self.browser.find_element(By.XPATH, xpath)
+        try:
+            self.browser.presence_of_element_located(xpath)
+            self.browser.visibility_of_element_located(xpath)
+            if(self.browser.presence_of_element_located(xpath)) :
+                self.browser.find_element(By.XPATH, xpath)
+        except Exception as error:
+            raise error        
 
     def click(self, xpath):
-        elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
-        elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
-        if(elementPresense):
-            if(elementVisible):
-                self.browser.find_element(By.XPATH, xpath).click()
+        try:
+            elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
+            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            if(elementPresense):
+                if(elementVisible):
+                    self.browser.find_element(By.XPATH, xpath).click()
+        except Exception as error:
+            raise error            
 
     def clear(self, xpath):
-        elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
-        elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
-        if(elementPresense):
-            if(elementVisible):
-                self.browser.find_element(By.XPATH, xpath).clear()    
+        try:
+            elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
+            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            if(elementPresense):
+                if(elementVisible):
+                    self.browser.find_element(By.XPATH, xpath).clear()  
+        except Exception as error:
+            raise error              
     
     
     def isClickable(self, xpath, index=None):
         # self.browser.visibility_of_element_located(xpath)
-        return WebDriverWait(self.browser, 10).until(EC.presence_of_element_located((xpath)))
+        try:
+            return WebDriverWait(self.browser, 10).until(EC.presence_of_element_located((xpath)))
+        except Exception as error:
+            raise error    
     
     '''
     Simulates typing into the element.
@@ -68,16 +81,20 @@ class common(customwebDriverwait):
     '''
 
     def fillField(self, xpath, text):
-        elementPresence = super().WaitFor_PresenseOf_Element_Located(xpath)
-        elementVisibility = super().WaitFor_VisibilityOf_Element_Located(xpath)
-        if(elementPresence):
-            if(elementVisibility):
-                self.browser.find_element(By.XPATH, xpath).send_keys(text)
-
+        try:
+            elementPresence = super().WaitFor_PresenseOf_Element_Located(xpath)
+            elementVisibility = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            if(elementPresence):
+                if(elementVisibility):
+                    self.browser.find_element(By.XPATH, xpath).send_keys(text)
+        except Exception as error:
+            raise error
 
     def navigateto(self, urlstring):
-        self.browser.get(urlstring)
-
+        try:
+            self.browser.get(urlstring)
+        except Exception as error:
+            raise error
     '''
         Gets the given attribute or property of the element.
 
@@ -95,11 +112,14 @@ class common(customwebDriverwait):
         is_active = "active" in target_element.get_attribute("class")
     '''
     def getAttribute(self, xpath,AttributeName):
-        elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
-        elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
-        if(elementPresense):
-            if(elementVisible):
-                return self.browser.find_element(By.XPATH, xpath).get_attribute(AttributeName)      
+        try:
+            elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
+            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            if(elementPresense):
+                if(elementVisible):
+                    return self.browser.find_element(By.XPATH, xpath).get_attribute(AttributeName)
+        except Exception as error:
+            raise error                  
     
     '''
         Gets the given attribute of the element. Unlike get_attribute(), this method only returns 
@@ -111,12 +131,14 @@ class common(customwebDriverwait):
         text_length = target_element.get_dom_attribute("class")
     '''
     def getDomAttribute(self, xpath,AttributeName):
-        elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
-        elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
-        if(elementPresense):
-            if(elementVisible):
-                return self.browser.find_element(By.XPATH, xpath).get_dom_attribute(AttributeName) 
-
+        try:
+            elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
+            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            if(elementPresense):
+                if(elementVisible):
+                    return self.browser.find_element(By.XPATH, xpath).get_dom_attribute(AttributeName) 
+        except Exception as error:
+            raise error
 
 
     '''
@@ -128,151 +150,223 @@ class common(customwebDriverwait):
         text_length = target_element.get_property("text_length")
     '''
     def getProperty(self, xpath,PropertyName):
-        elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
-        elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
-        if(elementPresense):
-            if(elementVisible):
-                return self.browser.find_element(By.XPATH, xpath).get_property(PropertyName) 
+        try:
+            elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
+            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            if(elementPresense):
+                if(elementVisible):
+                    return self.browser.find_element(By.XPATH, xpath).get_property(PropertyName)
+        except Exception as error:
+            raise error             
     '''
         Whether the element is visible to a user.
     '''
     def isElementDisplayed(self, xpath):
-        elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
-        elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
-        if(elementPresense):
-            if(elementVisible):
-                return self.browser.find_element(By.XPATH, xpath).is_displayed() 
+        try:
+            elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
+            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            if(elementPresense):
+                if(elementVisible):
+                    return self.browser.find_element(By.XPATH, xpath).is_displayed()
+        except Exception as error:
+            raise error             
     '''
         Returns whether the element is enabled.
     '''
     def isElementEnabled(self, xpath):
-        elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
-        elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
-        if(elementPresense):
-            if(elementVisible):
-                return self.browser.find_element(By.XPATH, xpath).is_enabled()  
-
+        try:
+            elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
+            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            if(elementPresense):
+                if(elementVisible):
+                    return self.browser.find_element(By.XPATH, xpath).is_enabled()  
+        except Exception as error:
+            raise error
     '''
         Returns whether the element is selected.
 
         Can be used to check if a checkbox or radio button is selected.
     '''
     def isElementSelected(self, xpath):
-        elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
-        elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
-        if(elementPresense):
-            if(elementVisible):
-                return self.browser.find_element(By.XPATH, xpath).is_selected() 
-    
+        try:
+            elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
+            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            if(elementPresense):
+                if(elementVisible):
+                    return self.browser.find_element(By.XPATH, xpath).is_selected() 
+        except Exception as error:
+            raise error
     '''
         Saves a screenshot of the current element to a PNG image file. Returns
         False if there is any IOError, else returns True. Use full paths in your filename.
     '''
     def currentElementScreenshot(self, xpath,screenShotSavingPath):
-        elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
-        elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
-        if(elementPresense):
-            if(elementVisible):
-                return self.browser.find_element(By.XPATH, xpath).screenshot(screenShotSavingPath)
+        try:
+            elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
+            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            if(elementPresense):
+                if(elementVisible):
+                    return self.browser.find_element(By.XPATH, xpath).screenshot(screenShotSavingPath)
+        except Exception as error:
+            raise error            
     # action class
 
     def actionClick(self, xpath):
-        actions = ActionChains(self.browser)
-        element = self.browser.find_element(By.XPATH, xpath)
-        actions.click(element)
+        try:
+            actions = ActionChains(self.browser)
+            
+            if(super().WaitFor_PresenseOf_Element_Located(xpath)):
+                element = self.browser.find_element(By.XPATH, xpath)
+                actions.move_to_element(element).click(element)
+                actions.perform()
+        except Exception as error:
+            raise  error    
 
     def actionClickandHold(self, xpath=None):
-        actions = ActionChains(self.browser)
-        if(xpath != None):
-            element = self.browser.find_element(By.XPATH, xpath)
-        else:
-            element = None
-        if(element != None):
-            actions.click_and_hold(element)
-        else:
-            actions.click_and_hold()
+        try:
+            actions = ActionChains(self.browser)
+            if(xpath != None):
+                element = self.browser.find_element(By.XPATH, xpath)
+            else:
+                element = None
+            if(element != None):
+                actions.click_and_hold(element)
+                actions.perform()
+            else:
+                actions.click_and_hold()
+                actions.perform()
+        except Exception as error:
+            raise error        
 
     def moveToElement(self, xpath):
-        actions = ActionChains(self.browser)
-        element = self.browser.find_element(By.XPATH, xpath)
-        actions.move_to_element(element).perform()
+        try:
+            actions = ActionChains(self.browser)
+            element = self.browser.find_element(By.XPATH, xpath)
+            actions.move_to_element(element).perform()
+        except Exception as error:
+            raise error    
 
     def moveToElementWithOffset(self, xpath, xoffset, yoffset):
-        actions = ActionChains(self.browser)
-        element = self.browser.find_element(By.XPATH, xpath)
-        actions.move_to_element_with_offset(element, xoffset, yoffset)
-
-    def moveByOffsett(self, xoffset, yoffset):
-        actions = ActionChains(self.browser)
-        actions.move_by_offset(xoffset, yoffset)
-
-    def actionRelease(self, xpath=None):
-        actions = ActionChains(self.browser)
-        if(xpath != None):
+        try:
+            actions = ActionChains(self.browser)
             element = self.browser.find_element(By.XPATH, xpath)
-        else:
-            element = None
-        if(element != None):
-            actions.release(element)
-        else:
-            actions.release()
+            actions.move_to_element_with_offset(element, xoffset, yoffset)
+            actions.perform()
+        except Exception as error:
+            raise error    
+    def moveByOffsett(self, xoffset, yoffset):
+        try:
+            actions = ActionChains(self.browser)
+            actions.move_by_offset(xoffset, yoffset)
+            actions.perform()
+        except Exception as error:
+            raise error    
+    def actionRelease(self, xpath=None):
+        try:
+            actions = ActionChains(self.browser)
+            if(xpath != None):
+                element = self.browser.find_element(By.XPATH, xpath)
+            else:
+                element = None
+            if(element != None):
+                actions.release(element)
+                actions.perform()
+
+            else:
+                actions.release()
+                actions.perform()
+        except Exception as error:
+            raise error        
+    
 
     def keyDown(self, ModifierKey, key, xpath=None):
-        actions = ActionChains(self.browser)
-        if(xpath != None):
-            element = self.browser.find_element(By.XPATH, xpath)
-        else:
-            element = None
-        if(element != None):
-            actions.key_down(ModifierKey, element).send_keys(key)
-        else:
-            actions.key_down(ModifierKey).send_keys(key)
+        try:
+            actions = ActionChains(self.browser)
+            if(xpath != None):
+                element = self.browser.find_element(By.XPATH, xpath)
+            else:
+                element = None
+            if(element != None):
+                actions.key_down(ModifierKey, element).send_keys(key)
+                actions.perform()
+            else:
+                actions.key_down(ModifierKey).send_keys(key)
+                actions.perform()
+        except Exception as error:
+            raise error
+
 
     def keyUp(self, ModifierKey, key, xpath=None):
-        actions = ActionChains(self.browser)
-        if(xpath != None):
-            element = self.browser.find_element(By.XPATH, xpath)
-        else:
-            element = None
-        if(element != None):
-            actions.key_up(ModifierKey, element).perform()
-        else:
-            actions.key_up(ModifierKey).perform()
+        try:
+            actions = ActionChains(self.browser)
+            if(xpath != None):
+                element = self.browser.find_element(By.XPATH, xpath)
+            else:
+                element = None
+            if(element != None):
+                actions.key_up(ModifierKey, element).perform()
+                
+            else:
+                actions.key_up(ModifierKey).perform()
+        except Exception as error:
+            raise error        
 
     def double_click(self, xpath: None):
-        actions = ActionChains(self.browser)
-        if(xpath != None):
-            element = self.browser.find_element(By.XPATH, xpath)
-        else:
-            element = None
-        if(element != None):
-            actions.double_click(element)
-        else:
-            actions.double_click()
+        try:
+            actions = ActionChains(self.browser)
+            if(xpath != None):
+                element = self.browser.find_element(By.XPATH, xpath)
+            else:
+                element = None
+            if(element != None):
+                actions.double_click(element)
+                actions.perform()
+            else:
+                actions.double_click()
+                actions.perform()
+        except Exception as error:
+            raise error        
 
     def righttClick(self, xpath=None):
-        actions = ActionChains(self.browser)
-        if(xpath != None):
-            element = self.browser.find_element(By.XPATH, xpath)
-        else:
-            element = None
-        if(element != None):
-            actions.context_click(element)
-        else:
-            actions.context_click()
+        try:
+            actions = ActionChains(self.browser)
+            if(xpath != None):
+                element = self.browser.find_element(By.XPATH, xpath)
+            else:
+                element = None
+            if(element != None):
+                actions.context_click(element)
+                actions.perform()
+            else:
+                actions.context_click()
+                actions.perform() 
+        except Exception as error:
+            raise error               
 
     def resetActions(self):
-        actions = ActionChains(self.browser)
-        actions.reset_actions()
+        try:
+            actions = ActionChains(self.browser)
+            actions.reset_actions()
+            actions.perform()
+        except Exception as error:
+            raise error            
 
     def sendKeys(self, *keys_to_send):
-        actions = ActionChains(self.browser)
-        actions.send_keys(keys_to_send)
+        try:
+            actions = ActionChains(self.browser)
+            actions.send_keys(keys_to_send)
+            actions.perform()
+        except Exception as error:
+            raise error            
 
     def sendKeysToElement(self, xpath, *keys_to_send):
-        actions = ActionChains(self.browser)
-        element = common.webdriverWait(self, xpath)
-        actions.send_keys_to_element(element, keys_to_send)
+        try:
+            actions = ActionChains(self.browser)
+            element = super().WaitFor_PresenseOf_Element_Located(xpath)
+            actions.send_keys_to_element(element, keys_to_send)
+            actions.perform()
+        except Exception as error:
+            raise error    
         '''
         Gets the full document screenshot of the current window as a base64 encoded string
         which is useful in embedded images in HTML.
@@ -281,7 +375,10 @@ class common(customwebDriverwait):
         driver.get_full_page_screenshot_as_base64()
         '''
     def get_screenshot_ofcurrentActive_page_in_base64(self):
-        return self.browser.get_full_page_screenshot_as_base64()
+        try:
+            return self.browser.get_full_page_screenshot_as_base64()
+        except Exception as error:
+            raise error    
 
         '''
         Saves a full document screenshot of the current window to a PNG image file. Returns
@@ -292,7 +389,10 @@ class common(customwebDriverwait):
         driver.get_full_page_screenshot_as_file('/Screenshots/foo.png')
         '''
     def get_screenshot_ofcurrentActive_page_asFile(self,filename:str):
-        return self.browser.get_full_page_screenshot_as_file(filename)    
+        try:
+            return self.browser.get_full_page_screenshot_as_file(filename) 
+        except Exception as error:
+            raise error       
         '''get_full_page_screenshot_as_png() → str
         Gets the full document screenshot of the current window as a binary data.
 
@@ -300,7 +400,10 @@ class common(customwebDriverwait):
         driver.get_full_page_screenshot_as_png()
         '''
     def get_screenshot_ofcurrentActive_page_asPNG(self):
-        return self.browser.get_full_page_screenshot_as_png()
+        try:
+            return self.browser.get_full_page_screenshot_as_png()
+        except Exception as error:
+            raise error    
 
         ''' 
         Saves a screenshot of the current window to a PNG image file. Returns
@@ -311,7 +414,10 @@ class common(customwebDriverwait):
         driver.save_screenshot('/Screenshots/foo.png')
         '''
     def screenshot_save_full_page_screenshot(self,filename):
-        return self.browser.save_screenshot(filename)
+        try:
+            return self.browser.save_screenshot(filename)
+        except Exception as error:
+            raise error    
 
     '''
     returns the embedded text in the image.
@@ -319,6 +425,9 @@ class common(customwebDriverwait):
     Which are: the text, its bounding box vertices, and the confidence level of the text detection
     '''    
     def get_embeddedText_from_image(self,path:str):
-         reader= easyocr.Reader(['en'])
-         return reader.readtext(path)    
+        try:
+            reader= easyocr.Reader(['en'])
+            return reader.readtext(path)
+        except Exception as error:
+            raise error        
     
