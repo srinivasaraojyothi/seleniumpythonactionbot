@@ -284,3 +284,26 @@ def dragAndDrop(self, sourcexpath, destinationxpath):
     def sendKeystoAlert(self,keysToSend):
             ... 
 ```
+### other_miscellaneous
+```python
+   
+   
+    '''
+    returns the embedded text in the image.
+    It returns a list of detected text, with each text element containing three types of information. 
+    Which are: the text, its bounding box vertices, and the confidence level of the text detection
+    '''    
+    def get_embeddedText_from_image(self,path:str):
+    ''' compares images by pixel and return boolean tru or false'''
+    def is_images_same_compare_by_pixel(self,sourceFile, destinationFile):
+    ''' returns the pdf file content as text'''   
+    def pdf_content_reader(self,file1):
+    ''' returns the mail body if the searched string found in in the mail body or subject'''    
+    def mail_outlook_search(self,userName,password,searchString:str,fromAddress:str):
+    ''' returns the mail attachments in a list'''
+    def mail_outlook_Attachments(self,userName,password,searchString:str,fromAddress:str):
+    ''' returns the mail attachments content in a dictionary as attachment name as key and attachment content as value'''                            
+    def mail_outlook_Attachments_Read(self,userName,password,searchString:str,fromAddress:str):
+  
+
+```
