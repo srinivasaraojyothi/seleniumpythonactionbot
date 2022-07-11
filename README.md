@@ -1,5 +1,7 @@
-# Python Selenium Actionbot wrapper
+# pyallied wrapper
+
 ## Currently supporting functions
+
 ### webelement functions  
 
 ``` python
