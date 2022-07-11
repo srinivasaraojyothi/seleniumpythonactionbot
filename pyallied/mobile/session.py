@@ -3,6 +3,7 @@ from typing import Union
 from click import command
 from pyallied.mobile.pollWait import pollWait
 from appium import webdriver 
+from pyallied.mobile.mobilecommand import mobile_command
 from appium.webdriver.applicationstate import ApplicationState
 from appium.webdriver.extensions.device_time import DeviceTime
 from appium.webdriver.extensions.location import Location
@@ -63,7 +64,8 @@ class session(pollWait,Location,Settings,CanExecuteCommands,AppiumConnection,Mob
         self.driver.switch_to.context('WEBVIEW_1')
     def get_Contexts(self):
         return self.driver.contexts
-        
+    def Execute_driver_to_Get_Properties(self,command:mobile_command):
+        return self.driver.execute(command)        
 
     
 
