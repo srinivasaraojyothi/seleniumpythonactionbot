@@ -309,3 +309,20 @@ def dragAndDrop(self, sourcexpath, destinationxpath):
   
 
 ```
+## Local Testing
+follow the below steps to do local test
+
+1. build the distibuted code 
+``` python
+py setup.py sdist
+```
+2. do local installtion (not the dot in the command)
+``` python
+py -m pip install -e .
+```
+3. check with below command for successful installation verification
+``` python
+py -m pip list
+```
+check the pyallied in visible with local path
+
