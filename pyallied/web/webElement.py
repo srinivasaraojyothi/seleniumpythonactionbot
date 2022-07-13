@@ -625,21 +625,21 @@ class common(customwebDriverwait):
             return element.rect
         except Exception as error:
             raise error
-    def get_element_screenshot_as_base64(self,xpath):
+    def get_element_screenshot_as_base64(self,xpath,name:str):
         try:
             #element=self.findElementBy(xpath) 
-            with open(self.__webElement_Screenshot_Location+"/imageToSave.png", "wb") as fh:
+            with open(self.__webElement_Screenshot_Location()+"/"+name+".jpg", "wb") as fh:
                 fh.write(base64.urlsafe_b64decode(self.findElementBy(xpath).screenshot_as_base64))
             
             #return element.screenshot_as_base64
         except Exception as error:
             raise error
-    def get_screenshot_as_png(self,xpath):
+    def get_element_screenshot_as_png(self,xpath,name:str):
         try:
-            result_File=self.__webElement_Screenshot_Location+"/pngFormat.png"
-            with open(result_File+"/imageToSave.png", "wb") as fh:
-                fh.write(base64.urlsafe_b64decode(self.findElementBy(xpath).screenshot_as_png)) 
-                Image.open(result_File).save(result_File, 'PNG')
+            result_File=self.__webElement_Screenshot_Location()+"/"+name+".png"
+            with open(result_File, "wb") as fh:
+                fh.write(self.findElementBy(xpath).screenshot_as_png)
+                #Image.open(result_File).save(result_File, 'PNG')
         except Exception as error:
             raise error
     '''
