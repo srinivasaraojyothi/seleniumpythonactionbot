@@ -11,7 +11,9 @@ from selenium.webdriver.support.select import Select
 from pyallied.web.webWaits import customwebDriverwait
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.common.actions.wheel_input import ScrollOrigin
-
+import os
+import base64
+from PIL import Image
 
 class common(customwebDriverwait):
 
@@ -33,10 +35,10 @@ class common(customwebDriverwait):
 
     def findElementBy(self, xpath):
         try:
-            self.driver.presence_of_element_located(xpath)
-            self.driver.visibility_of_element_located(xpath)
+            #self.driver.presence_of_element_located(xpath)
+            #self.driver.visibility_of_element_located(xpath)
             if(super().WaitFor_PresenseOf_Element_Located(xpath)) :
-                self.driver.find_element(By.XPATH, xpath)
+                return self.driver.find_element(By.XPATH, xpath)
         except Exception as error:
             raise error        
 
@@ -64,7 +66,8 @@ class common(customwebDriverwait):
     def isClickable(self, xpath, index=None):
         # self.driver.visibility_of_element_located(xpath)
         try:
-            return WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((xpath)))
+            #return WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((xpath)))
+            return super().WaitFor_PresenseOf_Element_Located(xpath)
         except Exception as error:
             raise error    
     
@@ -298,14 +301,14 @@ class common(customwebDriverwait):
                     actions.move_to_element(MovedToelement).click().perform()       
         except Exception as error:
             raise error 
-            '''
+        '''
             Move the mouse by an offset of the specified element.
             Offsets are relative to the top-left corner of the element.
             Args:	
             to_element: The WebElement to move to.
             xoffset: X offset to move to.
             yoffset: Y offset to move to.
-            '''           
+        '''           
     def moveToElementWithOffset(self, xpath, xoffset, yoffset):
         try:
             actions = ActionChains(self.driver)
@@ -459,6 +462,7 @@ class common(customwebDriverwait):
         try:
             actions = ActionChains(self.driver)
             element = super().WaitFor_PresenseOf_Element_Located(xpath)
+            actions.click(element)
             actions.send_keys_to_element(element, keys_to_send)
             actions.perform()
         except Exception as error:
@@ -613,7 +617,7 @@ class common(customwebDriverwait):
         except Exception as error:
             raise error
     '''
-    A dictionary with the size and location of the element.
+    A dictionary with t he size and location of the element.
     '''        
     def get_size_And_Location(self,xpath):
         try:
@@ -623,14 +627,19 @@ class common(customwebDriverwait):
             raise error
     def get_element_screenshot_as_base64(self,xpath):
         try:
-            element=self.findElementBy(xpath) 
-            return element.screenshot_as_base64
+            #element=self.findElementBy(xpath) 
+            with open(self.__webElement_Screenshot_Location+"/imageToSave.png", "wb") as fh:
+                fh.write(base64.urlsafe_b64decode(self.findElementBy(xpath).screenshot_as_base64))
+            
+            #return element.screenshot_as_base64
         except Exception as error:
             raise error
     def get_screenshot_as_png(self,xpath):
         try:
-            element=self.findElementBy(xpath) 
-            return element.screenshot_as_png
+            result_File=self.__webElement_Screenshot_Location+"/pngFormat.png"
+            with open(result_File+"/imageToSave.png", "wb") as fh:
+                fh.write(base64.urlsafe_b64decode(self.findElementBy(xpath).screenshot_as_png)) 
+                Image.open(result_File).save(result_File, 'PNG')
         except Exception as error:
             raise error
     '''
@@ -665,4 +674,11 @@ class common(customwebDriverwait):
             element=self.findElementBy(xpath) 
             return element.text
         except Exception as error:
-            raise error                                                                                                  
+            raise error
+    def __webElement_Screenshot_Location(self):
+        try:
+            dir_name=os.getcwd()+"/webElement_Screenshots"
+            os.makedirs(dir_name, exist_ok=True)
+            return dir_name
+        except FileExistsError:
+            pass    
