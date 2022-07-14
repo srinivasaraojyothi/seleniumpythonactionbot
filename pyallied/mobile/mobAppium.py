@@ -2,6 +2,7 @@ import base64
 from distutils.log import error
 from typing import Dict,Optional,List,Any
 from base64 import b64encode
+from xmlrpc.client import boolean
 from selenium.webdriver.common.utils import is_url_connectable
 from selenium import webdriver
 from appium.webdriver.common.appiumby import AppiumBy
@@ -16,6 +17,11 @@ from pyallied.mobile.logTypes import logTypes
 from pyallied.mobile.AndroidPoweOptions import android_poweroptions
 from pyallied.mobile.key_event_keyCodes import key_codes
 from appium.webdriver.extensions import keyboard
+from pyallied.mobile.gsm import GsmCallActions
+from pyallied.mobile.gsm import GsmSignalStrength
+from pyallied.mobile.gsm import GsmVoiceState
+from pyallied.mobile.network import NetSpeed
+
 import textwrap
 
 
@@ -700,28 +706,221 @@ class mobAppium:
     # Please make sure to encode the correct UI flow on your target device under test
     '''
     def toggle_wifi_Service(self):
-        self.driver.toggle_wifi()
+        try:
+            self.driver.toggle_wifi()
+        except Exception as error:
+            raise error    
     '''
     Switch the state of the location service
     ''' 
     def toggle_location_Services(self):
-        self.driver.toggle_location_services()
+        try:
+            self.driver.toggle_location_services()
+        except Exception as error:
+            raise error              
+
     '''
     Simulate an SMS message (Emulator only)
     ''' 
     def send_sms_emulatorOnly(self,number:str,message:str):
-        self.driver.send_sms(number, message)
+        try:
+            self.driver.send_sms(number, message)
+        except Exception as error:
+            raise error    
     '''
     Make GSM call (Emulator only)
     '''
-    def make_GSM_call_emulatorOnly(self):
-        self.driver.makeGsmCall("5551234567", GsmCallActions.CALL)    
+    def make_GSM_call_emulatorOnly(self, number:str,callActions:GsmCallActions ):
+        try:
+            self.driver.makeGsmCall("5551234567", callActions) 
+        except Exception as error:
+            raise error    
+    '''Set GSM signal strength (Emulator only)
 
+    ''' 
+    def set_GSM_signal_strength_emulatorOnly(self,signalStrength:GsmSignalStrength):
+        try:
+            self.driver.set_gsm_signal(signalStrength) 
+        except Exception as error:
+            raise error 
+    '''Set GSM voice state (Emulator only)
 
+    '''        
+    def set_GSM_signal_emulatorOnly(self,gsmVoice:GsmVoiceState):
+        try:
+            self.driver.set_gsm_voice(gsmVoice)
+        except Exception as error:
+            raise error 
+    '''Set network speed (Emulator only)
+    '''                            
+    def set_network_speed_emulatorOnly(self,netSpeed:NetSpeed):
+        try:
+            self.driver.set_network_speed(netSpeed)
+        except Exception as error:
+            raise error 
+    '''
+    Returns the information of the system state which is supported to read as like cpu, memory, network traffic, and battery
+    ex: self.driver.get_performance_data(‘my.app.package’, ‘cpuinfo’, 5)
+    Android only.
+
+    Parameters
+    package_name – The package name of the application
+
+    data_type – The type of system state which wants to read. It should be one of the supported performance data types. Check get_performance_data_types() for supported types
+
+    data_read_timeout – The number of attempts to read
+    '''        
+    def get_performance_Data(self,package_name: str, data_type: str, data_read_timeout: Optional[int] = None):
+        try:
+           return self.driver.get_performance_data(package_name,data_type,data_read_timeout)
+        except Exception as error:
+            raise error
+    '''Returns the information types of the system state which is supported to read as like cpu, memory, network traffic, and battery.
+    . 
+    '''         
+    def get_performance_data_Types(self):
+        try:
+           return self.driver.get_performance_data_types()
+        except Exception as error:
+            raise error  
+    '''Start recording screen
+
+    '''              
+    def start_recording_Screen(self):
+        try:
+            self.driver.start_recording_screen()
+        except Exception as error:
+            raise error
+    '''Stop recording screen
+
+    '''        
+    def stop_recording_Screen(self):
+        try:
+            self.driver.stop_recording_screen()
+        except Exception as error:
+            raise error 
+    '''Simulate touchId on iOS Simulator
+
+    Parameters
+    match – Simulates a successful touch (True) or a failed touch (False)
+
+    Returns
+    Self instance
+
+    Return type
+    Union[‘WebDriver’, ‘HardwareActions’]
+    '''  
+    def touch_id_ios_simulator(self,match:boolean):
+        try:
+            self.driver.touch_id(match)
+        except Exception as error:
+            raise error
+    '''Toggle enroll touchId on iOS Simulator
+
+    Returns
+    Self instance
+
+    Return type
+    Union[‘WebDriver’, ‘HardwareActions’]
+    '''        
+    def toggle_touch_id_enrollment_ios_simulator(self):
+        try:
+            self.driver.toggle_touch_id_enrollment()
+        except Exception as error:
+            raise error        
+    '''Open Android notifications (Emulator only)'''
+    def open_notifications_andriod_emulatorOnly(self):
+        try:
+            self.driver.open_notifications()
+        except Exception as error:
+            raise error
+    '''Retrieve visibility and bounds information of the status and navigation bars
         
 
-                      
+        Android only.
 
-                                      
-                             
+        Returns
+        A dictionary whose keys are
+        statusBar
+        visible
+
+        x
+
+        y
+
+        width
+
+        height
+
+        navigationBar
+        visible
+
+        x
+
+        y
+
+        width
+
+        height
+    '''
+    def get_system_Bars(self):        
+        try:
+            return self.driver.get_system_bars()
+        except Exception as error:
+            raise error 
+    '''Returns the date and time from the device.
+
+        Returns
+        The date and time
+
+        Return type
+        str
+    '''        
+    def get_device_Time(self):        
+        try:
+            return self.driver.device_time
+        except Exception as error:
+            raise error                                  
+    def get_device_Time(self,format: Optional[str] = None):        
+        try:
+            
+            return self.driver.device_time(format)
+        except Exception as error:
+            raise error 
+    '''Retrieve display density(dpi) of the Android device
+    Get the display density, Android only
+
+        Returns
+        The display density of the Android device(dpi)
+
+        Usage:
+        self.driver.get_display_density()
+
+        Returns
+        The display density
+
+        Return type
+        int
+    '''
+    def get_display_density_android(self):        
+        try:
+            
+            return self.driver.get_display_density()
+        except Exception as error:
+            raise error              
+    '''Authenticate users by using their finger print scans on supported emulators.
+        Authenticate users by using their finger print scans on supported Android emulators.
+
+        Parameters
+        finger_id – Finger prints stored in Android Keystore system (from 1 to 10)
+
+        Returns
+        TODO
+    '''                                  
+    def finger_print_android_emulator(self,finger_id: int):        
+        try:
+            
+            return self.driver.finger_print(finger_id)
+        except Exception as error:
+            raise error                              
 
