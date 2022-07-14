@@ -116,4 +116,56 @@ class DropDownActions(customwebDriverwait):
         if(self.driver.capabilities['browser_name']=="firefox"):
            return self.driver.binary.launch_browser(profile, timeout=30) 
         else:
-            raise "Launch_browser is allowed only on firefox"                                                                                                                                                                                                                 
+            raise "Launch_browser is allowed only on firefox" 
+    '''
+        Gets the full document screenshot of the current window as a base64 encoded string
+        which is useful in embedded images in HTML.
+
+        Usage:	
+        driver.get_full_page_screenshot_as_base64()
+    '''
+    def get_screenshot_ofcurrentActive_page_in_base64(self):
+        try:
+            return self.driver.get_full_page_screenshot_as_base64()
+        except Exception as error:
+            raise error    
+
+    '''
+        Saves a full document screenshot of the current window to a PNG image file. Returns
+        False if there is any IOError, else returns True. Use full paths in your filename.
+        Args:	
+        filename: The full path you wish to save your screenshot to. This should end with a .png extension.
+        Usage:	
+        driver.get_full_page_screenshot_as_file('/Screenshots/foo.png')
+    '''
+    def get_screenshot_ofcurrentActive_page_asFile(self,filename:str):
+        try:
+            return self.driver.get_full_page_screenshot_as_file(filename) 
+        except Exception as error:
+            raise error       
+    '''get_full_page_screenshot_as_png() → str
+        Gets the full document screenshot of the current window as a binary data.
+
+        Usage:	
+        driver.get_full_page_screenshot_as_png()
+    '''
+    def get_screenshot_ofcurrentActive_page_asPNG(self):
+        try:
+            return self.driver.get_full_page_screenshot_as_png()
+        except Exception as error:
+            raise error    
+
+    ''' 
+        Saves a screenshot of the current window to a PNG image file. Returns
+        False if there is any IOError, else returns True. Use full paths in your filename.
+        Args:	
+        filename: The full path you wish to save your screenshot to. This should end with a .png extension.
+        Usage:	
+        driver.save_screenshot('/Screenshots/foo.png')
+    '''
+    def screenshot_save_full_page_screenshot(self,filename):
+        try:
+            return self.driver.save_screenshot(filename)
+        except Exception as error:
+            raise error    
+                                                                                                                                                                                                                        
