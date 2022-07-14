@@ -7,12 +7,13 @@ from selenium.webdriver import ActionChains
 from selenium.webdriver.common.alert import Alert
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.select import Select
-
+import os
 
 class customwebDriverwait:
     def __init__(self, driver):
         #( "this is correct")
         self.driver = driver
+        self.__wait=10
 
     '''An expectation for checking that an element is present on the DOM of a page and visible. 
     Visibility means that the element is not only displayed but also has a height and width that is greater than 0.
@@ -20,7 +21,8 @@ class customwebDriverwait:
 
     def WaitFor_VisibilityOf_Element_Located(self, xpath):
         try:
-            return WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located((By.XPATH, xpath)))
+            print(self.customWait,'------>wait')
+            return WebDriverWait(self.driver, self.customWait).until(EC.visibility_of_element_located((By.XPATH, xpath)))
         except Exception as error:
             raise error
     '''An expectation for checking that an element is present on the DOM of a page. 
@@ -29,7 +31,7 @@ class customwebDriverwait:
 
     def WaitFor_PresenseOf_Element_Located(self, xpath):
         try:
-            return WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, xpath)))
+            return WebDriverWait(self.driver, self.customWait).until(EC.presence_of_element_located((By.XPATH, xpath)))
         except Exception as error:
             raise error
     '''An Expectation for checking an element is visible and enabled such that you can click it.
@@ -38,13 +40,13 @@ class customwebDriverwait:
 
     def WaitForElement_tobe_Clickable(self, xpath):
         try:
-            return WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.XPATH, xpath)))
+            return WebDriverWait(self.driver, self.customWait).until(EC.element_to_be_clickable((By.XPATH, xpath)))
         except Exception as error:
             raise error    
 
     def WaitForAlert_is_present(self):
         try:
-            return WebDriverWait(self.driver, 10).until(EC.alert_is_present())
+            return WebDriverWait(self.driver, self.customWait).until(EC.alert_is_present())
         except Exception as error:
             raise error
     '''An expectation for checking if the given attribute is included in the specified element. 
@@ -52,7 +54,7 @@ class customwebDriverwait:
 
     def WaitFor_element_attribute_to_include(self, xpath, value):
         try:
-            return WebDriverWait(self.driver, 10).until(EC.element_attribute_to_include((By.XPATH, xpath), value))
+            return WebDriverWait(self.driver, self.customWait).until(EC.element_attribute_to_include((By.XPATH, xpath), value))
         except Exception as error:
             raise error        
     '''An expectation to locate an element and check if the selection state specified is in that state. 
@@ -60,14 +62,14 @@ class customwebDriverwait:
 
     def WaitFor_element_located_selection_state_to_be(self, xpath, is_Selected):
         try:
-            return WebDriverWait(self.driver, 10).until(EC.element_located_selection_state_to_be((By.XPATH, xpath), is_Selected))
+            return WebDriverWait(self.driver, self.customWait).until(EC.element_located_selection_state_to_be((By.XPATH, xpath), is_Selected))
         except Exception as error:
             raise error
     '''An expectation for the element to be located is selected. locator is a tuple of (by, path)'''
 
     def WaitFor_element_located_to_be_selected(self, xpath):
         try:
-            return WebDriverWait(self.driver, 10).until(EC.element_located_to_be_selected((By.XPATH, xpath)))
+            return WebDriverWait(self.driver, self.customWait).until(EC.element_located_to_be_selected((By.XPATH, xpath)))
         except Exception as error:
             raise error
     '''An expectation for checking if the given element is selected. 
@@ -75,7 +77,7 @@ class customwebDriverwait:
 
     def WaitFor_element_selection_state_to_be(self, xpath, is_Selected):
         try:
-            return WebDriverWait(self.driver, 10).until(EC.element_selection_state_to_be((By.XPATH, xpath), is_Selected))
+            return WebDriverWait(self.driver, self.customWait).until(EC.element_selection_state_to_be((By.XPATH, xpath), is_Selected))
         except Exception as error:
             raise error
     '''An expectation for checking the selection is selected. 
@@ -86,7 +88,7 @@ class customwebDriverwait:
             if(customwebDriverwait.WaitFor_VisibilityOf_Element_Located(xpath)):
                 target = customwebDriverwait.WaitFor_VisibilityOf_Element_Located(
                     xpath)
-                return WebDriverWait(self.driver, 10).until(EC.element_to_be_selected(target))
+                return WebDriverWait(self.driver, self.customWait).until(EC.element_to_be_selected(target))
         except Exception as error:
             raise error
     '''An expectation for checking whether the given frame is available to switch to. 
@@ -94,7 +96,7 @@ class customwebDriverwait:
 
     def WaitFor_frame_to_be_available_and_switch_to_it(self, xpath):
         try:
-            return WebDriverWait(self.driver, 10).until(EC.frame_to_be_available_and_switch_to_it((By.XPATH, xpath)))
+            return WebDriverWait(self.driver, self.customWait).until(EC.frame_to_be_available_and_switch_to_it((By.XPATH, xpath)))
         except Exception as error:
             raise error            
     '''
@@ -117,7 +119,7 @@ class customwebDriverwait:
     def WaitFor_new_window_is_opened(self):
         try:
             currentWindowHandles = self.driver.window_handles
-            return WebDriverWait(self.driver, 10).until(EC.new_window_is_opened(currentWindowHandles))
+            return WebDriverWait(self.driver, self.customWait).until(EC.new_window_is_opened(currentWindowHandles))
         except Exception as error:
             raise error
     '''An expectation for the number of windows to be a certain value.'''
@@ -125,7 +127,7 @@ class customwebDriverwait:
     def WaitFor_number_of_windows_to_be(self, number):
         try:
         # currentWindowHandles=self.driver.window_handles
-            return WebDriverWait(self.driver, 10).until(EC.number_of_windows_to_be(number))
+            return WebDriverWait(self.driver, self.customWait).until(EC.number_of_windows_to_be(number))
         except Exception as error:
             raise error
     '''An expectation for checking that there is at least one element present on a web page. 
@@ -134,7 +136,7 @@ class customwebDriverwait:
     def WaitFor_presence_of_all_elements_located(self, xpath):
         try:
         # currentWindowHandles=self.driver.window_handles
-            return WebDriverWait(self.driver, 10).until(EC.presence_of_all_elements_located((By.XPATH, xpath)))
+            return WebDriverWait(self.driver, self.customWait).until(EC.presence_of_all_elements_located((By.XPATH, xpath)))
         except Exception as error:
             raise error
     '''Wait until an element is no longer attached to the DOM. element is the element to wait for. 
@@ -143,14 +145,14 @@ class customwebDriverwait:
     def WaitFor_staleness_of(self, xpath):
         try:
             element = self.driver.find_element_by_id(xpath)
-            return WebDriverWait(self.driver, 10).until(EC.staleness_of(element))
+            return WebDriverWait(self.driver, self.customWait).until(EC.staleness_of(element))
         except Exception as error:
             raise error
     '''An expectation for checking if the given text is present in the specified element. locator, text'''
 
     def WaitFor_text_to_be_present_in_element(self, xpath, text_):
         try:
-            return WebDriverWait(self.driver, 10).until(EC.text_to_be_present_in_element((By.XPATH, xpath), text_))
+            return WebDriverWait(self.driver, self.customWait).until(EC.text_to_be_present_in_element((By.XPATH, xpath), text_))
         except Exception as error:
             raise error
     '''An expectation for checking if the given text is present in the element’s attribute. 
@@ -158,14 +160,14 @@ class customwebDriverwait:
 
     def WaitFor_text_to_be_present_in_element_attribute(self, xpath, attribute, text_):
         try:
-            return WebDriverWait(self.driver, 10).until(EC.text_to_be_present_in_element_attribute((By.XPATH, xpath), attribute, text_))
+            return WebDriverWait(self.driver, self.customWait).until(EC.text_to_be_present_in_element_attribute((By.XPATH, xpath), attribute, text_))
         except Exception as error:
             raise error
     '''An expectation for checking if the given text is present in the element’s value. locator, text'''
 
     def WaitFor_text_to_be_present_in_element_value(self, xpath, text_):
         try:
-            return WebDriverWait(self.driver, 10).until(EC.text_to_be_present_in_element_value((By.XPATH, xpath), text_))
+            return WebDriverWait(self.driver, self.customWait).until(EC.text_to_be_present_in_element_value((By.XPATH, xpath), text_))
         except Exception as error:
             raise error
     '''An expectation for checking that the title contains a case-sensitive substring. 
@@ -174,7 +176,7 @@ class customwebDriverwait:
     def WaitFor_title_contains(self, text_):
         try:
         # page_title=self.driver.title
-            return WebDriverWait(self.driver, 10).until(EC.title_contains(text_))
+            return WebDriverWait(self.driver, self.customWait).until(EC.title_contains(text_))
         except Exception as error:
             raise error
     '''An expectation for checking the title of a page. title is the expected title, 
@@ -183,7 +185,7 @@ class customwebDriverwait:
     def WaitFor_title_is(self, text_):
         try:
             # page_title=self.driver.title
-            return WebDriverWait(self.driver, 10).until(EC.title_is(text_))
+            return WebDriverWait(self.driver, self.customWait).until(EC.title_is(text_))
         except Exception as error:
             raise error
     '''An expectation for checking the current url. url is the expected url, 
@@ -192,7 +194,7 @@ class customwebDriverwait:
     def WaitFor_url_changes(self, url):
         try:
             # page_title=self.driver.title
-            return WebDriverWait(self.driver, 10).until(EC.url_changes(url))
+            return WebDriverWait(self.driver, self.customWait).until(EC.url_changes(url))
         except Exception as error:
             raise error
     '''An expectation for checking that the current url contains a case-sensitive substring. 
@@ -201,7 +203,7 @@ class customwebDriverwait:
     def WaitFor_url_contains(self, url):
         try:
             # page_title=self.driver.title
-            return WebDriverWait(self.driver, 10).until(EC.url_contains(url))
+            return WebDriverWait(self.driver, self.customWait).until(EC.url_contains(url))
         except Exception as error:
             raise error
     '''An expectation for checking the current url. pattern is the expected pattern, 
@@ -210,7 +212,7 @@ class customwebDriverwait:
     def WaitFor_url_matches(self, pattern):
         try:
             # page_title=self.driver.title
-            return WebDriverWait(self.driver, 10).until(EC.url_matches(pattern))
+            return WebDriverWait(self.driver, self.customWait).until(EC.url_matches(pattern))
         except Exception as error:
             raise error
     '''An expectation for checking the current url. url is the expected url, 
@@ -219,7 +221,7 @@ class customwebDriverwait:
     def WaitFor_url_to_be(self, url):
         try:
             # page_title=self.driver.title
-            return WebDriverWait(self.driver, 10).until(EC.url_to_be(url))
+            return WebDriverWait(self.driver, self.customWait).until(EC.url_to_be(url))
         except Exception as error:
             raise error
     '''An expectation for checking that an element, known to be present on the DOM of a page, is visible. 
@@ -229,7 +231,7 @@ class customwebDriverwait:
     def WaitFor_visibility_of(self, xpath):
         try:
             element = self.driver.find_element_by_id(xpath)
-            return WebDriverWait(self.driver, 10).until(EC.visibility_of(element))
+            return WebDriverWait(self.driver, self.customWait).until(EC.visibility_of(element))
         except Exception as error:
             raise error
     '''An expectation for checking that all elements are present on the DOM of a page and visible. 
@@ -238,7 +240,7 @@ class customwebDriverwait:
 
     def WaitFor_visibility_of_all_elements_located(self, xpath):
         try:
-            return WebDriverWait(self.driver, 10).until(EC.visibility_of_all_elements_located((By.XPATH, xpath)))
+            return WebDriverWait(self.driver, self.customWait).until(EC.visibility_of_all_elements_located((By.XPATH, xpath)))
         except Exception as error:
             raise error
     '''An expectation for checking that there is at least one element visible on a web page. 
@@ -246,6 +248,21 @@ class customwebDriverwait:
 
     def WaitFor_visibility_of_any_elements_located(self, xpath):
         try:
-            return WebDriverWait(self.driver, 10).until(EC.visibility_of_any_elements_located((By.XPATH, xpath)))
+            return WebDriverWait(self.driver, self.customWait).until(EC.visibility_of_any_elements_located((By.XPATH, xpath)))
         except Exception as error:
             raise error
+
+    @property
+    def customWait(self):
+         #print("getter method called")
+         return self.__wait
+       
+     # a setter function
+    @customWait.setter
+    def customWait(self, wait=None):
+         #print("custom wait is set to=",wait)
+         if(wait!=None):
+            self.__wait = wait
+         else:
+            wait=10
+            self.__wait=wait
