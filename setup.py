@@ -1,11 +1,11 @@
 import setuptools
 
 with open("README.md", "rb") as fh:
-    long_description = fh.read()
+    long_description = fh.read().decode("utf8").replace('\r\n', '\n')
 
 setuptools.setup(
     name="pyallied",                     # This is the name of the package
-    version="1.0.1",                        # The initial release version
+    version="1.0.3",                        # The initial release version
     author="srinivasaraojyothi@gmail.com",                     # Full name of the author
     description="pyallied - a wrapper based on selenium python",
     url = "https://github.com/srinivasaraojyothi/seleniumpythonactionbot.git",
