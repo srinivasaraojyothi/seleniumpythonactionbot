@@ -1,3 +1,4 @@
+from pyparsing import And
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.alert import Alert
 from selenium.webdriver.common.keys import Keys
@@ -28,8 +29,8 @@ class DragAndDrop(customwebDriverwait):
             SourceelElementVisibility=super().WaitFor_VisibilityOf_Element_Located(sourcexpath)
             DestinationElementPresense=super().WaitFor_PresenseOf_Element_Located(destinationxpath)
             DestinationElementVisibility=super().WaitFor_VisibilityOf_Element_Located(destinationxpath)
-            if(SourceelElementPresense & DestinationElementPresense ):
-                if(SourceelElementVisibility & DestinationElementVisibility):
+            if(SourceelElementPresense and DestinationElementPresense ):
+                if(SourceelElementVisibility and DestinationElementVisibility):
                     sourceElement = self.driver.find_element(By.XPATH, sourcexpath)
                     destination = self.driver.find_element(By.XPATH, destinationxpath)
                     action_chains = ActionChains(self.driver)

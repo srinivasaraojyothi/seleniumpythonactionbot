@@ -251,7 +251,11 @@ class customwebDriverwait:
             return WebDriverWait(self.driver, self.customWait).until(EC.visibility_of_any_elements_located((By.XPATH, xpath)))
         except Exception as error:
             raise error
-
+    def driver_implicit_wait(self,wait):
+        try:
+            self.driver.implicitly_wait(wait)
+        except Exception as error:
+            raise error    
     @property
     def customWait(self):
          #print("getter method called")

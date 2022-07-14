@@ -527,7 +527,7 @@ class mobAppium:
     For Android emulator. To set the state of the battery charger to connected or not.
 
     '''
-    def Set_Power_ac(self,powerMode:android_poweroptions):
+    def Set_Power_ac_forEmulator(self,powerMode:android_poweroptions):
         try:
             self.driver.set_power_ac(powerMode)
         except Exception as error:
@@ -535,7 +535,7 @@ class mobAppium:
     '''Emulate power capacity change on the connected emulator.
 
     '''
-    def set_power_capacity(self,percentage:int):
+    def set_power_capacity_forEmulator(self,percentage:int):
         try:
             self.driver.set_power_capacity(50)
         except Exception as error:
@@ -694,6 +694,29 @@ class mobAppium:
             self.driver.keyevent(keycode,metastate)
         except Exception as error:
             raise error                           
+    '''
+    Switch the state of the WiFi service. Since Android Q, a method to change the WiFi service state has been restricted. 
+    #12327 Please toggle the state via UI instead of this method. The UI flow depends on devices. 
+    # Please make sure to encode the correct UI flow on your target device under test
+    '''
+    def toggle_wifi_Service(self):
+        self.driver.toggle_wifi()
+    '''
+    Switch the state of the location service
+    ''' 
+    def toggle_location_Services(self):
+        self.driver.toggle_location_services()
+    '''
+    Simulate an SMS message (Emulator only)
+    ''' 
+    def send_sms_emulatorOnly(self,number:str,message:str):
+        self.driver.send_sms(number, message)
+    '''
+    Make GSM call (Emulator only)
+    '''
+    def make_GSM_call_emulatorOnly(self):
+        self.driver.makeGsmCall("5551234567", GsmCallActions.CALL)    
+
 
         
 
