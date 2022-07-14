@@ -463,7 +463,7 @@ class common(customwebDriverwait):
             actions = ActionChains(self.driver)
             element = super().WaitFor_PresenseOf_Element_Located(xpath)
             actions.click(element)
-            actions.send_keys_to_element(element, keys_to_send)
+            actions.send_keys_to_element(element, *keys_to_send)
             actions.perform()
         except Exception as error:
             raise error    
