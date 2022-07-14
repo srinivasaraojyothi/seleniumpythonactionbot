@@ -360,7 +360,7 @@ class Browser(customwebDriverwait):
             raise error
     def Get_Page_Source(self):
         try:
-            return self.driver.page_source()
+            return self.driver.page_source
         except Exception as error:
             raise error
     def get_command_line_args(self):
@@ -403,4 +403,19 @@ class Browser(customwebDriverwait):
         try:
             return self.driver.service.service_url
         except Exception as error:
-            raise error                                                                                                               
+            raise error 
+    def get_driver_name(self):
+        try:
+            return self.driver.name
+        except Exception as error:
+            raise error
+    def get_orientation(self):
+        try:
+            return self.driver.orientation
+        except Exception as error:
+            raise error
+    def get_timeouts(self):
+        try:
+            return self.driver.timeouts
+        except Exception as error:
+            raise error                                                                                                                                                       
