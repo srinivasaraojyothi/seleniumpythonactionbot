@@ -65,7 +65,7 @@ class frameAndWindow(customwebDriverwait):
 
     def switchToParentFrame(self):
         try:
-            self.driver.switch_to_default_content()
+            self.driver.switch_to.default_content()
         except Exception as error:
             raise error
     def switch_To_Frame_ByXpath(self,frameXpath):
