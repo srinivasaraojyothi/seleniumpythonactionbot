@@ -324,7 +324,8 @@ class common(customwebDriverwait):
             actions.move_by_offset(xoffset, yoffset)
             actions.perform()
         except Exception as error:
-            raise error    
+            raise error   
+    '''         
     def actionRelease(self, xpath=None):
         try:
             actions = ActionChains(self.driver)
@@ -342,7 +343,7 @@ class common(customwebDriverwait):
                 actions.perform()
         except Exception as error:
             raise error        
-    
+    '''
 
     def keyDown_and_sendKeys(self, ModifierKey, keys, xpath=None):
         try:
