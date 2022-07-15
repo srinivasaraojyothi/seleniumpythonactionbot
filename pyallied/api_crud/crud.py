@@ -28,13 +28,26 @@ class crud:
         #print(headersDict)
         #print(ast.literal_eval(str(dictdata["headers"]).replace("‘","'")))
         if dictdata["crud_type"]=="POST":
-            f=open(dictdata["data"])
-            
-            data=json.dumps(json.load(f)[testcaseId])
-            
-            respo=requests.post(dictdata["api_signature"],headers=headersDict,data=data)
-            #print(respo.json())
-            return respo
+            if(dictdata["headers"].find("multipart")):
+                files = {'file': open(dictdata["multipart_data"], 'rb')}
+                f=open(dictdata["data"])
+                
+
+                
+                data=json.dumps(json.load(f)[testcaseId])
+                
+                respo=requests.post(dictdata["api_signature"],headers=headersDict,data=data,files=files)
+                #print(respo.json())
+                return respo
+                print('')
+            else:
+                f=open(dictdata["data"])
+                
+                data=json.dumps(json.load(f)[testcaseId])
+                
+                respo=requests.post(dictdata["api_signature"],headers=headersDict,data=data)
+                #print(respo.json())
+                return respo
         if dictdata["crud_type"]=="GET":
             #f=open(dictdata["data"])
             
@@ -44,6 +57,22 @@ class crud:
             
             #print(respo.json())
             return respo
+        if dictdata["crud_type"]=="DELETE":
+            #f=open(dictdata["data"])
+            
+            #data=json.dumps(json.load(f)[testcaseId])
+            
+            respo=requests.delete(dictdata["api_signature"])
+            
+            #print(respo.json())
+            return respo
+        if dictdata["crud_type"]=="PUT":
+            f=open(dictdata["data"])
+                
+            data=json.dumps(json.load(f)[testcaseId])
+                
+            respo=requests.put(dictdata["api_signature"],headers=headersDict,data=data)
+            return respo                        
 
 
 
