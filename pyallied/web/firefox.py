@@ -126,7 +126,7 @@ class firefox(customwebDriverwait):
         Usage:	
         driver.get_full_page_screenshot_as_base64()
     '''
-    def get_screenshot_ofcurrentActive_page_in_base64(self,name):
+    def get_full_screenshot_page_in_base64(self,name):
         try:
             with open(self.__web_Screenshot_Location()+"/"+name+".jpg", "wb") as fh:
                 fh.write(base64.urlsafe_b64decode(self.driver.get_full_page_screenshot_as_base64()))             
@@ -142,7 +142,7 @@ class firefox(customwebDriverwait):
         Usage:	
         driver.get_full_page_screenshot_as_file('/Screenshots/foo.png')
     '''
-    def get_screenshot_ofcurrentActive_page_asFile(self,filename:str):
+    def get_full_screenshot_page_asFile(self,filename:str):
         try:
             return self.driver.get_full_page_screenshot_as_file(self.__web_Screenshot_Location()+"/"+filename+".png") 
         except Exception as error:
@@ -153,7 +153,7 @@ class firefox(customwebDriverwait):
         Usage:	
         driver.get_full_page_screenshot_as_png()
     '''
-    def get_screenshot_ofcurrentActive_page_asPNG(self,name):
+    def get_full_screenshot_page_asPNG(self,name):
         try:
             result_File=self.__web_Screenshot_Location()+"/"+name+".png"
             with open(result_File, "wb") as fh:
