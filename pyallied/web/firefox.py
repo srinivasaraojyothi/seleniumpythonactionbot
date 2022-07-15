@@ -1,5 +1,5 @@
 from pyallied.web.webWaits import customwebDriverwait
-class DropDownActions(customwebDriverwait):
+class firefox(customwebDriverwait):
     def __init__(self, driver):
         super().__init__(driver)
         self.driver = driver
