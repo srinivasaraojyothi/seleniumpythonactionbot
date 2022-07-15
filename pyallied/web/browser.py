@@ -5,6 +5,9 @@ from pyallied.web.print_page_options import PrintOptions
 from pyallied.web.webWaits import customwebDriverwait
 from pyallied.web.log_type import log_type
 from pyallied.web.file_detector import FileDetector
+import os
+import base64
+from PIL import Image
 from selenium.webdriver.remote.file_detector import UselessFileDetector
 class Browser(customwebDriverwait):
     def __init__(self,driver):
@@ -418,4 +421,31 @@ class Browser(customwebDriverwait):
         try:
             return self.driver.timeouts
         except Exception as error:
-            raise error                                                                                                                                                       
+            raise error
+    def get_screenshot_base64(self,name): 
+        try:
+            with open(self.__Screenshot_Location()+"/"+name+".jpg", "wb") as fh:
+                fh.write(base64.urlsafe_b64decode(self.driver.get_screenshot_as_base64()))            
+            
+        except Exception as error:
+            raise error
+    def get_screenshot_png(self,name): 
+        try:
+            with open(self.__Screenshot_Location()+"/"+name+".png", "wb") as fh:
+                fh.write(self.driver.get_screenshot_as_png())            
+            
+        except Exception as error:
+            raise error
+    def get_screenshot_file(self,name): 
+        try:
+            self.driver.get_screenshot_as_file(self.__Screenshot_Location+"/"+name+'.png')
+            
+        except Exception as error:
+            raise error                        
+    def __Screenshot_Location(self):
+        try:
+            dir_name=os.getcwd()+"/page_Screenshots"
+            os.makedirs(dir_name, exist_ok=True)
+            return dir_name
+        except FileExistsError:
+            pass                                                                                                                                                                               

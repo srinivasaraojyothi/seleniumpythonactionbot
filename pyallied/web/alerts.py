@@ -45,8 +45,10 @@ class driverAlerts(customwebDriverwait):
     def sendKeystoAlert(self,keysToSend):
         try:
             alertPresence= super().WaitForAlert_is_present()
-            name_prompt = Alert(self.driver)
-            name_prompt.send_keys(keysToSend)
+            alert=self.driver.switch_to.alert
+            alert.send_keys(keysToSend)
+            #name_prompt = Alert(self.driver)
+            #name_prompt.send_keys(keysToSend)
         except Exception as error:
             raise error            
     # Special Keys

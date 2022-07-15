@@ -1,4 +1,7 @@
 from pyallied.web.webWaits import customwebDriverwait
+import os
+import base64
+from PIL import Image
 class firefox(customwebDriverwait):
     def __init__(self, driver):
         super().__init__(driver)
@@ -123,9 +126,11 @@ class firefox(customwebDriverwait):
         Usage:	
         driver.get_full_page_screenshot_as_base64()
     '''
-    def get_screenshot_ofcurrentActive_page_in_base64(self):
+    def get_screenshot_ofcurrentActive_page_in_base64(self,name):
         try:
-            return self.driver.get_full_page_screenshot_as_base64()
+            with open(self.__web_Screenshot_Location()+"/"+name+".jpg", "wb") as fh:
+                fh.write(base64.urlsafe_b64decode(self.driver.get_full_page_screenshot_as_base64()))             
+             
         except Exception as error:
             raise error    
 
@@ -139,7 +144,7 @@ class firefox(customwebDriverwait):
     '''
     def get_screenshot_ofcurrentActive_page_asFile(self,filename:str):
         try:
-            return self.driver.get_full_page_screenshot_as_file(filename) 
+            return self.driver.get_full_page_screenshot_as_file(self.__web_Screenshot_Location+"/"+filename+".png") 
         except Exception as error:
             raise error       
     '''get_full_page_screenshot_as_png() → str
@@ -148,9 +153,13 @@ class firefox(customwebDriverwait):
         Usage:	
         driver.get_full_page_screenshot_as_png()
     '''
-    def get_screenshot_ofcurrentActive_page_asPNG(self):
+    def get_screenshot_ofcurrentActive_page_asPNG(self,name):
         try:
-            return self.driver.get_full_page_screenshot_as_png()
+            result_File=self.__web_Screenshot_Location()+"/"+name+".png"
+            with open(result_File, "wb") as fh:
+                fh.write(self.driver.get_full_page_screenshot_as_png())
+
+             
         except Exception as error:
             raise error    
 
@@ -166,5 +175,12 @@ class firefox(customwebDriverwait):
         try:
             return self.driver.save_screenshot(filename)
         except Exception as error:
-            raise error    
+            raise error
+    def __web_Screenshot_Location(self):
+        try:
+            dir_name=os.getcwd()+"/page_Screenshots"
+            os.makedirs(dir_name, exist_ok=True)
+            return dir_name
+        except FileExistsError:
+            pass                
                                                                                                                                                                                                                         
