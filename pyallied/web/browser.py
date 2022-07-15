@@ -438,7 +438,7 @@ class Browser(customwebDriverwait):
             raise error
     def get_screenshot_file(self,name): 
         try:
-            self.driver.get_screenshot_as_file(self.__Screenshot_Location+"/"+name+'.png')
+            self.driver.get_screenshot_as_file(self.__Screenshot_Location()+"/"+name+'.png')
             
         except Exception as error:
             raise error                        

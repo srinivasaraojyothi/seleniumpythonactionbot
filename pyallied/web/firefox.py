@@ -144,7 +144,7 @@ class firefox(customwebDriverwait):
     '''
     def get_screenshot_ofcurrentActive_page_asFile(self,filename:str):
         try:
-            return self.driver.get_full_page_screenshot_as_file(self.__web_Screenshot_Location+"/"+filename+".png") 
+            return self.driver.get_full_page_screenshot_as_file(self.__web_Screenshot_Location()+"/"+filename+".png") 
         except Exception as error:
             raise error       
     '''get_full_page_screenshot_as_png() → str
