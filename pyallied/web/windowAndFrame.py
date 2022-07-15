@@ -34,7 +34,13 @@ class frameAndWindow(customwebDriverwait):
         try:
             self.driver.minimize_window()
         except Exception as error:
-            raise error                        
+            raise error
+    def Maximize_window(self):
+        try:
+            self.driver.maximize_window()
+        except Exception as error:
+            raise error            
+
     # switch to window
     # ex: <a href="somewhere.html" target="windowName">Click here to open a new window</a>
 
