@@ -4,9 +4,10 @@ class firefox(customwebDriverwait):
         super().__init__(driver)
         self.driver = driver
     def Uninstall_addon(self,identifier):
-        #if(self.driver.capabilities['browser_name']=="firefox"):
+        try:
             self.driver.uninstall_addon(identifier)
-
+        except Exception as error:
+            raise error
     '''
     Installs Firefox addon.
 
