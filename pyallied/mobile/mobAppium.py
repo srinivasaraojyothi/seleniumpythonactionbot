@@ -13,6 +13,7 @@ from appium.webdriver.common.appiumby import AppiumBy
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import StaleElementReferenceException
 from selenium.common.exceptions import ElementNotVisibleException
+from appium.webdriver.extensions.keyboard import Keyboard
 from pyallied.mobile.logTypes import logTypes
 from pyallied.mobile.AndroidPoweOptions import android_poweroptions
 from pyallied.mobile.key_event_keyCodes import key_codes
@@ -617,6 +618,7 @@ class mobAppium:
     '''          
     def press_Key_code(self,keycode: int, metastate: Optional[int] = None, flags: Optional[int] = None):
         try:
+            #print('---')
             self.driver.press_keycode(keycode,metastate,flags)
 
         except Exception as error:
