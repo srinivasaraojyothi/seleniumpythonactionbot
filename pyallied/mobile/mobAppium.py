@@ -3,9 +3,10 @@ from distutils.log import error
 from typing import Dict,Optional,List,Any
 from base64 import b64encode
 from xmlrpc.client import boolean
-from selenium.webdriver.common.utils import is_url_connectable
+#from selenium.webdriver.common.utils import is_url_connectable
 from selenium import webdriver
 from appium.webdriver.common.appiumby import AppiumBy
+from selenium.webdriver.common import utils
 from appium.protocols.webdriver.can_execute_scripts import CanExecuteScripts
 import polling2
 import time
@@ -38,7 +39,7 @@ class mobAppium:
         '''
 
     def get_Remote_Driver_Status(self, port):
-        self.driver.is_url_connectable(port)
+        utils.is_url_connectable(port)
 
         '''
         Execute a variety of native, mobile commands that aren't associated with a specific endpoint

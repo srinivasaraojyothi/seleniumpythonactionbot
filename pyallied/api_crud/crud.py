@@ -28,7 +28,7 @@ class crud:
         #print(headersDict)
         #print(ast.literal_eval(str(dictdata["headers"]).replace("‘","'")))
         if dictdata["crud_type"]=="POST":
-            if(dictdata["headers"].find("multipart")):
+            if( "multipart" in dictdata["headers"]):
                 files = {'file': open(dictdata["multipart_data"], 'rb')}
                 f=open(dictdata["data"])
                 
