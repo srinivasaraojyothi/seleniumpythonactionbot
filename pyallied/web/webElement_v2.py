@@ -15,7 +15,7 @@ import os
 import base64
 from PIL import Image
 
-class common(customwebDriverwait):
+class common_v2(customwebDriverwait):
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -33,41 +33,41 @@ class common(customwebDriverwait):
         
         
 
-    def findElementBy(self, xpath):
+    def findElementBy(self, locatorType,locator):
         try:
             #self.driver.presence_of_element_located(xpath)
             #self.driver.visibility_of_element_located(xpath)
-            if(super().WaitFor_PresenseOf_Element_Located(xpath)) :
-                return self.driver.find_element(By.XPATH, xpath)
+            if(super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)) :
+                return super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
         except Exception as error:
             raise error        
 
-    def click(self, xpath):
+    def click(self, locatorType,locator):
         try:
-            elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
-            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
+            elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)
             if(elementPresense):
                 if(elementVisible):
-                    self.driver.find_element(By.XPATH, xpath).click()
+                    elementPresense.click()
         except Exception as error:
             raise error            
 
-    def clear(self, xpath):
+    def clear(self, locatorType,locator):
         try:
-            elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
-            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
+            elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)
             if(elementPresense):
                 if(elementVisible):
-                    self.driver.find_element(By.XPATH, xpath).clear()  
+                    elementPresense.clear()  
         except Exception as error:
             raise error              
     
     
-    def isClickable(self, xpath, index=None):
+    def isClickable(self, locatorType,locator, index=None):
         # self.driver.visibility_of_element_located(xpath)
         try:
             #return WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((xpath)))
-            return super().WaitFor_PresenseOf_Element_Located(xpath)
+            return super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
         except Exception as error:
             raise error    
     
@@ -88,13 +88,13 @@ class common(customwebDriverwait):
     # file_input.send_keys(os.path.abspath("path/to/profilepic.gif"))
     '''
 
-    def fillField(self, xpath, text):
+    def fillField(self, locatorType,locator, text):
         try:
-            elementPresence = super().WaitFor_PresenseOf_Element_Located(xpath)
-            elementVisibility = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            elementPresence = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
+            elementVisibility = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)
             if(elementPresence):
                 if(elementVisibility):
-                    self.driver.find_element(By.XPATH, xpath).send_keys(text)
+                    elementVisibility.send_keys(text)
         except Exception as error:
             raise error
 
@@ -119,13 +119,13 @@ class common(customwebDriverwait):
         # Check if the "active" CSS class is applied to an element.
         is_active = "active" in target_element.get_attribute("class")
     '''
-    def getAttribute(self, xpath,AttributeName):
+    def getAttribute(self, locatorType,locator,AttributeName):
         try:
-            elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
-            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
+            elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)
             if(elementPresense):
                 if(elementVisible):
-                    return self.driver.find_element(By.XPATH, xpath).get_attribute(AttributeName)
+                    return elementPresense.get_attribute(AttributeName)
         except Exception as error:
             raise error                  
     
@@ -138,13 +138,13 @@ class common(customwebDriverwait):
         Usage:	
         text_length = target_element.get_dom_attribute("class")
     '''
-    def getDomAttribute(self, xpath,AttributeName):
+    def getDomAttribute(self, locatorType,locator,AttributeName):
         try:
-            elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
-            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
+            elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)
             if(elementPresense):
                 if(elementVisible):
-                    return self.driver.find_element(By.XPATH, xpath).get_dom_attribute(AttributeName) 
+                    return elementPresense.get_dom_attribute(AttributeName) 
         except Exception as error:
             raise error
 
@@ -157,37 +157,37 @@ class common(customwebDriverwait):
         Usage:	
         text_length = target_element.get_property("text_length")
     '''
-    def getProperty(self, xpath,PropertyName):
+    def getProperty(self, locatorType,locator,PropertyName):
         try:
-            elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
-            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
+            elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)
             if(elementPresense):
                 if(elementVisible):
-                    return self.driver.find_element(By.XPATH, xpath).get_property(PropertyName)
+                    return elementPresense.get_property(PropertyName)
         except Exception as error:
             raise error             
     '''
         Whether the element is visible to a user.
     '''
-    def isElementDisplayed(self, xpath):
+    def isElementDisplayed(self, locatorType,locator):
         try:
-            elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
-            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
+            elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)
             if(elementPresense):
                 if(elementVisible):
-                    return self.driver.find_element(By.XPATH, xpath).is_displayed()
+                    return elementVisible.is_displayed()
         except Exception as error:
             raise error             
     '''
         Returns whether the element is enabled.
     '''
-    def isElementEnabled(self, xpath):
+    def isElementEnabled(self, locatorType,locator):
         try:
-            elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
-            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
+            elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)
             if(elementPresense):
                 if(elementVisible):
-                    return self.driver.find_element(By.XPATH, xpath).is_enabled()  
+                    return elementPresense.is_enabled()  
         except Exception as error:
             raise error
     '''
@@ -195,38 +195,38 @@ class common(customwebDriverwait):
 
         Can be used to check if a checkbox or radio button is selected.
     '''
-    def isElementSelected(self, xpath):
+    def isElementSelected(locatorType,locator):
         try:
-            elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
-            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
+            elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)
             if(elementPresense):
                 if(elementVisible):
-                    return self.driver.find_element(By.XPATH, xpath).is_selected() 
+                    return elementVisible.is_selected() 
         except Exception as error:
             raise error
     '''
         Saves a screenshot of the current element to a PNG image file. Returns
         False if there is any IOError, else returns True. Use full paths in your filename.
     '''
-    def currentElementScreenshot(self, xpath,screenShotSavingPath):
+    def currentElementScreenshot(self, locatorType,locator,screenShotSavingPath):
         try:
-            elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
-            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
+            elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)
             if(elementPresense):
                 if(elementVisible):
-                    return self.driver.find_element(By.XPATH, xpath).screenshot(screenShotSavingPath)
+                    return elementVisible.screenshot(screenShotSavingPath)
         except Exception as error:
             raise error
         
 
     # action class
 
-    def actionClick(self, xpath):
+    def actionClick(self, locatorType,locator):
         try:
             actions = ActionChains(self.driver)
-            
-            if(super().WaitFor_PresenseOf_Element_Located(xpath)):
-                element = self.driver.find_element(By.XPATH, xpath)
+            #elementLocated=super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
+            if(super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)):
+                element = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
                 actions.move_to_element(element).click(element)
                 actions.perform()
         except Exception as error:
@@ -238,12 +238,12 @@ class common(customwebDriverwait):
         Args:	
         on_element: The element to mouse down. If None, clicks on current mouse position.
         '''
-    def actionClickandHold(self, xpath=None):
+    def actionClickandHold(self, locatorType,locator=None):
         try:
             actions = ActionChains(self.driver)
-            if(xpath != None):
-                if(super().WaitFor_PresenseOf_Element_Located(xpath)):
-                    element = self.driver.find_element(By.XPATH, xpath)
+            if(locator != None):
+                if(super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)):
+                    element = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
             else:
                 element = None
             if(element != None):
@@ -257,11 +257,11 @@ class common(customwebDriverwait):
     '''
     Moves the mouse to the element
     '''
-    def moveToElement(self, xpath):
+    def moveToElement(self, locatorType,locator):
         try:
             actions = ActionChains(self.driver)
-            if(super().WaitFor_PresenseOf_Element_Located(xpath)):
-                element = self.driver.find_element(By.XPATH, xpath)
+            if(super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)):
+                element = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
                 actions.move_to_element(element).perform()
         except Exception as error:
             raise error
@@ -269,11 +269,11 @@ class common(customwebDriverwait):
     '''
     Moves the mouse to the element and clicks it
     '''
-    def moveToElement_and_click(self, xpath):
+    def moveToElement_and_click(self, locatorType,locator):
         try:
             actions = ActionChains(self.driver)
-            if(super().WaitFor_PresenseOf_Element_Located(xpath)):
-                element = self.driver.find_element(By.XPATH, xpath)
+            if(super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)):
+                element = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
                 actions.move_to_element(element).click(element).perform()
         except Exception as error:
             raise error
@@ -286,17 +286,17 @@ class common(customwebDriverwait):
         actions.perform()
         if user didnt provide subelement xpath, then it clicks the same element mouse moved to
         '''    
-    def moveToElement_and_subElement_click(self, xpathOfMovingTO, xpathOfElemtToClick=None):
+    def moveToElement_and_subElement_click(self, locatorType,LocatorMovingTO, LocatorOfElemtToClick=None):
         try:
-            if(xpathOfElemtToClick!=None):    
+            if(LocatorOfElemtToClick!=None):    
                 actions = ActionChains(self.driver)
-                if(super().WaitFor_PresenseOf_Element_Located(xpathOfMovingTO)):
-                    MovedToelement = self.driver.find_element(By.XPATH, xpathOfMovingTO)
-                    ClickElement=  self.driver.find_element(By.XPATH, xpathOfElemtToClick)  
+                if(super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,LocatorMovingTO)):
+                    MovedToelement = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,LocatorMovingTO)
+                    ClickElement=  super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,LocatorOfElemtToClick)  
                     actions.move_to_element(MovedToelement).click(ClickElement).perform()
             else:
-                if(super().WaitFor_PresenseOf_Element_Located(xpathOfMovingTO)):
-                    MovedToelement = self.driver.find_element(By.XPATH, xpathOfMovingTO)
+                if(super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,LocatorMovingTO)):
+                    MovedToelement = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,LocatorMovingTO)
                       
                     actions.move_to_element(MovedToelement).click().perform()       
         except Exception as error:
@@ -309,11 +309,11 @@ class common(customwebDriverwait):
             xoffset: X offset to move to.
             yoffset: Y offset to move to.
         '''           
-    def moveToElementWithOffset(self, xpath, xoffset, yoffset):
+    def moveToElementWithOffset(self, locatorType,locator, xoffset, yoffset):
         try:
             actions = ActionChains(self.driver)
-            if(super().WaitFor_PresenseOf_Element_Located(xpath)):
-                element = self.driver.find_element(By.XPATH, xpath)
+            if(super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)):
+                element = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
                 actions.move_to_element_with_offset(element, xoffset, yoffset)
                 actions.perform()
         except Exception as error:
@@ -330,7 +330,7 @@ class common(customwebDriverwait):
         try:
             actions = ActionChains(self.driver)
             if(xpath != None):
-                if(super().WaitFor_PresenseOf_Element_Located(xpath)):
+                if(super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)):
                     element = self.driver.find_element(By.XPATH, xpath)
             else:
                 element = None
@@ -345,12 +345,12 @@ class common(customwebDriverwait):
             raise error        
     '''
 
-    def keyDown_and_sendKeys(self, ModifierKey, keys, xpath=None):
+    def keyDown_and_sendKeys(self, ModifierKey, keys, locatorType,locator=None):
         try:
             actions = ActionChains(self.driver)
-            if(xpath != None):
-                if(super().WaitFor_PresenseOf_Element_Located(xpath)):
-                    element = self.driver.find_element(By.XPATH, xpath)
+            if(locator != None):
+                if(super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)):
+                    element = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
                     actions.key_down(ModifierKey, element).send_keys(keys)
                     actions.perform()                    
             else:
@@ -370,12 +370,12 @@ class common(customwebDriverwait):
     ActionChains(driver).key_down(Keys.CONTROL).send_keys('c').key_up(Keys.CONTROL).perform()
     
     '''
-    def keyUp(self, ModifierKey, xpath=None):
+    def keyUp(self, ModifierKey, locatorType,locator=None):
         try:
             actions = ActionChains(self.driver)
-            if(xpath != None):
-                if(super().WaitFor_PresenseOf_Element_Located(xpath)):    
-                    element = self.driver.find_element(By.XPATH, xpath)
+            if(locator != None):
+                if(super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)):    
+                    element = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
                     actions.key_up(ModifierKey, element).perform()
             else:
 
@@ -385,12 +385,12 @@ class common(customwebDriverwait):
         '''
          keyboard key press down --> keyboard send keys -->keyboard releasing the key 
         '''
-    def keyDown_sendKeys_keyUP(self,ModifierKey,keys:str, xpath=None):
+    def keyDown_sendKeys_keyUP(self,ModifierKey,keys:str, locatorType,locator=None):
         try:
             actions = ActionChains(self.driver)   
-            if(xpath != None):
-                if(super().WaitFor_PresenseOf_Element_Located(xpath)):    
-                    element = self.driver.find_element(By.XPATH, xpath)
+            if(locator != None):
+                if(super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)):    
+                    element = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
                     actions.key_down(ModifierKey,element).send_keys(keys).key_up(ModifierKey,element).perform()
             else:
                 actions.key_down(ModifierKey).send_keys(keys).key_up(ModifierKey).perform()
@@ -405,12 +405,12 @@ class common(customwebDriverwait):
     Args:	
     on_element: The element to double-click. If None, clicks on current mouse position.
     '''
-    def double_click(self, xpath: None):
+    def double_click(self, locatorType,locator: None):
         try:
             actions = ActionChains(self.driver)
-            if(xpath != None):
-                if(super().WaitFor_PresenseOf_Element_Located(xpath)):
-                    element = self.driver.find_element(By.XPATH, xpath)
+            if(locator != None):
+                if(super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)):
+                    element = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
                     actions.double_click(element)
                     actions.perform()
 
@@ -426,12 +426,12 @@ class common(customwebDriverwait):
         Args:	
         on_element: The element to context-click. If None, clicks on current mouse position.
         '''
-    def right_Click(self, xpath=None):
+    def right_Click(self, locatorType,locator=None):
         try:
             actions = ActionChains(self.driver)
-            if(xpath != None):
-                if(super().WaitFor_PresenseOf_Element_Located(xpath)):
-                    element = self.driver.find_element(By.XPATH, xpath)
+            if(locator != None):
+                if(super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)):
+                    element = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
             else:
                 element = None
             if(element != None):
@@ -459,10 +459,10 @@ class common(customwebDriverwait):
         except Exception as error:
             raise error            
 
-    def sendKeysToElement(self, xpath, *keys_to_send):
+    def sendKeysToElement(self, locatorType,locator, *keys_to_send):
         try:
             actions = ActionChains(self.driver)
-            element = super().WaitFor_PresenseOf_Element_Located(xpath)
+            element = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
             actions.click(element)
             actions.send_keys_to_element(element, *keys_to_send)
             actions.perform()
@@ -536,11 +536,11 @@ class common(customwebDriverwait):
         Args:	
         keys_to_send: The keys to send. Modifier keys constants can be found in the ‘Keys’ class.
         '''
-    def scroll_to_Element(self, xpath):
+    def scroll_to_Element(self, locatorType,locator):
         try:
             actions = ActionChains(self.driver)
-            if(super().WaitFor_PresenseOf_Element_Located(xpath)):
-                element = self.driver.find_element(By.XPATH, xpath)
+            if(super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)):
+                element = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
                 actions.scroll_to_element( element)
                 actions.perform()
         except Exception as error:
