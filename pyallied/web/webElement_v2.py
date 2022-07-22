@@ -21,10 +21,10 @@ class common_v2(customwebDriverwait):
         super().__init__(driver)
         self.driver = driver
 
-    def findElementsBy(self, xpath):
+    def findElementsBy(self, locatorType,locator):
         try:
-            if(super().WaitFor_presence_of_all_elements_located(xpath)):
-                return self.driver.find_elements(By.XPATH, xpath)
+            if(super().WaitFor_presence_of_all_elements_located_AnyLocatorType(locatorType,locator)):
+                return super().WaitFor_presence_of_all_elements_located_AnyLocatorType(locatorType,locator)
         except Exception as error:
             raise error
 
@@ -551,27 +551,27 @@ class common_v2(customwebDriverwait):
             self.driver.switch_to.active_element
         except Exception as error:
             raise error
-    def formSubmit(self,xpath):
+    def formSubmit(self,locatorType,locator):
         try:
-            element=self.findElementBy(xpath) 
+            element=self.findElementBy(locatorType,locator) 
             element.submit()
         except Exception as error:
             raise error
-    def get_Value_of_css_property(self,xpath,property_name):
+    def get_Value_of_css_property(self,locatorType,locator,property_name):
         try:
-            element=self.findElementBy(xpath) 
+            element=self.findElementBy(locatorType,locator) 
             return element.value_of_css_property(property_name)
         except Exception as error:
             raise error
-    def get_Accessible_name(self,xpath):
+    def get_Accessible_name(self,locatorType,locator):
         try:
-            element=self.findElementBy(xpath) 
+            element=self.findElementBy(locatorType,locator) 
             return element.accessible_name
         except Exception as error:
             raise error 
-    def get_Aria_role(self,xpath):
+    def get_Aria_role(self,locatorType,locator):
         try:
-            element=self.findElementBy(xpath) 
+            element=self.findElementBy(locatorType,locator) 
             return element.Aria_role
         except Exception as error:
             raise error 
@@ -584,15 +584,15 @@ class common_v2(customwebDriverwait):
     if element1 == element2:
         print("These 2 are equal")
     '''                                                  
-    def Get_internal_ID(self,xpath):
+    def Get_internal_ID(self,locatorType,locator):
         try:
-            element=self.findElementBy(xpath) 
+            element=self.findElementBy(locatorType,locator) 
             return element.id
         except Exception as error:
             raise error
-    def Get_location_of_Element(self,xpath):
+    def Get_location_of_Element(self,locatorType,locator):
         try:
-            element=self.findElementBy(xpath) 
+            element=self.findElementBy(locatorType,locator) 
             return element.location
         except Exception as error:
             raise error
@@ -602,44 +602,44 @@ class common_v2(customwebDriverwait):
 
     Returns the top lefthand corner location on the screen, or None if the element is not visible.
     '''
-    def get_Scroll_location_of_Element(self,xpath):
+    def get_Scroll_location_of_Element(self,locatorType,locator):
         try:
-            element=self.findElementBy(xpath) 
+            element=self.findElementBy(locatorType,locator) 
             return element.location_once_scrolled_into_view
         except Exception as error:
             raise error
     '''
     Internal reference to the WebDriver instance this element was found from.
     '''        
-    def get_Prent_of_Element(self,xpath):
+    def get_Prent_of_Element(self,locatorType,locator):
         try:
-            element=self.findElementBy(xpath) 
+            element=self.findElementBy(locatorType,locator) 
             return element.parent
         except Exception as error:
             raise error
     '''
     A dictionary with t he size and location of the element.
     '''        
-    def get_size_And_Location(self,xpath):
+    def get_size_And_Location(self,locatorType,locator):
         try:
-            element=self.findElementBy(xpath) 
+            element=self.findElementBy(locatorType,locator) 
             return element.rect
         except Exception as error:
             raise error
-    def get_element_screenshot_as_base64(self,xpath,name:str):
+    def get_element_screenshot_as_base64(self,locatorType,locator,name:str):
         try:
             #element=self.findElementBy(xpath) 
             with open(self.__webElement_Screenshot_Location()+"/"+name+".jpg", "wb") as fh:
-                fh.write(base64.urlsafe_b64decode(self.findElementBy(xpath).screenshot_as_base64))
+                fh.write(base64.urlsafe_b64decode(self.findElementBy(locatorType,locator).screenshot_as_base64))
             
             #return element.screenshot_as_base64
         except Exception as error:
             raise error
-    def get_element_screenshot_as_png(self,xpath,name:str):
+    def get_element_screenshot_as_png(self,locatorType,locator,name:str):
         try:
             result_File=self.__webElement_Screenshot_Location()+"/"+name+".png"
             with open(result_File, "wb") as fh:
-                fh.write(self.findElementBy(xpath).screenshot_as_png)
+                fh.write(self.findElementBy(locatorType,locator).screenshot_as_png)
                 #Image.open(result_File).save(result_File, 'PNG')
         except Exception as error:
             raise error
@@ -652,27 +652,27 @@ class common_v2(customwebDriverwait):
     NoSuchShadowRoot - if no shadow root was attached to element
     
     '''        
-    def get_Element_shadow_root(self,xpath):
+    def get_Element_shadow_root(self,locatorType,locator):
         try:
-            element=self.findElementBy(xpath) 
+            element=self.findElementBy(locatorType,locator) 
             return element.shadow_root
         except Exception as error:
             raise error
-    def get_Element_size(self,xpath):
+    def get_Element_size(self,locatorType,locator):
         try:
-            element=self.findElementBy(xpath) 
+            element=self.findElementBy(locatorType,locator) 
             return element.size
         except Exception as error:
             raise error
-    def get_Element_tag_name(self,xpath):
+    def get_Element_tag_name(self,locatorType,locator):
         try:
-            element=self.findElementBy(xpath) 
+            element=self.findElementBy(locatorType,locator) 
             return element.tag_name
         except Exception as error:
             raise error
-    def get_Element_text(self,xpath):
+    def get_Element_text(self,locatorType,locator):
         try:
-            element=self.findElementBy(xpath) 
+            element=self.findElementBy(locatorType,locator) 
             return element.text
         except Exception as error:
             raise error

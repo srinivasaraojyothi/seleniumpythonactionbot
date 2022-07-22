@@ -311,4 +311,25 @@ class customwebDriverwait:
             elif(locatorType=='TAG_NAME'):
                 return WebDriverWait(self.driver, self.customWait).until(EC.visibility_of_element_located((By.TAG_NAME, locator)))
         except Exception as error:
-            raise error                        
+            raise error
+    def WaitFor_presence_of_all_elements_located_AnyLocatorType(self, locatorType,locator):                                    
+        self.locatorType=str(locatorType).capitalize
+        try:
+            if(locatorType=='XPATH'):
+                return WebDriverWait(self.driver, self.customWait).until(EC.presence_of_all_elements_located((By.XPATH, locator)))
+            elif(locatorType=='ID'):
+                return WebDriverWait(self.driver, self.customWait).until(EC.presence_of_all_elements_located((By.ID, locator)))
+            elif(locatorType=='CLASS_NAME'):
+                return WebDriverWait(self.driver, self.customWait).until(EC.presence_of_all_elements_located((By.CLASS_NAME, locator)))
+            elif(locatorType=='CSS_SELECTOR'):
+                return WebDriverWait(self.driver, self.customWait).until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, locator)))
+            elif(locatorType=='LINK_TEXT'):
+                return WebDriverWait(self.driver, self.customWait).until(EC.presence_of_all_elements_located((By.LINK_TEXT, locator))) 
+            elif(locatorType=='NAME'):
+                return WebDriverWait(self.driver, self.customWait).until(EC.presence_of_all_elements_located((By.NAME, locator)))
+            elif(locatorType=='PARTIAL_LINK_TEXT'):
+                return WebDriverWait(self.driver, self.customWait).until(EC.presence_of_all_elements_located((By.PARTIAL_LINK_TEXT, locator)))                                                                               
+            elif(locatorType=='TAG_NAME'):
+                return WebDriverWait(self.driver, self.customWait).until(EC.presence_of_all_elements_located((By.TAG_NAME, locator)))
+        except Exception as error:
+            raise error
