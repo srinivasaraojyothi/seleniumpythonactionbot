@@ -692,4 +692,182 @@ class common_v2(customwebDriverwait):
             return element
         except Exception as error:
             return error
+    '''
+        drag_and_drop(source, target)¶
+        Holds down the left mouse button on the source element,
+        then moves to the target element and releases the mouse button.
+        Args:	
+        source: The element to mouse down.
+        target: The element to mouse up
+    '''
+    def dragAndDrop(self, locatorType,sourcexpath, destinationxpath):
+        try:
+            SourceelElementPresense=super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,sourcexpath)
+            SourceelElementVisibility=super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,sourcexpath)
+            DestinationElementPresense=super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,destinationxpath)
+            DestinationElementVisibility=super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,destinationxpath)
+            if(SourceelElementPresense and DestinationElementPresense ):
+                if(SourceelElementVisibility and DestinationElementVisibility):
+                    sourceElement = self.findElementBy(locatorType, sourcexpath)
+                    destination = self.findElementBy(locatorType, destinationxpath)
+                    action_chains = ActionChains(self.driver)
+                    action_chains.drag_and_drop(sourceElement, destination).perform()
+        except Exception as error:
+            raise error            
+        '''
+        drag_and_drop_by_offset(source, xoffset, yoffset)¶
+        Holds down the left mouse button on the source element,
+        then moves to the target offset and releases the mouse button.
+        Args:	
+        source: The element to mouse down.
+        xoffset: X offset to move to.
+        yoffset: Y offset to move to.
+        '''
+    def dragAndDropByOffset(self, locatorType,sourcexpath, xoffset, yoffset):
+        try:
+            SourceelElementPresense=super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,sourcexpath)
+            SourceelElementVisibility=super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,sourcexpath)
+            if(SourceelElementPresense):
+                if(SourceelElementVisibility):
+                    sourceElement = self.findElementBy(locatorType, sourcexpath)
+
+                    action_chains = ActionChains(self.driver)
+                    action_chains.drag_and_drop_by_offset(
+                        sourceElement, xoffset, yoffset).perform()
+        except Exception as error:
+            raise error                
+
+
+
+    def selectDropDownByValue(self, locatorType,locator, valueToSelect):
+        try:
+            elementPresense=super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
+            #elementVisibility=super().WaitFor_VisibilityOf_Element_Located(xpath)
+            if(elementPresense):
+                #if(elementVisibility):
+                    select = Select(self.findElementBy(locatorType, locator))
+                    select.select_by_value(valueToSelect)
+        except Exception as error:
+            raise error
+    def selectDropDownByIndex(self, locatorType,locator, indexToSelect):
+        try:
+            elementPresense=super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
+            #elementVisibility=super().WaitFor_VisibilityOf_Element_Located(xpath)
+            if(elementPresense):
+                #if(elementVisibility):
+                    select = Select(self.findElementBy(locatorType, locator))
+                    select.select_by_index(indexToSelect)
+        except Exception as error:
+            raise error
+    def selectDropDownByVisibleText(self, locatorType,locator, textToSelect):
+        try:
+            elementPresense=super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
+            #elementVisibility=super().WaitFor_VisibilityOf_Element_Located(xpath)
+            if(elementPresense):
+                    select = Select(self.findElementBy(locatorType, locator))
+                    select.select_by_visible_text(textToSelect)
+        except Exception as error:
+            raise error
+    def deselectAllOptionsInDropDown(self, locatorType,locator):
+        try:
+            elementPresense=super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
+            #elementVisibility=super().WaitFor_VisibilityOf_Element_Located(xpath)
+            if(elementPresense):
+                #if(elementVisibility):
+                    select = Select(self.findElementBy(locatorType, locator))
+                    select.deselect_all()
+        except Exception as error:
+            raise error
+    def getDefaultSelectedDropDownOptions(self, locatorType,locator):
+        try:
+            elementPresense=super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
+            #elementVisibility=super().WaitFor_VisibilityOf_Element_Located(xpath)
+            selectedOptions=[]
+            if(elementPresense):
+                #if(elementVisibility):
+                    select = Select(self.findElementBy(locatorType, locator))
+                    all_selected_options = select.all_selected_options
+                    for i in all_selected_options:
+                        if(i.text):
+                            selectedOptions.append(i.text)
+                        elif(i.get_attribute('value')):
+                            selectedOptions.append(i.get_attribute('value'))
+                    return selectedOptions
+        except Exception as error:
+            raise error
+    def getAllOptionInDropDown(self, locatorType,locator):
+        try:
+            elementPresense=super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
+            #elementVisibility=super().WaitFor_VisibilityOf_Element_Located(xpath)
+            allOptions=[]
+            if(elementPresense):
+                #if(elementVisibility):
+                    select = Select(self.findElementBy(locatorType, locator))
+                    options = select.options
+                    for i in options:
+                        if(i.text):
+                            allOptions.append(i.text)
+                        elif(i.get_attribute('value')):
+                            allOptions.append(i.get_attribute('value'))
+
+                    return allOptions
+        except Exception as error:
+            raise error
+    def deselectByIndex(self, locatorType,locator, index):
+        try:
+            elementPresense=super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
+            #elementVisibility=super().WaitFor_VisibilityOf_Element_Located(xpath)
+            if(elementPresense):
+                #if(elementVisibility):
+                    select = Select(self.findElementBy(locatorType, locator))
+                    select.deselect_by_index(index)
+        except Exception as error:
+            raise error
+    def deselectByValue(self, locatorType,locator, value):
+        try:
+            elementPresense=super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
+            #elementVisibility=super().WaitFor_VisibilityOf_Element_Located(xpath)
+            if(elementPresense):
+                #if(elementVisibility):
+                    select = Select(self.findElementBy(locatorType, locator))
+                    select.deselect_by_value(value)
+        except Exception as error:
+            raise error
+    def deselectByVisibleText(self, locatorType,locator, text):
+        try:
+            elementPresense=super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
+            #elementVisibility=super().WaitFor_VisibilityOf_Element_Located(xpath)
+            if(elementPresense):
+                #if(elementVisibility):        
+                    select = Select(self.findElementBy(locatorType, locator))
+                    select.deselect_by_visible_text(text)
+        except Exception as error:
+            raise error
+    def getFirstSelecteOption(self, locatorType,locator):
+        try:
+            elementPresense=super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
+            #elementVisibility=super().WaitFor_VisibilityOf_Element_Located(xpath)
+            firstSelectedOption=[]
+            if(elementPresense):
+                #if(elementVisibility):        
+                    select = Select(self.findElementBy(locatorType, locator))
+                    selectedOption=select.first_selected_option
+                    #for i in selectedOption:
+                    if(selectedOption.text):
+                            firstSelectedOption.append(selectedOption.text)
+                    elif(selectedOption.get_attribute('value')):
+                            firstSelectedOption.append(selectedOption.get_attribute('value'))
+
+                    return firstSelectedOption 
+        except Exception as error:
+            raise error                    
+    def switch_To_Frame_ByLocator(self,locatorType,locator):
+        try:
+            #self.driver.presence_of_element_located(frameXpath)
+            if(super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)) :
+                element=self.findElementBy(locatorType, locator)
+                self.driver.switch_to.frame(element)
+        except Exception as error:
+            raise error            
+
         
