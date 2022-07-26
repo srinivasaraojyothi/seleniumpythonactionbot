@@ -56,6 +56,22 @@ class DragAndDrop(customwebDriverwait):
 
                     action_chains = ActionChains(self.driver)
                     action_chains.drag_and_drop_by_offset(
-                        sourceElement, xoffset, yoffset).perform()
+                        sourceElement, xoffset, yoffset).pause(5).perform()
         except Exception as error:
-            raise error                
+            raise error
+    def dragElement_ToOffSet_And_Drop(self, sourcexpath, xoffset, yoffset):
+        try:
+            SourceelElementPresense=super().WaitFor_PresenseOf_Element_Located(sourcexpath)
+            SourceelElementVisibility=super().WaitFor_VisibilityOf_Element_Located(sourcexpath)
+            if(SourceelElementPresense):
+                if(SourceelElementVisibility):
+                    sourceElement = self.driver.find_element(By.XPATH, sourcexpath)
+
+                    action_chains = ActionChains(self.driver)
+
+                    action_chains.move_to_element(sourceElement).pause(1).click_and_hold().pause(2).move_by_offset(xoffset, yoffset).pause(2).release().perform()
+        except Exception as error:
+            raise error        
+        
+
+
