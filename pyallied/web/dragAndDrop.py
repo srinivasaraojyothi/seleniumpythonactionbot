@@ -1,3 +1,4 @@
+from distutils.log import error
 from pyparsing import And
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.alert import Alert
@@ -7,6 +8,7 @@ from pyallied.web.webWaits import customwebDriverwait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from seletools.actions import drag_and_drop
 
 
 
@@ -71,7 +73,18 @@ class DragAndDrop(customwebDriverwait):
 
                     action_chains.move_to_element(sourceElement).pause(1).click_and_hold().pause(2).move_by_offset(xoffset, yoffset).pause(2).release().perform()
         except Exception as error:
-            raise error        
-        
-
+            raise error
+    def seletools_drag_and_drop(self, sourcexpath, destinationxpath):
+        try:
+            SourceelElementPresense=super().WaitFor_PresenseOf_Element_Located(sourcexpath)
+            SourceelElementVisibility=super().WaitFor_VisibilityOf_Element_Located(sourcexpath)
+            DestinationElementPresense=super().WaitFor_PresenseOf_Element_Located(destinationxpath)
+            DestinationElementVisibility=super().WaitFor_VisibilityOf_Element_Located(destinationxpath)
+            if(SourceelElementPresense and DestinationElementPresense ):
+                if(SourceelElementVisibility and DestinationElementVisibility):
+                    sourceElement = self.driver.find_element(By.XPATH, sourcexpath)
+                    destination = self.driver.find_element(By.XPATH, destinationxpath)                    
+                    drag_and_drop(self.driver, sourceElement, destination)           
+        except Exception as error:
+            raise error
 
