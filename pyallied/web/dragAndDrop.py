@@ -12,6 +12,7 @@ from seletools.actions import drag_and_drop
 
 
 
+
 class DragAndDrop(customwebDriverwait):
     # drag and drop
     def __init__(self, driver):
@@ -87,4 +88,17 @@ class DragAndDrop(customwebDriverwait):
                     drag_and_drop(self.driver, sourceElement, destination)           
         except Exception as error:
             raise error
+    '''
+    ATTENTION: you must use CSS selectors for draggable and droppable elements in order for this script to work. 
+    It’s related to the way that browser search elements in DOM tree using embedded scripts
+    '''        
+    def dragAndDrop_cssSelectorOnly_jsExecuter(self,sourcexpath, destinationxpath):
+        try:
+            f = open("pyallied/web/dragDrop.js",  "r")
+            javascript = f.read()
+            f.close()
+            self.driver.execute_script(javascript, sourcexpath, destinationxpath)
+        except Exception as error:
+            raise error    
+
 
