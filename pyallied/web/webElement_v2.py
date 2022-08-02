@@ -195,7 +195,7 @@ class common_v2(customwebDriverwait):
 
         Can be used to check if a checkbox or radio button is selected.
     '''
-    def isElementSelected(locatorType,locator):
+    def isElementSelected(self,locatorType,locator):
         try:
             elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
             elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)
@@ -288,8 +288,9 @@ class common_v2(customwebDriverwait):
         '''    
     def moveToElement_and_subElement_click(self, locatorType,LocatorMovingTO, LocatorOfElemtToClick=None):
         try:
+            actions = ActionChains(self.driver)
             if(LocatorOfElemtToClick!=None):    
-                actions = ActionChains(self.driver)
+                
                 if(super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,LocatorMovingTO)):
                     MovedToelement = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,LocatorMovingTO)
                     ClickElement=  super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,LocatorOfElemtToClick)  
