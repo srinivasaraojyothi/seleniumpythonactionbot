@@ -433,7 +433,7 @@ class mobAppium_actions(mobAppium):
     ''' 
     def get_current_url(self):
         try:
-            return self.driver.current_url()
+            return self.driver.current_url
   
         except Exception as error:
             raise error
@@ -445,7 +445,7 @@ class mobAppium_actions(mobAppium):
         except Exception as error:
             raise error 
     '''Navigate forwards in the browser history, if possible (Web context only'''
-    def navigate_back(self):
+    def navigate_forward(self):
         try:
             return self.driver.forward()
   
