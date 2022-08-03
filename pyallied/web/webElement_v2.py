@@ -346,10 +346,10 @@ class common_v2(customwebDriverwait):
             raise error        
     '''
 
-    def keyDown_and_sendKeys(self, ModifierKey, keys, locatorType,locator=None):
+    def keyDown_and_sendKeys(self, ModifierKey, keys, locatorType=None,locator=None):
         try:
             actions = ActionChains(self.driver)
-            if(locator != None):
+            if(locator != None and locatorType != None):
                 if(super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)):
                     element = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
                     actions.key_down(ModifierKey, element).send_keys(keys)
