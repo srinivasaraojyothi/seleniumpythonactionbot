@@ -455,7 +455,7 @@ class common_v2(customwebDriverwait):
     def sendKeys(self, *keys_to_send):
         try:
             actions = ActionChains(self.driver)
-            actions.send_keys(keys_to_send)
+            actions.send_keys(*keys_to_send)
             actions.perform()
         except Exception as error:
             raise error            
