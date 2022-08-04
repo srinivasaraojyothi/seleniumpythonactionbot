@@ -549,7 +549,8 @@ class common_v2(customwebDriverwait):
     def switch_To_ActiveElement(self):
         try:
 
-            self.driver.switch_to.active_element
+            element=self.driver.switch_to.active_element
+            return element
         except Exception as error:
             raise error
     def formSubmit(self,locatorType,locator):
