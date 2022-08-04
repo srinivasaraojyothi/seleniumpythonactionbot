@@ -346,7 +346,7 @@ class common_v2(customwebDriverwait):
             raise error        
     '''
 
-    def keyDown_and_sendKeys(self, ModifierKey, keys, locatorType=None,locator=None):
+    def keyDown_and_sendKeys(self, ModifierKey:Keys, keys, locatorType=None,locator=None):
         try:
             actions = ActionChains(self.driver)
             if(locator != None and locatorType != None):
@@ -371,7 +371,7 @@ class common_v2(customwebDriverwait):
     ActionChains(driver).key_down(Keys.CONTROL).send_keys('c').key_up(Keys.CONTROL).perform()
     
     '''
-    def keyUp(self, ModifierKey, locatorType,locator=None):
+    def keyUp(self, ModifierKey:Keys, locatorType,locator=None):
         try:
             actions = ActionChains(self.driver)
             if(locator != None):
@@ -386,7 +386,7 @@ class common_v2(customwebDriverwait):
         '''
          keyboard key press down --> keyboard send keys -->keyboard releasing the key 
         '''
-    def keyDown_sendKeys_keyUP(self,ModifierKey,keys:str, locatorType,locator=None):
+    def keyDown_sendKeys_keyUP(self,ModifierKey:Keys,keys:str, locatorType,locator=None):
         try:
             actions = ActionChains(self.driver)   
             if(locator != None):
