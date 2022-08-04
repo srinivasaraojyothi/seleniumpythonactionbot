@@ -75,7 +75,7 @@ class DragAndDrop(customwebDriverwait):
                     action_chains.move_to_element(sourceElement).pause(1).click_and_hold().pause(2).move_by_offset(xoffset, yoffset).pause(2).release().perform()
         except Exception as error:
             raise error
-    def seletools_drag_and_drop(self, sourcexpath, destinationxpath):
+    def seletools_drag_and_drop_xpath(self, sourcexpath, destinationxpath):
         try:
             SourceelElementPresense=super().WaitFor_PresenseOf_Element_Located(sourcexpath)
             SourceelElementVisibility=super().WaitFor_VisibilityOf_Element_Located(sourcexpath)
@@ -88,17 +88,39 @@ class DragAndDrop(customwebDriverwait):
                     drag_and_drop(self.driver, sourceElement, destination)           
         except Exception as error:
             raise error
+    def seletools_drag_and_drop_css(self, source_css, destination_css):
+        try:
+            SourceelElementPresense=self.__waitFor_presenseOf_element_located(source_css)
+            SourceelElementVisibility=self.__waitFor_visibilityOf_element_located(source_css)
+            DestinationElementPresense=self.__waitFor_presenseOf_element_located(destination_css)
+            DestinationElementVisibility=self.__waitFor_visibilityOf_element_located(destination_css)
+            if(SourceelElementPresense and DestinationElementPresense ):
+                if(SourceelElementVisibility and DestinationElementVisibility):
+                    sourceElement = self.driver.find_element(By.CSS_SELECTOR, source_css)
+                    destination = self.driver.find_element(By.CSS_SELECTOR, destination_css)                    
+                    drag_and_drop(self.driver, sourceElement, destination)           
+        except Exception as error:
+            raise error            
     '''
     ATTENTION: you must use CSS selectors for draggable and droppable elements in order for this script to work. 
     It’s related to the way that browser search elements in DOM tree using embedded scripts
     '''        
-    def dragAndDrop_cssSelectorOnly_jsExecuter(self,sourcexpath, destinationxpath):
+    def dragAndDrop_cssSelectorOnly_jsExecuter(self,source_css, destination_css):
         try:
             f = open("pyallied/web/dragDrop.js",  "r")
             javascript = f.read()
             f.close()
-            self.driver.execute_script(javascript, sourcexpath, destinationxpath)
+            self.driver.execute_script(javascript, source_css, destination_css)
         except Exception as error:
             raise error    
-
-
+    def __waitFor_presenseOf_element_located(self, cssLocator):
+        try:
+            return WebDriverWait(self.driver, self.customWait).until(EC.presence_of_element_located((By.CSS_SELECTOR, cssLocator)))
+        except Exception as error:
+            raise error
+    def __waitFor_visibilityOf_element_located(self, cssLocator):
+        try:
+            #print(self.customWait,'------>wait')
+            return WebDriverWait(self.driver, self.customWait).until(EC.visibility_of_element_located((By.CSS_SELECTOR, cssLocator)))
+        except Exception as error:
+            raise error
