@@ -21,7 +21,7 @@ class customwebDriverwait:
 
     def WaitFor_VisibilityOf_Element_Located(self, xpath):
         try:
-            #print(self.customWait,'------>wait')
+            ##print(self.customWait,'------>wait')
             return WebDriverWait(self.driver, self.customWait).until(EC.visibility_of_element_located((By.XPATH, xpath)))
         except Exception as error:
             raise error
@@ -258,13 +258,13 @@ class customwebDriverwait:
             raise error    
     @property
     def customWait(self):
-         #print("getter method called")
+         ##print("getter method called")
          return self.__wait
        
      # a setter function
     @customWait.setter
     def customWait(self, wait=None):
-         #print("custom wait is set to=",wait)
+         ##print("custom wait is set to=",wait)
          if(wait!=None):
             self.__wait = wait
          else:
@@ -272,10 +272,10 @@ class customwebDriverwait:
             self.__wait=wait
     def WaitFor_PresenseOf_Element_Located_AnyLocatorType(self, locatorType:str,locator):
         #self.locatorType=str(locatorType).upper()
-        #print(self.locatorType,"------>")
+        ##print(self.locatorType,"------>")
         try:
             if(locatorType.upper()=='XPATH'):
-                print("matching xpath",locatorType,'<---->')
+                #print("matching xpath",locatorType,'<---->')
                 return WebDriverWait(self.driver, self.customWait).until(EC.presence_of_element_located((By.XPATH, locator)))
             elif(locatorType.upper()=='ID'):
                 return WebDriverWait(self.driver, self.customWait).until(EC.presence_of_element_located((By.ID, locator)))
@@ -297,7 +297,7 @@ class customwebDriverwait:
             raise error 
     def WaitFor_Visibility_of_Element_Located_AnyLocatorType(self, locatorType:str,locator):
         #self.locatorType=str(locatorType).upper()
-        #print(self.locatorType,"------>")
+        ##print(self.locatorType,"------>")
         try:
             if(locatorType.upper()=='XPATH'):
                 return WebDriverWait(self.driver, self.customWait).until(EC.visibility_of_element_located((By.XPATH, locator)))
@@ -323,7 +323,7 @@ class customwebDriverwait:
         #self.locatorType=str(locatorType).upper()
         try:
             if(locatorType.upper()=='XPATH'):
-                print("matching xpath--")
+                ##print("matching xpath--")
                 return WebDriverWait(self.driver, self.customWait).until(EC.presence_of_all_elements_located((By.XPATH, locator)))
             elif(locatorType.upper()=='ID'):
                 return WebDriverWait(self.driver, self.customWait).until(EC.presence_of_all_elements_located((By.ID, locator)))
