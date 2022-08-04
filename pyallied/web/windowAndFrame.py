@@ -63,7 +63,7 @@ class frameAndWindow(customwebDriverwait):
 
     def switchToFrame(self, xpath):
         try:
-            super().WaitFor_frame_to_be_available_and_switch_to_it(xpath)
+            return super().WaitFor_frame_to_be_available_and_switch_to_it(xpath)
         except Exception as error:
             raise error        
     # Once we are done with working on frames, we will have to come back to the parent

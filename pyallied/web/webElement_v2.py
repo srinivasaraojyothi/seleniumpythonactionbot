@@ -21,7 +21,7 @@ class common_v2(customwebDriverwait):
         super().__init__(driver)
         self.driver = driver
 
-    def findElementsBy(self, locatorType,locator):
+    def findElementsBy(self,locatorType:str,locator):
         try:
             if(super().WaitFor_presence_of_all_elements_located_AnyLocatorType(locatorType,locator)):
                 return super().WaitFor_presence_of_all_elements_located_AnyLocatorType(locatorType,locator)
@@ -33,16 +33,19 @@ class common_v2(customwebDriverwait):
         
         
 
-    def findElementBy(self, locatorType,locator):
+    def findElementBy(self, locatorType:str,locator):
         try:
             #self.driver.presence_of_element_located(xpath)
             #self.driver.visibility_of_element_located(xpath)
             if(super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)) :
                 return super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
+            else:
+                raise Exception(" ** wrong selector/ no selector ** ",locatorType.upper())
+                raise error    
         except Exception as error:
             raise error        
 
-    def click(self, locatorType,locator):
+    def click(self,locatorType:str,locator):
         try:
             elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
             elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)
@@ -52,7 +55,7 @@ class common_v2(customwebDriverwait):
         except Exception as error:
             raise error            
 
-    def clear(self, locatorType,locator):
+    def clear(self,locatorType:str,locator):
         try:
             elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
             elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)
@@ -63,7 +66,7 @@ class common_v2(customwebDriverwait):
             raise error              
     
     
-    def isClickable(self, locatorType,locator, index=None):
+    def isClickable(self,locatorType:str,locator, index=None):
         # self.driver.visibility_of_element_located(xpath)
         try:
             #return WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((xpath)))
@@ -88,7 +91,7 @@ class common_v2(customwebDriverwait):
     # file_input.send_keys(os.path.abspath("path/to/profilepic.gif"))
     '''
 
-    def fillField(self, locatorType,locator, text):
+    def fillField(self,locatorType:str,locator, text):
         try:
             elementPresence = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
             elementVisibility = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)
@@ -119,7 +122,7 @@ class common_v2(customwebDriverwait):
         # Check if the "active" CSS class is applied to an element.
         is_active = "active" in target_element.get_attribute("class")
     '''
-    def getAttribute(self, locatorType,locator,AttributeName):
+    def getAttribute(self,locatorType:str,locator,AttributeName):
         try:
             elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
             elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)
@@ -138,7 +141,7 @@ class common_v2(customwebDriverwait):
         Usage:	
         text_length = target_element.get_dom_attribute("class")
     '''
-    def getDomAttribute(self, locatorType,locator,AttributeName):
+    def getDomAttribute(self,locatorType:str,locator,AttributeName):
         try:
             elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
             elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)
@@ -157,7 +160,7 @@ class common_v2(customwebDriverwait):
         Usage:	
         text_length = target_element.get_property("text_length")
     '''
-    def getProperty(self, locatorType,locator,PropertyName):
+    def getProperty(self,locatorType:str,locator,PropertyName):
         try:
             elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
             elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)
@@ -169,7 +172,7 @@ class common_v2(customwebDriverwait):
     '''
         Whether the element is visible to a user.
     '''
-    def isElementDisplayed(self, locatorType,locator):
+    def isElementDisplayed(self,locatorType:str,locator):
         try:
             elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
             elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)
@@ -181,7 +184,7 @@ class common_v2(customwebDriverwait):
     '''
         Returns whether the element is enabled.
     '''
-    def isElementEnabled(self, locatorType,locator):
+    def isElementEnabled(self,locatorType:str,locator):
         try:
             elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
             elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)
@@ -195,7 +198,7 @@ class common_v2(customwebDriverwait):
 
         Can be used to check if a checkbox or radio button is selected.
     '''
-    def isElementSelected(self,locatorType,locator):
+    def isElementSelected(self,locatorType:str,locator):
         try:
             elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
             elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)
@@ -208,7 +211,7 @@ class common_v2(customwebDriverwait):
         Saves a screenshot of the current element to a PNG image file. Returns
         False if there is any IOError, else returns True. Use full paths in your filename.
     '''
-    def currentElementScreenshot(self, locatorType,locator,screenShotSavingPath):
+    def currentElementScreenshot(self,locatorType:str,locator,screenShotSavingPath):
         try:
             elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
             elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)
@@ -221,7 +224,7 @@ class common_v2(customwebDriverwait):
 
     # action class
 
-    def actionClick(self, locatorType,locator):
+    def actionClick(self,locatorType:str,locator):
         try:
             actions = ActionChains(self.driver)
             #elementLocated=super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
@@ -238,7 +241,7 @@ class common_v2(customwebDriverwait):
         Args:	
         on_element: The element to mouse down. If None, clicks on current mouse position.
         '''
-    def actionClickandHold(self, locatorType,locator=None):
+    def actionClickandHold(self,locatorType:str,locator=None):
         try:
             actions = ActionChains(self.driver)
             if(locator != None):
@@ -257,7 +260,7 @@ class common_v2(customwebDriverwait):
     '''
     Moves the mouse to the element
     '''
-    def moveToElement(self, locatorType,locator):
+    def moveToElement(self,locatorType:str,locator):
         try:
             actions = ActionChains(self.driver)
             if(super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)):
@@ -269,7 +272,7 @@ class common_v2(customwebDriverwait):
     '''
     Moves the mouse to the element and clicks it
     '''
-    def moveToElement_and_click(self, locatorType,locator):
+    def moveToElement_and_click(self,locatorType:str,locator):
         try:
             actions = ActionChains(self.driver)
             if(super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)):
@@ -286,7 +289,7 @@ class common_v2(customwebDriverwait):
         actions.perform()
         if user didnt provide subelement xpath, then it clicks the same element mouse moved to
         '''    
-    def moveToElement_and_subElement_click(self, locatorType,LocatorMovingTO, LocatorOfElemtToClick=None):
+    def moveToElement_and_subElement_click(self,locatorType:str,LocatorMovingTO, LocatorOfElemtToClick=None):
         try:
             actions = ActionChains(self.driver)
             if(LocatorOfElemtToClick!=None):    
@@ -310,7 +313,7 @@ class common_v2(customwebDriverwait):
             xoffset: X offset to move to.
             yoffset: Y offset to move to.
         '''           
-    def moveToElementWithOffset(self, locatorType,locator, xoffset, yoffset):
+    def moveToElementWithOffset(self,locatorType:str,locator, xoffset, yoffset):
         try:
             actions = ActionChains(self.driver)
             if(super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)):
@@ -406,7 +409,7 @@ class common_v2(customwebDriverwait):
     Args:	
     on_element: The element to double-click. If None, clicks on current mouse position.
     '''
-    def double_click(self, locatorType,locator: None):
+    def double_click(self,locatorType:str,locator: None):
         try:
             actions = ActionChains(self.driver)
             if(locator != None):
@@ -427,7 +430,7 @@ class common_v2(customwebDriverwait):
         Args:	
         on_element: The element to context-click. If None, clicks on current mouse position.
         '''
-    def right_Click(self, locatorType,locator=None):
+    def right_Click(self,locatorType:str,locator=None):
         try:
             actions = ActionChains(self.driver)
             if(locator != None):
@@ -460,7 +463,7 @@ class common_v2(customwebDriverwait):
         except Exception as error:
             raise error            
 
-    def sendKeysToElement(self, locatorType,locator, *keys_to_send):
+    def sendKeysToElement(self,locatorType:str,locator, *keys_to_send):
         try:
             actions = ActionChains(self.driver)
             element = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
@@ -537,7 +540,7 @@ class common_v2(customwebDriverwait):
         Args:	
         keys_to_send: The keys to send. Modifier keys constants can be found in the ‘Keys’ class.
         '''
-    def scroll_to_Element(self, locatorType,locator):
+    def scroll_to_Element(self,locatorType:str,locator):
         try:
             actions = ActionChains(self.driver)
             if(super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)):
@@ -553,25 +556,25 @@ class common_v2(customwebDriverwait):
             return element
         except Exception as error:
             raise error
-    def formSubmit(self,locatorType,locator):
+    def formSubmit(self,locatorType:str,locator):
         try:
             element=self.findElementBy(locatorType,locator) 
             element.submit()
         except Exception as error:
             raise error
-    def get_Value_of_css_property(self,locatorType,locator,property_name):
+    def get_Value_of_css_property(self,locatorType:str,locator,property_name):
         try:
             element=self.findElementBy(locatorType,locator) 
             return element.value_of_css_property(property_name)
         except Exception as error:
             raise error
-    def get_Accessible_name(self,locatorType,locator):
+    def get_Accessible_name(self,locatorType:str,locator):
         try:
             element=self.findElementBy(locatorType,locator) 
             return element.accessible_name
         except Exception as error:
             raise error 
-    def get_Aria_role(self,locatorType,locator):
+    def get_Aria_role(self,locatorType:str,locator):
         try:
             element=self.findElementBy(locatorType,locator) 
             return element.Aria_role
@@ -586,13 +589,13 @@ class common_v2(customwebDriverwait):
     if element1 == element2:
         print("These 2 are equal")
     '''                                                  
-    def Get_internal_ID(self,locatorType,locator):
+    def Get_internal_ID(self,locatorType:str,locator):
         try:
             element=self.findElementBy(locatorType,locator) 
             return element.id
         except Exception as error:
             raise error
-    def Get_location_of_Element(self,locatorType,locator):
+    def Get_location_of_Element(self,locatorType:str,locator):
         try:
             element=self.findElementBy(locatorType,locator) 
             return element.location
@@ -604,7 +607,7 @@ class common_v2(customwebDriverwait):
 
     Returns the top lefthand corner location on the screen, or None if the element is not visible.
     '''
-    def get_Scroll_location_of_Element(self,locatorType,locator):
+    def get_Scroll_location_of_Element(self,locatorType:str,locator):
         try:
             element=self.findElementBy(locatorType,locator) 
             return element.location_once_scrolled_into_view
@@ -613,7 +616,7 @@ class common_v2(customwebDriverwait):
     '''
     Internal reference to the WebDriver instance this element was found from.
     '''        
-    def get_Prent_of_Element(self,locatorType,locator):
+    def get_Prent_of_Element(self,locatorType:str,locator):
         try:
             element=self.findElementBy(locatorType,locator) 
             return element.parent
@@ -622,13 +625,13 @@ class common_v2(customwebDriverwait):
     '''
     A dictionary with t he size and location of the element.
     '''        
-    def get_size_And_Location(self,locatorType,locator):
+    def get_size_And_Location(self,locatorType:str,locator):
         try:
             element=self.findElementBy(locatorType,locator) 
             return element.rect
         except Exception as error:
             raise error
-    def get_element_screenshot_as_base64(self,locatorType,locator,name:str):
+    def get_element_screenshot_as_base64(self,locatorType:str,locator,name:str):
         try:
             #element=self.findElementBy(xpath) 
             with open(self.__webElement_Screenshot_Location()+"/"+name+".jpg", "wb") as fh:
@@ -637,7 +640,7 @@ class common_v2(customwebDriverwait):
             #return element.screenshot_as_base64
         except Exception as error:
             raise error
-    def get_element_screenshot_as_png(self,locatorType,locator,name:str):
+    def get_element_screenshot_as_png(self,locatorType:str,locator,name:str):
         try:
             result_File=self.__webElement_Screenshot_Location()+"/"+name+".png"
             with open(result_File, "wb") as fh:
@@ -654,25 +657,25 @@ class common_v2(customwebDriverwait):
     NoSuchShadowRoot - if no shadow root was attached to element
     
     '''        
-    def get_Element_shadow_root(self,locatorType,locator):
+    def get_Element_shadow_root(self,locatorType:str,locator):
         try:
             element=self.findElementBy(locatorType,locator) 
             return element.shadow_root
         except Exception as error:
             raise error
-    def get_Element_size(self,locatorType,locator):
+    def get_Element_size(self,locatorType:str,locator):
         try:
             element=self.findElementBy(locatorType,locator) 
             return element.size
         except Exception as error:
             raise error
-    def get_Element_tag_name(self,locatorType,locator):
+    def get_Element_tag_name(self,locatorType:str,locator):
         try:
             element=self.findElementBy(locatorType,locator) 
             return element.tag_name
         except Exception as error:
             raise error
-    def get_Element_text(self,locatorType,locator):
+    def get_Element_text(self,locatorType:str,locator):
         try:
             element=self.findElementBy(locatorType,locator) 
             return element.text
@@ -685,7 +688,7 @@ class common_v2(customwebDriverwait):
             return dir_name
         except FileExistsError:
             pass
-    def __with_findElement_withAnyLocator(self, locatorType, locator):
+    def __with_findElement_withAnyLocator(self,locatorType:str, locator):
 
         #if locatorType == "XPATH":
         try:
@@ -702,7 +705,7 @@ class common_v2(customwebDriverwait):
         source: The element to mouse down.
         target: The element to mouse up
     '''
-    def dragAndDrop(self, locatorType,sourcexpath, destinationxpath):
+    def dragAndDrop(self,locatorType:str,sourcexpath, destinationxpath):
         try:
             SourceelElementPresense=super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,sourcexpath)
             SourceelElementVisibility=super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,sourcexpath)
@@ -725,7 +728,7 @@ class common_v2(customwebDriverwait):
         xoffset: X offset to move to.
         yoffset: Y offset to move to.
         '''
-    def dragAndDropByOffset(self, locatorType,sourcexpath, xoffset, yoffset):
+    def dragAndDropByOffset(self,locatorType:str,sourcexpath, xoffset, yoffset):
         try:
             SourceelElementPresense=super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,sourcexpath)
             SourceelElementVisibility=super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,sourcexpath)
@@ -741,7 +744,7 @@ class common_v2(customwebDriverwait):
 
 
 
-    def selectDropDownByValue(self, locatorType,locator, valueToSelect):
+    def selectDropDownByValue(self,locatorType:str,locator, valueToSelect):
         try:
             elementPresense=super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
             #elementVisibility=super().WaitFor_VisibilityOf_Element_Located(xpath)
@@ -751,7 +754,7 @@ class common_v2(customwebDriverwait):
                     select.select_by_value(valueToSelect)
         except Exception as error:
             raise error
-    def selectDropDownByIndex(self, locatorType,locator, indexToSelect):
+    def selectDropDownByIndex(self,locatorType:str,locator, indexToSelect):
         try:
             elementPresense=super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
             #elementVisibility=super().WaitFor_VisibilityOf_Element_Located(xpath)
@@ -761,7 +764,7 @@ class common_v2(customwebDriverwait):
                     select.select_by_index(indexToSelect)
         except Exception as error:
             raise error
-    def selectDropDownByVisibleText(self, locatorType,locator, textToSelect):
+    def selectDropDownByVisibleText(self,locatorType:str,locator, textToSelect):
         try:
             elementPresense=super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
             #elementVisibility=super().WaitFor_VisibilityOf_Element_Located(xpath)
@@ -770,7 +773,7 @@ class common_v2(customwebDriverwait):
                     select.select_by_visible_text(textToSelect)
         except Exception as error:
             raise error
-    def deselectAllOptionsInDropDown(self, locatorType,locator):
+    def deselectAllOptionsInDropDown(self,locatorType:str,locator):
         try:
             elementPresense=super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
             #elementVisibility=super().WaitFor_VisibilityOf_Element_Located(xpath)
@@ -780,7 +783,7 @@ class common_v2(customwebDriverwait):
                     select.deselect_all()
         except Exception as error:
             raise error
-    def getDefaultSelectedDropDownOptions(self, locatorType,locator):
+    def getDefaultSelectedDropDownOptions(self,locatorType:str,locator):
         try:
             elementPresense=super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
             #elementVisibility=super().WaitFor_VisibilityOf_Element_Located(xpath)
@@ -797,7 +800,7 @@ class common_v2(customwebDriverwait):
                     return selectedOptions
         except Exception as error:
             raise error
-    def getAllOptionInDropDown(self, locatorType,locator):
+    def getAllOptionInDropDown(self,locatorType:str,locator):
         try:
             elementPresense=super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
             #elementVisibility=super().WaitFor_VisibilityOf_Element_Located(xpath)
@@ -815,7 +818,7 @@ class common_v2(customwebDriverwait):
                     return allOptions
         except Exception as error:
             raise error
-    def deselectByIndex(self, locatorType,locator, index):
+    def deselectByIndex(self,locatorType:str,locator, index):
         try:
             elementPresense=super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
             #elementVisibility=super().WaitFor_VisibilityOf_Element_Located(xpath)
@@ -825,7 +828,7 @@ class common_v2(customwebDriverwait):
                     select.deselect_by_index(index)
         except Exception as error:
             raise error
-    def deselectByValue(self, locatorType,locator, value):
+    def deselectByValue(self,locatorType:str,locator, value):
         try:
             elementPresense=super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
             #elementVisibility=super().WaitFor_VisibilityOf_Element_Located(xpath)
@@ -835,7 +838,7 @@ class common_v2(customwebDriverwait):
                     select.deselect_by_value(value)
         except Exception as error:
             raise error
-    def deselectByVisibleText(self, locatorType,locator, text):
+    def deselectByVisibleText(self,locatorType:str,locator, text):
         try:
             elementPresense=super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
             #elementVisibility=super().WaitFor_VisibilityOf_Element_Located(xpath)
@@ -845,7 +848,7 @@ class common_v2(customwebDriverwait):
                     select.deselect_by_visible_text(text)
         except Exception as error:
             raise error
-    def getFirstSelecteOption(self, locatorType,locator):
+    def getFirstSelecteOption(self,locatorType:str,locator):
         try:
             elementPresense=super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
             #elementVisibility=super().WaitFor_VisibilityOf_Element_Located(xpath)
@@ -863,13 +866,14 @@ class common_v2(customwebDriverwait):
                     return firstSelectedOption 
         except Exception as error:
             raise error                    
-    def switch_To_Frame_ByLocator(self,locatorType,locator):
+    def switch_To_Frame_ByAnyLocator(self,locatorType:str,locator):
         try:
             #self.driver.presence_of_element_located(frameXpath)
-            if(super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)) :
-                element=self.findElementBy(locatorType, locator)
-                self.driver.switch_to.frame(element)
+            return super().WaitFor_frame_to_be_available_and_switch_to_it_AnyLocator(locatorType,locator)
+                #element=self.findElementBy(locatorType, locator)
+                #self.driver.switch_to.frame(element)
         except Exception as error:
-            raise error            
+            raise error
+
 
         
