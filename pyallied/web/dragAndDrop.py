@@ -107,7 +107,7 @@ class DragAndDrop(customwebDriverwait):
     '''        
     def dragAndDrop_cssSelectorOnly_jsExecuter(self,source_css, destination_css):
         try:
-            f = open("pyallied/web/dragDrop.js",  "r")
+            f = open(r"..\..\seleniumpythonactionbot\pyallied\web\dragDrop.js",  "r")
             javascript = f.read()
             f.close()
             self.driver.execute_script(javascript, source_css, destination_css)
