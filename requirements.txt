@@ -123,7 +123,6 @@ PyPDF4==1.27.0
 pypiwin32==223
 Pypubsub==4.0.3
 pyrsistent==0.18.1
-pyseleniumbot==1.0.7
 PySocks==1.7.1
 pytest==7.1.2
 pytest-bdd==5.0.0
