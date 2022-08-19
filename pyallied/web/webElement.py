@@ -317,14 +317,52 @@ class common(customwebDriverwait):
                 actions.move_to_element_with_offset(element, xoffset, yoffset)
                 actions.perform()
         except Exception as error:
-            raise error    
+            raise error
+    def moveToElement_WithOffset_and_click(self, xpath, xoffset, yoffset):
+        try:
+            actions = ActionChains(self.driver)
+            if(super().WaitFor_PresenseOf_Element_Located(xpath)):
+                element = self.driver.find_element(By.XPATH, xpath)
+                actions.move_to_element_with_offset(element, xoffset, yoffset).click()
+                actions.perform()
+        except Exception as error:
+            raise error 
+    def moveTo_location_and_click(self, xoffset, yoffset,clickElementXpath=None):
+        try:
+            actions = ActionChains(self.driver)
+            if clickElementXpath!=None:    
+                if(super().WaitFor_PresenseOf_Element_Located(clickElementXpath)):
+                    element = self.driver.find_element(By.XPATH, clickElementXpath)
+                    actions.move_to_location( xoffset, yoffset).click(element)
+                    actions.perform()
+                else:
+                    actions.move_to_location( xoffset, yoffset).click()
+                    actions.perform()                       
+        except Exception as error:
+            raise error  
+    '''
+    move_by_offset(xoffset, yoffset)¶
+    Moving the mouse to an offset from current mouse position.
+
+    Args:	
+    xoffset: X offset to move to, as a positive or negative integer.
+    yoffset: Y offset to move to, as a positive or negative integer.
+
+    '''                                  
     def moveByOffsett(self, xoffset, yoffset):
         try:
             actions = ActionChains(self.driver)
             actions.move_by_offset(xoffset, yoffset)
             actions.perform()
         except Exception as error:
-            raise error   
+            raise error
+    def move_ByOffset_and_click(self, xoffset, yoffset):
+        try:
+            actions = ActionChains(self.driver)
+            actions.move_by_offset(xoffset, yoffset).click()
+            actions.perform()
+        except Exception as error:
+            raise error                
     '''         
     def actionRelease(self, xpath=None):
         try:
