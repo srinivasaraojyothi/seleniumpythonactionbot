@@ -314,7 +314,7 @@ follow the below steps to do local test
 
 1. build the distibuted code 
 ``` python
-py setup.py sdist
+py setup.py sdist bdist_wheel
 ```
 2. do local installtion (not the dot in the command)
 ``` python
