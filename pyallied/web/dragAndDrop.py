@@ -9,6 +9,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from seletools.actions import drag_and_drop
+import os
 
 
 
@@ -107,7 +108,8 @@ class DragAndDrop(customwebDriverwait):
     '''        
     def dragAndDrop_cssSelectorOnly_jsExecuter(self,source_css, destination_css):
         try:
-            f = open(r"..\..\seleniumpythonactionbot\pyallied\web\dragDrop.js",  "r")
+            #file_path=os.path.dirname(__file__)
+            f = open(os.path.dirname(__file__)+"\dragDrop.js",  "r")
             javascript = f.read()
             f.close()
             self.driver.execute_script(javascript, source_css, destination_css)
