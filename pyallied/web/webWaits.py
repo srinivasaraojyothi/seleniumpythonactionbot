@@ -25,6 +25,12 @@ class customwebDriverwait:
             return WebDriverWait(self.driver, self.customWait).until(EC.visibility_of_element_located((By.XPATH, xpath)))
         except Exception as error:
             raise error
+    def WaitFor_invisibilityOf_Element_Located(self, xpath):
+        try:
+            ##print(self.customWait,'------>wait')
+            return WebDriverWait(self.driver, self.customWait).until(EC.invisibility_of_element_located((By.XPATH, xpath)))
+        except Exception as error:
+            raise error            
     '''An expectation for checking that an element is present on the DOM of a page. 
     This does not necessarily mean that the element is visible. 
     locator - used to find the element returns the WebElement once it is located'''
@@ -319,6 +325,30 @@ class customwebDriverwait:
                 raise Exception(" ** wrong selector/ no selector ** ",locatorType.upper())   
         except Exception as error:
             raise error
+    def WaitFor_invisibility_of_Element_Located_AnyLocatorType(self, locatorType:str,locator):
+        #self.locatorType=str(locatorType).upper()
+        ##print(self.locatorType,"------>")
+        try:
+            if(locatorType.upper()=='XPATH'):
+                return WebDriverWait(self.driver, self.customWait).until(EC.invisibility_of_element_located((By.XPATH, locator)))
+            elif(locatorType.upper()=='ID'):
+                return WebDriverWait(self.driver, self.customWait).until(EC.invisibility_of_element_located((By.ID, locator)))
+            elif(locatorType.upper()=='CLASS_NAME'):
+                return WebDriverWait(self.driver, self.customWait).until(EC.invisibility_of_element_located((By.CLASS_NAME, locator)))
+            elif(locatorType.upper()=='CSS_SELECTOR'):
+                return WebDriverWait(self.driver, self.customWait).until(EC.invisibility_of_element_located((By.CSS_SELECTOR, locator)))
+            elif(locatorType.upper()=='LINK_TEXT'):
+                return WebDriverWait(self.driver, self.customWait).until(EC.invisibility_of_element_located((By.LINK_TEXT, locator))) 
+            elif(locatorType.upper()=='NAME'):
+                return WebDriverWait(self.driver, self.customWait).until(EC.invisibility_of_element_located((By.NAME, locator)))
+            elif(locatorType.upper()=='PARTIAL_LINK_TEXT'):
+                return WebDriverWait(self.driver, self.customWait).until(EC.invisibility_of_element_located((By.PARTIAL_LINK_TEXT, locator)))                                                                               
+            elif(locatorType.upper()=='TAG_NAME'):
+                return WebDriverWait(self.driver, self.customWait).until(EC.invisibility_of_element_located((By.TAG_NAME, locator)))
+            else:
+                raise Exception(" ** wrong selector/ no selector ** ",locatorType.upper())   
+        except Exception as error:
+            raise error            
     def WaitFor_presence_of_all_elements_located_AnyLocatorType(self, locatorType:str,locator):                                    
         #self.locatorType=str(locatorType).upper()
         try:

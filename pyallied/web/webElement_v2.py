@@ -226,12 +226,15 @@ class common_v2(customwebDriverwait):
 
     def actionClick(self,locatorType:str,locator):
         try:
+
             actions = ActionChains(self.driver)
+            elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
+            elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)            
             #elementLocated=super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
-            if(super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)):
-                element = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
-                actions.move_to_element(element).click(element)
-                actions.perform()
+            if elementPresense:
+                if elementVisible:
+                    actions.move_to_element(elementVisible).click(elementVisible)
+                    actions.perform()
         except Exception as error:
             raise  error    
 
@@ -245,13 +248,13 @@ class common_v2(customwebDriverwait):
         try:
             actions = ActionChains(self.driver)
             if(locator != None):
-                if(super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)):
-                    element = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
-            else:
-                element = None
-            if(element != None):
-                actions.click_and_hold(element)
-                actions.perform()
+                elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
+                elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)                 
+                if elementPresense :
+                    if elementVisible :
+                        actions.click_and_hold(elementVisible)
+                        actions.perform()
+
             else:
                 actions.click_and_hold()
                 actions.perform()
@@ -263,9 +266,11 @@ class common_v2(customwebDriverwait):
     def moveToElement(self,locatorType:str,locator):
         try:
             actions = ActionChains(self.driver)
-            if(super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)):
-                element = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
-                actions.move_to_element(element).perform()
+            elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
+            elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
+            if elementPresense:
+                if elementVisible:
+                    actions.move_to_element(elementVisible).perform()
         except Exception as error:
             raise error
                 
@@ -275,9 +280,11 @@ class common_v2(customwebDriverwait):
     def moveToElement_and_click(self,locatorType:str,locator):
         try:
             actions = ActionChains(self.driver)
-            if(super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)):
-                element = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
-                actions.move_to_element(element).click(element).perform()
+            elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
+            elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)            
+            if elementPresense:
+                if elementVisible:
+                    actions.move_to_element(elementVisible).click(elementVisible).perform()
         except Exception as error:
             raise error
         '''
@@ -293,16 +300,22 @@ class common_v2(customwebDriverwait):
         try:
             actions = ActionChains(self.driver)
             if(LocatorOfElemtToClick!=None):    
+                elementPresense_LocatorMovingTO = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,LocatorMovingTO)
+                elementVisible_LocatorMovingTO = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,LocatorMovingTO)                
+                elementPresense_LocatorOfElemtToClick = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,LocatorOfElemtToClick)
+                elementVisible_LocatorOfElemtToClick = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,LocatorOfElemtToClick)                
                 
-                if(super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,LocatorMovingTO)):
-                    MovedToelement = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,LocatorMovingTO)
-                    ClickElement=  super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,LocatorOfElemtToClick)  
-                    actions.move_to_element(MovedToelement).click(ClickElement).perform()
+                if elementPresense_LocatorMovingTO:
+                    if elementVisible_LocatorMovingTO:
+                        if elementPresense_LocatorOfElemtToClick:
+                            if elementVisible_LocatorOfElemtToClick:
+                                actions.move_to_element(elementVisible_LocatorMovingTO).click(elementVisible_LocatorOfElemtToClick).perform()
             else:
-                if(super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,LocatorMovingTO)):
-                    MovedToelement = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,LocatorMovingTO)
-                      
-                    actions.move_to_element(MovedToelement).click().perform()       
+                elementPresense_LocatorMovingTO = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,LocatorMovingTO)
+                elementVisible_LocatorMovingTO = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,LocatorMovingTO)                
+                if elementPresense_LocatorMovingTO:
+                    if elementVisible_LocatorMovingTO:                      
+                        actions.move_to_element(elementVisible_LocatorMovingTO).click().perform()       
         except Exception as error:
             raise error 
         '''
@@ -316,10 +329,12 @@ class common_v2(customwebDriverwait):
     def moveToElementWithOffset(self,locatorType:str,locator, xoffset, yoffset):
         try:
             actions = ActionChains(self.driver)
-            if(super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)):
-                element = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
-                actions.move_to_element_with_offset(element, xoffset, yoffset)
-                actions.perform()
+            elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
+            elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
+            if elementPresense:
+                if elementVisible:
+                    actions.move_to_element_with_offset(elementVisible, xoffset, yoffset)
+                    actions.perform()
         except Exception as error:
             raise error    
     def moveByOffsett(self, xoffset, yoffset):
@@ -353,10 +368,12 @@ class common_v2(customwebDriverwait):
         try:
             actions = ActionChains(self.driver)
             if(locator != None and locatorType != None):
-                if(super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)):
-                    element = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
-                    actions.key_down(ModifierKey, element).send_keys(keys)
-                    actions.perform()                    
+                elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
+                elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
+                if elementPresense:
+                    if elementVisible:
+                        actions.key_down(ModifierKey, elementVisible).send_keys(keys)
+                        actions.perform()                    
             else:
                 actions.key_down(ModifierKey).send_keys(keys)
                 actions.perform()
@@ -378,9 +395,11 @@ class common_v2(customwebDriverwait):
         try:
             actions = ActionChains(self.driver)
             if(locator != None):
-                if(super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)):    
-                    element = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
-                    actions.key_up(ModifierKey, element).perform()
+                elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
+                elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
+                if elementPresense:
+                    if elementVisible:
+                        actions.key_up(ModifierKey, elementVisible).perform()
             else:
 
                 actions.key_up(ModifierKey).perform()
@@ -393,9 +412,11 @@ class common_v2(customwebDriverwait):
         try:
             actions = ActionChains(self.driver)   
             if(locator != None):
-                if(super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)):    
-                    element = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
-                    actions.key_down(ModifierKey,element).send_keys(keys).key_up(ModifierKey,element).perform()
+                elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
+                elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
+                if elementPresense:
+                    if elementVisible:
+                        actions.key_down(ModifierKey,elementVisible).send_keys(keys).key_up(ModifierKey,elementVisible).perform()
             else:
                 actions.key_down(ModifierKey).send_keys(keys).key_up(ModifierKey).perform()
         except Exception as error:
@@ -413,10 +434,12 @@ class common_v2(customwebDriverwait):
         try:
             actions = ActionChains(self.driver)
             if(locator != None):
-                if(super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)):
-                    element = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
-                    actions.double_click(element)
-                    actions.perform()
+                elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
+                elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
+                if elementPresense:
+                    if elementVisible:
+                        actions.double_click(elementVisible)
+                        actions.perform()
 
             else:
                 actions.double_click()
@@ -434,13 +457,12 @@ class common_v2(customwebDriverwait):
         try:
             actions = ActionChains(self.driver)
             if(locator != None):
-                if(super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)):
-                    element = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
-            else:
-                element = None
-            if(element != None):
-                actions.context_click(element)
-                actions.perform()
+                elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
+                elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
+                if elementPresense:
+                    if elementVisible:
+                        actions.context_click(elementVisible)
+                        actions.perform()
             else:
                 actions.context_click()
                 actions.perform() 
@@ -465,11 +487,14 @@ class common_v2(customwebDriverwait):
 
     def sendKeysToElement(self,locatorType:str,locator, *keys_to_send):
         try:
-            actions = ActionChains(self.driver)
-            element = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
-            actions.click(element)
-            actions.send_keys_to_element(element, *keys_to_send)
-            actions.perform()
+                actions = ActionChains(self.driver)
+                elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
+                elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
+                if elementPresense:
+                    if elementVisible:
+                        actions.click(elementVisible)
+                        actions.send_keys_to_element(element, *keys_to_send)
+                        actions.perform()
         except Exception as error:
             raise error    
 
@@ -543,10 +568,12 @@ class common_v2(customwebDriverwait):
     def scroll_to_Element(self,locatorType:str,locator):
         try:
             actions = ActionChains(self.driver)
-            if(super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)):
-                element = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
-                actions.scroll_to_element( element)
-                actions.perform()
+            elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
+            elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
+            if elementPresense:
+                    if elementVisible:
+                        actions.scroll_to_element( elementVisible)
+                        actions.perform()
         except Exception as error:
             raise error
     def switch_To_ActiveElement(self):
@@ -558,26 +585,38 @@ class common_v2(customwebDriverwait):
             raise error
     def formSubmit(self,locatorType:str,locator):
         try:
-            element=self.findElementBy(locatorType,locator) 
-            element.submit()
+            elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
+            elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
+            if elementPresense:
+                    if elementVisible:
+                        elementVisible.submit()
         except Exception as error:
             raise error
     def get_Value_of_css_property(self,locatorType:str,locator,property_name):
         try:
-            element=self.findElementBy(locatorType,locator) 
-            return element.value_of_css_property(property_name)
+            elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
+            elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
+            if elementPresense:
+                    if elementVisible:
+                        return elementVisible.value_of_css_property(property_name)
         except Exception as error:
             raise error
     def get_Accessible_name(self,locatorType:str,locator):
         try:
-            element=self.findElementBy(locatorType,locator) 
-            return element.accessible_name
+            elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
+            elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
+            if elementPresense:
+                    if elementVisible: 
+                        return elementVisible.accessible_name
         except Exception as error:
             raise error 
     def get_Aria_role(self,locatorType:str,locator):
         try:
-            element=self.findElementBy(locatorType,locator) 
-            return element.Aria_role
+            elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
+            elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
+            if elementPresense:
+                    if elementVisible:
+                         return elementVisible.Aria_role
         except Exception as error:
             raise error 
     '''Internal ID used by selenium.
@@ -591,14 +630,20 @@ class common_v2(customwebDriverwait):
     '''                                                  
     def Get_internal_ID(self,locatorType:str,locator):
         try:
-            element=self.findElementBy(locatorType,locator) 
-            return element.id
+            elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
+            elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
+            if elementPresense:
+                    if elementVisible: 
+                        return elementVisible.id
         except Exception as error:
             raise error
     def Get_location_of_Element(self,locatorType:str,locator):
         try:
-            element=self.findElementBy(locatorType,locator) 
-            return element.location
+            elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
+            elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
+            if elementPresense:
+                    if elementVisible:
+                         return elementVisible.location
         except Exception as error:
             raise error
     '''
@@ -609,8 +654,11 @@ class common_v2(customwebDriverwait):
     '''
     def get_Scroll_location_of_Element(self,locatorType:str,locator):
         try:
-            element=self.findElementBy(locatorType,locator) 
-            return element.location_once_scrolled_into_view
+            elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
+            elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
+            if elementPresense:
+                    if elementVisible: 
+                         return elementVisible.location_once_scrolled_into_view
         except Exception as error:
             raise error
     '''
@@ -618,8 +666,11 @@ class common_v2(customwebDriverwait):
     '''        
     def get_Prent_of_Element(self,locatorType:str,locator):
         try:
-            element=self.findElementBy(locatorType,locator) 
-            return element.parent
+            elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
+            elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
+            if elementPresense:
+                    if elementVisible: 
+                        return elementVisible.parent
         except Exception as error:
             raise error
     '''
@@ -627,24 +678,34 @@ class common_v2(customwebDriverwait):
     '''        
     def get_size_And_Location(self,locatorType:str,locator):
         try:
-            element=self.findElementBy(locatorType,locator) 
-            return element.rect
+            elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
+            elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
+            if elementPresense:
+                    if elementVisible: 
+                            return elementVisible.rect
         except Exception as error:
             raise error
     def get_element_screenshot_as_base64(self,locatorType:str,locator,name:str):
         try:
-            #element=self.findElementBy(xpath) 
-            with open(self.__webElement_Screenshot_Location()+"/"+name+".jpg", "wb") as fh:
-                fh.write(base64.urlsafe_b64decode(self.findElementBy(locatorType,locator).screenshot_as_base64))
+            elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
+            elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
+            if elementPresense:
+                    if elementVisible: 
+                        with open(self.__webElement_Screenshot_Location()+"/"+name+".jpg", "wb") as fh:
+                            fh.write(base64.urlsafe_b64decode(elementVisible.screenshot_as_base64))
             
             #return element.screenshot_as_base64
         except Exception as error:
             raise error
     def get_element_screenshot_as_png(self,locatorType:str,locator,name:str):
         try:
-            result_File=self.__webElement_Screenshot_Location()+"/"+name+".png"
-            with open(result_File, "wb") as fh:
-                fh.write(self.findElementBy(locatorType,locator).screenshot_as_png)
+            elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
+            elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
+            if elementPresense:
+                    if elementVisible:             
+                        result_File=self.__webElement_Screenshot_Location()+"/"+name+".png"
+                        with open(result_File, "wb") as fh:
+                            fh.write(elementVisible.screenshot_as_png)
                 #Image.open(result_File).save(result_File, 'PNG')
         except Exception as error:
             raise error
@@ -659,26 +720,38 @@ class common_v2(customwebDriverwait):
     '''        
     def get_Element_shadow_root(self,locatorType:str,locator):
         try:
-            element=self.findElementBy(locatorType,locator) 
-            return element.shadow_root
+            elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
+            elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
+            if elementPresense:
+                    if elementVisible: 
+                            return elementVisible.shadow_root
         except Exception as error:
             raise error
     def get_Element_size(self,locatorType:str,locator):
         try:
-            element=self.findElementBy(locatorType,locator) 
-            return element.size
+            elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
+            elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
+            if elementPresense:
+                    if elementVisible: 
+                            return elementVisible.size
         except Exception as error:
             raise error
     def get_Element_tag_name(self,locatorType:str,locator):
         try:
-            element=self.findElementBy(locatorType,locator) 
-            return element.tag_name
+            elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
+            elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
+            if elementPresense:
+                    if elementVisible:
+                        return elementVisible.tag_name
         except Exception as error:
             raise error
     def get_Element_text(self,locatorType:str,locator):
         try:
-            element=self.findElementBy(locatorType,locator) 
-            return element.text
+            elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
+            elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
+            if elementPresense:
+                    if elementVisible:
+                        return elementVisible.text
         except Exception as error:
             raise error
     def __webElement_Screenshot_Location(self):
@@ -713,10 +786,8 @@ class common_v2(customwebDriverwait):
             DestinationElementVisibility=super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,destinationxpath)
             if(SourceelElementPresense and DestinationElementPresense ):
                 if(SourceelElementVisibility and DestinationElementVisibility):
-                    sourceElement = self.findElementBy(locatorType, sourcexpath)
-                    destination = self.findElementBy(locatorType, destinationxpath)
                     action_chains = ActionChains(self.driver)
-                    action_chains.drag_and_drop(sourceElement, destination).perform()
+                    action_chains.drag_and_drop(SourceelElementVisibility, DestinationElementVisibility).perform()
         except Exception as error:
             raise error            
         '''
@@ -734,11 +805,9 @@ class common_v2(customwebDriverwait):
             SourceelElementVisibility=super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,sourcexpath)
             if(SourceelElementPresense):
                 if(SourceelElementVisibility):
-                    sourceElement = self.findElementBy(locatorType, sourcexpath)
-
                     action_chains = ActionChains(self.driver)
                     action_chains.drag_and_drop_by_offset(
-                        sourceElement, xoffset, yoffset).perform()
+                        SourceelElementVisibility, xoffset, yoffset).perform()
         except Exception as error:
             raise error                
 

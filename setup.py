@@ -5,13 +5,14 @@ with open("README.md", "rb") as fh:
 
 setuptools.setup(
     name="pyallied",                     # This is the name of the package
-    version="1.0.3",                        # The initial release version
+    version="1.0.8",                        # The initial release version
     author="srinivasaraojyothi@gmail.com",                     # Full name of the author
     description="pyallied - a wrapper based on selenium python",
     url = "https://github.com/srinivasaraojyothi/seleniumpythonactionbot.git",
     long_description=long_description,      # Long description read from the the readme file
     long_description_content_type="text/markdown",
     packages=setuptools.find_packages(),    # List of all python modules to be installed
+    include_package_data=True,
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",

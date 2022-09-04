@@ -56,11 +56,9 @@ class DragAndDrop(customwebDriverwait):
             SourceelElementVisibility=super().WaitFor_VisibilityOf_Element_Located(sourcexpath)
             if(SourceelElementPresense):
                 if(SourceelElementVisibility):
-                    sourceElement = self.driver.find_element(By.XPATH, sourcexpath)
-
                     action_chains = ActionChains(self.driver)
                     action_chains.drag_and_drop_by_offset(
-                        sourceElement, xoffset, yoffset).pause(5).perform()
+                        SourceelElementVisibility, xoffset, yoffset).pause(5).perform()
         except Exception as error:
             raise error
     def dragElement_ToOffSet_And_Drop(self, sourcexpath, xoffset, yoffset):
@@ -69,11 +67,9 @@ class DragAndDrop(customwebDriverwait):
             SourceelElementVisibility=super().WaitFor_VisibilityOf_Element_Located(sourcexpath)
             if(SourceelElementPresense):
                 if(SourceelElementVisibility):
-                    sourceElement = self.driver.find_element(By.XPATH, sourcexpath)
-
                     action_chains = ActionChains(self.driver)
 
-                    action_chains.move_to_element(sourceElement).pause(1).click_and_hold().pause(2).move_by_offset(xoffset, yoffset).pause(2).release().perform()
+                    action_chains.move_to_element(SourceelElementVisibility).pause(1).click_and_hold().pause(2).move_by_offset(xoffset, yoffset).pause(2).release().perform()
         except Exception as error:
             raise error
     def seletools_drag_and_drop_xpath(self, sourcexpath, destinationxpath):
@@ -83,10 +79,8 @@ class DragAndDrop(customwebDriverwait):
             DestinationElementPresense=super().WaitFor_PresenseOf_Element_Located(destinationxpath)
             DestinationElementVisibility=super().WaitFor_VisibilityOf_Element_Located(destinationxpath)
             if(SourceelElementPresense and DestinationElementPresense ):
-                if(SourceelElementVisibility and DestinationElementVisibility):
-                    sourceElement = self.driver.find_element(By.XPATH, sourcexpath)
-                    destination = self.driver.find_element(By.XPATH, destinationxpath)                    
-                    drag_and_drop(self.driver, sourceElement, destination)           
+                if(SourceelElementVisibility and DestinationElementVisibility):                  
+                    drag_and_drop(self.driver, SourceelElementVisibility, DestinationElementVisibility)           
         except Exception as error:
             raise error
     def seletools_drag_and_drop_css(self, source_css, destination_css):
@@ -96,10 +90,8 @@ class DragAndDrop(customwebDriverwait):
             DestinationElementPresense=self.__waitFor_presenseOf_element_located(destination_css)
             DestinationElementVisibility=self.__waitFor_visibilityOf_element_located(destination_css)
             if(SourceelElementPresense and DestinationElementPresense ):
-                if(SourceelElementVisibility and DestinationElementVisibility):
-                    sourceElement = self.driver.find_element(By.CSS_SELECTOR, source_css)
-                    destination = self.driver.find_element(By.CSS_SELECTOR, destination_css)                    
-                    drag_and_drop(self.driver, sourceElement, destination)           
+                if(SourceelElementVisibility and DestinationElementVisibility):                   
+                    drag_and_drop(self.driver, SourceelElementVisibility, DestinationElementVisibility)           
         except Exception as error:
             raise error            
     '''
