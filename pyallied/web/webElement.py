@@ -35,10 +35,11 @@ class common(customwebDriverwait):
 
     def findElementBy(self, xpath):
         try:
-            #self.driver.presence_of_element_located(xpath)
-            #self.driver.visibility_of_element_located(xpath)
-            if(super().WaitFor_PresenseOf_Element_Located(xpath)) :
-                return self.driver.find_element(By.XPATH, xpath)
+            elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
+            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            if elementPresense :
+                if elementVisible:
+                    return elementVisible
         except Exception as error:
             raise error        
 
@@ -48,7 +49,7 @@ class common(customwebDriverwait):
             elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
             if(elementPresense):
                 if(elementVisible):
-                    self.driver.find_element(By.XPATH, xpath).click()
+                    elementVisible.click()
         except Exception as error:
             raise error            
 
@@ -58,7 +59,7 @@ class common(customwebDriverwait):
             elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
             if(elementPresense):
                 if(elementVisible):
-                    self.driver.find_element(By.XPATH, xpath).clear()  
+                    elementVisible.clear()
         except Exception as error:
             raise error              
     
@@ -66,8 +67,12 @@ class common(customwebDriverwait):
     def isClickable(self, xpath, index=None):
         # self.driver.visibility_of_element_located(xpath)
         try:
+            elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
+            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            if(elementPresense):
+                if(elementVisible):
             #return WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((xpath)))
-            return super().WaitFor_PresenseOf_Element_Located(xpath)
+                    return elementVisible
         except Exception as error:
             raise error    
     
@@ -94,7 +99,7 @@ class common(customwebDriverwait):
             elementVisibility = super().WaitFor_VisibilityOf_Element_Located(xpath)
             if(elementPresence):
                 if(elementVisibility):
-                    self.driver.find_element(By.XPATH, xpath).send_keys(text)
+                    elementVisibility.send_keys(text)
         except Exception as error:
             raise error
 
@@ -125,7 +130,7 @@ class common(customwebDriverwait):
             elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
             if(elementPresense):
                 if(elementVisible):
-                    return self.driver.find_element(By.XPATH, xpath).get_attribute(AttributeName)
+                    return elementVisible.get_attribute(AttributeName)
         except Exception as error:
             raise error                  
     
@@ -144,7 +149,7 @@ class common(customwebDriverwait):
             elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
             if(elementPresense):
                 if(elementVisible):
-                    return self.driver.find_element(By.XPATH, xpath).get_dom_attribute(AttributeName) 
+                    return elementVisible.get_dom_attribute(AttributeName)
         except Exception as error:
             raise error
 
@@ -163,7 +168,7 @@ class common(customwebDriverwait):
             elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
             if(elementPresense):
                 if(elementVisible):
-                    return self.driver.find_element(By.XPATH, xpath).get_property(PropertyName)
+                    return elementVisible.get_property(PropertyName)
         except Exception as error:
             raise error             
     '''
@@ -175,7 +180,7 @@ class common(customwebDriverwait):
             elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
             if(elementPresense):
                 if(elementVisible):
-                    return self.driver.find_element(By.XPATH, xpath).is_displayed()
+                    return elementVisible.is_displayed()
         except Exception as error:
             raise error             
     '''
@@ -187,7 +192,7 @@ class common(customwebDriverwait):
             elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
             if(elementPresense):
                 if(elementVisible):
-                    return self.driver.find_element(By.XPATH, xpath).is_enabled()  
+                    return elementVisible.is_enabled()
         except Exception as error:
             raise error
     '''
@@ -201,7 +206,7 @@ class common(customwebDriverwait):
             elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
             if(elementPresense):
                 if(elementVisible):
-                    return self.driver.find_element(By.XPATH, xpath).is_selected() 
+                    return elementVisible.is_selected()
         except Exception as error:
             raise error
     '''
@@ -214,7 +219,7 @@ class common(customwebDriverwait):
             elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
             if(elementPresense):
                 if(elementVisible):
-                    return self.driver.find_element(By.XPATH, xpath).screenshot(screenShotSavingPath)
+                    return elementVisible.screenshot(screenShotSavingPath)
         except Exception as error:
             raise error
         
@@ -224,11 +229,13 @@ class common(customwebDriverwait):
     def actionClick(self, xpath):
         try:
             actions = ActionChains(self.driver)
-            
-            if(super().WaitFor_PresenseOf_Element_Located(xpath)):
-                element = self.driver.find_element(By.XPATH, xpath)
-                actions.move_to_element(element).click(element)
-                actions.perform()
+            elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
+            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            if elementPresense :
+                if elementVisible:
+                    #element = self.driver.find_element(By.XPATH, xpath)
+                    actions.move_to_element(element).click(elementVisible)
+                    actions.perform()
         except Exception as error:
             raise  error    
 
@@ -242,13 +249,12 @@ class common(customwebDriverwait):
         try:
             actions = ActionChains(self.driver)
             if(xpath != None):
-                if(super().WaitFor_PresenseOf_Element_Located(xpath)):
-                    element = self.driver.find_element(By.XPATH, xpath)
-            else:
-                element = None
-            if(element != None):
-                actions.click_and_hold(element)
-                actions.perform()
+                elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
+                elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+                if elementPresense:
+                    if elementVisible:
+                        actions.click_and_hold(elementVisible)
+                        actions.perform()
             else:
                 actions.click_and_hold()
                 actions.perform()
@@ -260,9 +266,12 @@ class common(customwebDriverwait):
     def moveToElement(self, xpath):
         try:
             actions = ActionChains(self.driver)
-            if(super().WaitFor_PresenseOf_Element_Located(xpath)):
-                element = self.driver.find_element(By.XPATH, xpath)
-                actions.move_to_element(element).perform()
+            elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
+            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            if elementPresense:
+                if elementVisible:
+                    #element = self.driver.find_element(By.XPATH, xpath)
+                    actions.move_to_element(elementVisible).perform()
         except Exception as error:
             raise error
                 
@@ -272,9 +281,12 @@ class common(customwebDriverwait):
     def moveToElement_and_click(self, xpath):
         try:
             actions = ActionChains(self.driver)
-            if(super().WaitFor_PresenseOf_Element_Located(xpath)):
-                element = self.driver.find_element(By.XPATH, xpath)
-                actions.move_to_element(element).click(element).perform()
+            elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
+            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            if elementPresense:
+                if elementVisible:
+                    #element = self.driver.find_element(By.XPATH, xpath)
+                    actions.move_to_element(elementVisible).click(elementVisible).perform()
         except Exception as error:
             raise error
         '''
@@ -290,15 +302,25 @@ class common(customwebDriverwait):
         try:
             if(xpathOfElemtToClick!=None):    
                 actions = ActionChains(self.driver)
-                if(super().WaitFor_PresenseOf_Element_Located(xpathOfMovingTO)):
-                    MovedToelement = self.driver.find_element(By.XPATH, xpathOfMovingTO)
-                    ClickElement=  self.driver.find_element(By.XPATH, xpathOfElemtToClick)  
-                    actions.move_to_element(MovedToelement).click(ClickElement).perform()
+                elementPresense_OfMovingTo = super().WaitFor_PresenseOf_Element_Located(xpathOfMovingTO)
+                elementVisible_OfMovingTo = super().WaitFor_VisibilityOf_Element_Located(xpathOfMovingTO)
+                elementPresense_ToClick = super().WaitFor_PresenseOf_Element_Located(xpathOfElemtToClick)
+                elementVisible_ToClick = super().WaitFor_VisibilityOf_Element_Located(xpathOfElemtToClick)
+                if elementPresense_OfMovingTo:
+                    if elementVisible_OfMovingTo:
+                        if elementPresense_ToClick:
+                            if elementVisible_ToClick:
+                                #MovedToelement = self.driver.find_element(By.XPATH, xpathOfMovingTO)
+                                #ClickElement=  self.driver.find_element(By.XPATH, xpathOfElemtToClick)
+                                actions.move_to_element(elementVisible_OfMovingTo).click(elementVisible_ToClick).perform()
             else:
-                if(super().WaitFor_PresenseOf_Element_Located(xpathOfMovingTO)):
-                    MovedToelement = self.driver.find_element(By.XPATH, xpathOfMovingTO)
+                elementPresense_OfMovingTo = super().WaitFor_PresenseOf_Element_Located(xpathOfMovingTO)
+                elementVisible_OfMovingTo = super().WaitFor_VisibilityOf_Element_Located(xpathOfMovingTO)
+                if elementPresense_OfMovingTo :
+                    if elementVisible_OfMovingTo:
+                        #MovedToelement = self.driver.find_element(By.XPATH, xpathOfMovingTO)
                       
-                    actions.move_to_element(MovedToelement).click().perform()       
+                        actions.move_to_element(elementVisible_OfMovingTo).click().perform()
         except Exception as error:
             raise error 
         '''
@@ -312,29 +334,39 @@ class common(customwebDriverwait):
     def moveToElementWithOffset(self, xpath, xoffset, yoffset):
         try:
             actions = ActionChains(self.driver)
-            if(super().WaitFor_PresenseOf_Element_Located(xpath)):
-                element = self.driver.find_element(By.XPATH, xpath)
-                actions.move_to_element_with_offset(element, xoffset, yoffset)
-                actions.perform()
+            elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
+            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            if elementPresense:
+                if elementVisible:
+                    #element = self.driver.find_element(By.XPATH, xpath)
+                    actions.move_to_element_with_offset(elementVisible, xoffset, yoffset)
+                    actions.perform()
         except Exception as error:
             raise error
     def moveToElement_WithOffset_and_click(self, xpath, xoffset, yoffset):
         try:
             actions = ActionChains(self.driver)
-            if(super().WaitFor_PresenseOf_Element_Located(xpath)):
-                element = self.driver.find_element(By.XPATH, xpath)
-                actions.move_to_element_with_offset(element, xoffset, yoffset).click()
-                actions.perform()
+            elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
+            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            if elementPresense:
+                if elementVisible:
+                    #element = self.driver.find_element(By.XPATH, xpath)
+                    actions.move_to_element_with_offset(elementVisible, xoffset, yoffset).click()
+                    actions.perform()
         except Exception as error:
             raise error 
     def moveTo_location_and_click(self, xoffset, yoffset,clickElementXpath=None):
         try:
             actions = ActionChains(self.driver)
-            if clickElementXpath!=None:    
-                if(super().WaitFor_PresenseOf_Element_Located(clickElementXpath)):
-                    element = self.driver.find_element(By.XPATH, clickElementXpath)
-                    actions.move_to_location( xoffset, yoffset).click(element)
-                    actions.perform()
+
+            if clickElementXpath!=None:
+                elementPresense = super().WaitFor_PresenseOf_Element_Located(clickElementXpath)
+                elementVisible = super().WaitFor_VisibilityOf_Element_Located(clickElementXpath)
+                if elementPresense:
+                    if elementVisible:
+                        #element = self.driver.find_element(By.XPATH, clickElementXpath)
+                        actions.move_to_location( xoffset, yoffset).click(elementVisible)
+                        actions.perform()
                 else:
                     actions.move_to_location( xoffset, yoffset).click()
                     actions.perform()                       
@@ -387,10 +419,13 @@ class common(customwebDriverwait):
         try:
             actions = ActionChains(self.driver)
             if(xpath != None):
-                if(super().WaitFor_PresenseOf_Element_Located(xpath)):
-                    element = self.driver.find_element(By.XPATH, xpath)
-                    actions.key_down(ModifierKey, element).send_keys(keys)
-                    actions.perform()                    
+                elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
+                elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+                if elementPresense:
+                    if elementVisible:
+                        #element = self.driver.find_element(By.XPATH, xpath)
+                        actions.key_down(ModifierKey, elementVisible).send_keys(keys)
+                        actions.perform()
             else:
                 actions.key_down(ModifierKey).send_keys(keys)
                 actions.perform()
@@ -412,9 +447,12 @@ class common(customwebDriverwait):
         try:
             actions = ActionChains(self.driver)
             if(xpath != None):
-                if(super().WaitFor_PresenseOf_Element_Located(xpath)):    
-                    element = self.driver.find_element(By.XPATH, xpath)
-                    actions.key_up(ModifierKey, element).perform()
+                elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
+                elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+                if elementPresense:
+                    if elementVisible:
+                        #element = self.driver.find_element(By.XPATH, xpath)
+                        actions.key_up(ModifierKey, elementVisible).perform()
             else:
 
                 actions.key_up(ModifierKey).perform()
@@ -427,9 +465,12 @@ class common(customwebDriverwait):
         try:
             actions = ActionChains(self.driver)   
             if(xpath != None):
-                if(super().WaitFor_PresenseOf_Element_Located(xpath)):    
-                    element = self.driver.find_element(By.XPATH, xpath)
-                    actions.key_down(ModifierKey,element).send_keys(keys).key_up(ModifierKey,element).perform()
+                elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
+                elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+                if elementPresense:
+                    if elementVisible:
+                        #element = self.driver.find_element(By.XPATH, xpath)
+                        actions.key_down(ModifierKey,elementVisible).send_keys(keys).key_up(ModifierKey,elementVisible).perform()
             else:
                 actions.key_down(ModifierKey).send_keys(keys).key_up(ModifierKey).perform()
         except Exception as error:
@@ -447,10 +488,13 @@ class common(customwebDriverwait):
         try:
             actions = ActionChains(self.driver)
             if(xpath != None):
-                if(super().WaitFor_PresenseOf_Element_Located(xpath)):
-                    element = self.driver.find_element(By.XPATH, xpath)
-                    actions.double_click(element)
-                    actions.perform()
+                elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
+                elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+                if elementPresense:
+                    if elementVisible:
+                        #element = self.driver.find_element(By.XPATH, xpath)
+                        actions.double_click(elementVisible)
+                        actions.perform()
 
             else:
                 actions.double_click()
@@ -468,13 +512,13 @@ class common(customwebDriverwait):
         try:
             actions = ActionChains(self.driver)
             if(xpath != None):
-                if(super().WaitFor_PresenseOf_Element_Located(xpath)):
-                    element = self.driver.find_element(By.XPATH, xpath)
-            else:
-                element = None
-            if(element != None):
-                actions.context_click(element)
-                actions.perform()
+                elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
+                elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+                if elementPresense:
+                    if elementVisible:
+                        actions.context_click(elementVisible)
+                        actions.perform()
+
             else:
                 actions.context_click()
                 actions.perform() 
@@ -500,10 +544,14 @@ class common(customwebDriverwait):
     def sendKeysToElement(self, xpath, *keys_to_send):
         try:
             actions = ActionChains(self.driver)
-            element = super().WaitFor_PresenseOf_Element_Located(xpath)
-            actions.click(element)
-            actions.send_keys_to_element(element, *keys_to_send)
-            actions.perform()
+            elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
+            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            if elementPresense:
+                if elementVisible:
+                    #element = super().WaitFor_PresenseOf_Element_Located(xpath)
+                    actions.click(elementVisible)
+                    actions.send_keys_to_element(elementVisible, *keys_to_send)
+                    actions.perform()
         except Exception as error:
             raise error    
 
@@ -577,10 +625,13 @@ class common(customwebDriverwait):
     def scroll_to_Element(self, xpath):
         try:
             actions = ActionChains(self.driver)
-            if(super().WaitFor_PresenseOf_Element_Located(xpath)):
-                element = self.driver.find_element(By.XPATH, xpath)
-                actions.scroll_to_element( element)
-                actions.perform()
+            elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
+            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            if elementPresense:
+                if elementVisible:
+                    #element = self.driver.find_element(By.XPATH, xpath)
+                    actions.scroll_to_element( elementVisible)
+                    actions.perform()
         except Exception as error:
             raise error
     def switch_To_ActiveElement(self):
@@ -591,26 +642,38 @@ class common(customwebDriverwait):
             raise error
     def formSubmit(self,xpath):
         try:
-            element=self.findElementBy(xpath) 
-            element.submit()
+            elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
+            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            if elementPresense:
+                if elementVisible:
+                    elementVisible.submit()
         except Exception as error:
             raise error
     def get_Value_of_css_property(self,xpath,property_name):
         try:
-            element=self.findElementBy(xpath) 
-            return element.value_of_css_property(property_name)
+            elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
+            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            if elementPresense:
+                if elementVisible:
+                    return elementVisible.value_of_css_property(property_name)
         except Exception as error:
             raise error
     def get_Accessible_name(self,xpath):
         try:
-            element=self.findElementBy(xpath) 
-            return element.accessible_name
+            elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
+            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            if elementPresense:
+                if elementVisible:
+                    return elementVisible.accessible_name
         except Exception as error:
             raise error 
     def get_Aria_role(self,xpath):
         try:
-            element=self.findElementBy(xpath) 
-            return element.Aria_role
+            elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
+            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            if elementPresense:
+                if elementVisible:
+                    return elementVisible.Aria_role
         except Exception as error:
             raise error 
     '''Internal ID used by selenium.
@@ -624,14 +687,20 @@ class common(customwebDriverwait):
     '''                                                  
     def Get_internal_ID(self,xpath):
         try:
-            element=self.findElementBy(xpath) 
-            return element.id
+            elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
+            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            if elementPresense:
+                if elementVisible:
+                    return elementVisible.id
         except Exception as error:
             raise error
     def Get_location_of_Element(self,xpath):
         try:
-            element=self.findElementBy(xpath) 
-            return element.location
+            elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
+            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            if elementPresense:
+                if elementVisible:
+                    return elementVisible.location
         except Exception as error:
             raise error
     '''
@@ -642,8 +711,11 @@ class common(customwebDriverwait):
     '''
     def get_Scroll_location_of_Element(self,xpath):
         try:
-            element=self.findElementBy(xpath) 
-            return element.location_once_scrolled_into_view
+            elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
+            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            if elementPresense:
+                if elementVisible:
+                    return elementVisible.location_once_scrolled_into_view
         except Exception as error:
             raise error
     '''
@@ -651,8 +723,11 @@ class common(customwebDriverwait):
     '''        
     def get_Prent_of_Element(self,xpath):
         try:
-            element=self.findElementBy(xpath) 
-            return element.parent
+            elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
+            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            if elementPresense:
+                if elementVisible:
+                    return elementVisible.parent
         except Exception as error:
             raise error
     '''
@@ -660,25 +735,35 @@ class common(customwebDriverwait):
     '''        
     def get_size_And_Location(self,xpath):
         try:
-            element=self.findElementBy(xpath) 
-            return element.rect
+            elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
+            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            if elementPresense:
+                if elementVisible:
+                    return elementVisible.rect
         except Exception as error:
             raise error
     def get_element_screenshot_as_base64(self,xpath,name:str):
         try:
-            #element=self.findElementBy(xpath) 
-            with open(self.__webElement_Screenshot_Location()+"/"+name+".jpg", "wb") as fh:
-                fh.write(base64.urlsafe_b64decode(self.findElementBy(xpath).screenshot_as_base64))
+            elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
+            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            if elementPresense:
+                if elementVisible:
+                    with open(self.__webElement_Screenshot_Location()+"/"+name+".jpg", "wb") as fh:
+                        fh.write(base64.urlsafe_b64decode(elementVisible.screenshot_as_base64))
             
             #return element.screenshot_as_base64
         except Exception as error:
             raise error
     def get_element_screenshot_as_png(self,xpath,name:str):
         try:
-            result_File=self.__webElement_Screenshot_Location()+"/"+name+".png"
-            with open(result_File, "wb") as fh:
-                fh.write(self.findElementBy(xpath).screenshot_as_png)
-                #Image.open(result_File).save(result_File, 'PNG')
+            elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
+            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            if elementPresense:
+                if elementVisible:
+                    result_File=self.__webElement_Screenshot_Location()+"/"+name+".png"
+                    with open(result_File, "wb") as fh:
+                        fh.write(elementVisible.screenshot_as_png)
+                        #Image.open(result_File).save(result_File, 'PNG')
         except Exception as error:
             raise error
     '''
@@ -692,26 +777,38 @@ class common(customwebDriverwait):
     '''        
     def get_Element_shadow_root(self,xpath):
         try:
-            element=self.findElementBy(xpath) 
-            return element.shadow_root
+            elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
+            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            if elementPresense:
+                if elementVisible:
+                    return elementVisible.shadow_root
         except Exception as error:
             raise error
     def get_Element_size(self,xpath):
         try:
-            element=self.findElementBy(xpath) 
-            return element.size
+            elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
+            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            if elementPresense:
+                if elementVisible:
+                        return elementVisible.size
         except Exception as error:
             raise error
     def get_Element_tag_name(self,xpath):
         try:
-            element=self.findElementBy(xpath) 
-            return element.tag_name
+            elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
+            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            if elementPresense:
+                if elementVisible:
+                    return elementVisible.tag_name
         except Exception as error:
             raise error
     def get_Element_text(self,xpath):
         try:
-            element=self.findElementBy(xpath) 
-            return element.text
+            elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
+            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            if elementPresense:
+                if elementVisible:
+                    return elementVisible.text
         except Exception as error:
             raise error
     def __webElement_Screenshot_Location(self):
