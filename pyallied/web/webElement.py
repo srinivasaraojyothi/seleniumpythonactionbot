@@ -626,9 +626,9 @@ class common(customwebDriverwait):
         try:
             actions = ActionChains(self.driver)
             elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
-            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            #elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
             if elementPresense:
-                if elementVisible:
+                #if elementVisible:
                     #element = self.driver.find_element(By.XPATH, xpath)
                     actions.scroll_to_element( elementVisible)
                     actions.perform()
@@ -652,27 +652,27 @@ class common(customwebDriverwait):
     def get_Value_of_css_property(self,xpath,property_name):
         try:
             elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
-            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            #elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
             if elementPresense:
-                if elementVisible:
+                #if elementVisible:
                     return elementVisible.value_of_css_property(property_name)
         except Exception as error:
             raise error
     def get_Accessible_name(self,xpath):
         try:
             elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
-            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            #elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
             if elementPresense:
-                if elementVisible:
+                #if elementVisible:
                     return elementVisible.accessible_name
         except Exception as error:
             raise error 
     def get_Aria_role(self,xpath):
         try:
             elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
-            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            #elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
             if elementPresense:
-                if elementVisible:
+                #if elementVisible:
                     return elementVisible.Aria_role
         except Exception as error:
             raise error 
@@ -688,18 +688,18 @@ class common(customwebDriverwait):
     def Get_internal_ID(self,xpath):
         try:
             elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
-            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            #elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
             if elementPresense:
-                if elementVisible:
+                #if elementVisible:
                     return elementVisible.id
         except Exception as error:
             raise error
     def Get_location_of_Element(self,xpath):
         try:
             elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
-            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            #elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
             if elementPresense:
-                if elementVisible:
+                #if elementVisible:
                     return elementVisible.location
         except Exception as error:
             raise error
@@ -712,9 +712,9 @@ class common(customwebDriverwait):
     def get_Scroll_location_of_Element(self,xpath):
         try:
             elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
-            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            #elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
             if elementPresense:
-                if elementVisible:
+                #if elementVisible:
                     return elementVisible.location_once_scrolled_into_view
         except Exception as error:
             raise error
@@ -782,36 +782,36 @@ class common(customwebDriverwait):
     def get_Element_shadow_root(self,xpath):
         try:
             elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
-            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            #elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
             if elementPresense:
-                if elementVisible:
+               # if elementVisible:
                     return elementVisible.shadow_root
         except Exception as error:
             raise error
     def get_Element_size(self,xpath):
         try:
             elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
-            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            #elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
             if elementPresense:
-                if elementVisible:
+                #if elementVisible:
                         return elementVisible.size
         except Exception as error:
             raise error
     def get_Element_tag_name(self,xpath):
         try:
             elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
-            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            #elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
             if elementPresense:
-                if elementVisible:
+                #if elementVisible:
                     return elementVisible.tag_name
         except Exception as error:
             raise error
     def get_Element_text(self,xpath):
         try:
             elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
-            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            #elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
             if elementPresense:
-                if elementVisible:
+                #if elementVisible:
                     return elementVisible.text
         except Exception as error:
             raise error

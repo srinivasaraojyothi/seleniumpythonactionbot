@@ -569,10 +569,10 @@ class common_v2(customwebDriverwait):
         try:
             actions = ActionChains(self.driver)
             elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
-            elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
+            #elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
             if elementPresense:
                     if elementVisible:
-                        actions.scroll_to_element( elementVisible)
+                       # actions.scroll_to_element( elementVisible)
                         actions.perform()
         except Exception as error:
             raise error
@@ -586,36 +586,36 @@ class common_v2(customwebDriverwait):
     def formSubmit(self,locatorType:str,locator):
         try:
             elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
-            elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
+            #elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
             if elementPresense:
-                    if elementVisible:
+                   # if elementVisible:
                         elementVisible.submit()
         except Exception as error:
             raise error
     def get_Value_of_css_property(self,locatorType:str,locator,property_name):
         try:
             elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
-            elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
+            #elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
             if elementPresense:
-                    if elementVisible:
+                    #if elementVisible:
                         return elementVisible.value_of_css_property(property_name)
         except Exception as error:
             raise error
     def get_Accessible_name(self,locatorType:str,locator):
         try:
             elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
-            elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
+            #elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
             if elementPresense:
-                    if elementVisible: 
+                    #if elementVisible: 
                         return elementVisible.accessible_name
         except Exception as error:
             raise error 
     def get_Aria_role(self,locatorType:str,locator):
         try:
             elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
-            elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
+            #elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
             if elementPresense:
-                    if elementVisible:
+                    #if elementVisible:
                          return elementVisible.Aria_role
         except Exception as error:
             raise error 
@@ -631,18 +631,18 @@ class common_v2(customwebDriverwait):
     def Get_internal_ID(self,locatorType:str,locator):
         try:
             elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
-            elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
+            #elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
             if elementPresense:
-                    if elementVisible: 
+                    #if elementVisible: 
                         return elementVisible.id
         except Exception as error:
             raise error
     def Get_location_of_Element(self,locatorType:str,locator):
         try:
             elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
-            elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
+            #elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
             if elementPresense:
-                    if elementVisible:
+                   # if elementVisible:
                          return elementVisible.location
         except Exception as error:
             raise error
@@ -655,9 +655,9 @@ class common_v2(customwebDriverwait):
     def get_Scroll_location_of_Element(self,locatorType:str,locator):
         try:
             elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
-            elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
+            #elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
             if elementPresense:
-                    if elementVisible: 
+                    #if elementVisible: 
                          return elementVisible.location_once_scrolled_into_view
         except Exception as error:
             raise error          
@@ -667,9 +667,9 @@ class common_v2(customwebDriverwait):
     def get_Prent_of_Element(self,locatorType:str,locator):
         try:
             elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
-            elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
+            #elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
             if elementPresense:
-                    if elementVisible: 
+                    #if elementVisible: 
                         return elementVisible.parent
         except Exception as error:
             raise error
@@ -721,36 +721,36 @@ class common_v2(customwebDriverwait):
     def get_Element_shadow_root(self,locatorType:str,locator):
         try:
             elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
-            elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
+            #elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
             if elementPresense:
-                    if elementVisible: 
+                    #if elementVisible: 
                             return elementVisible.shadow_root
         except Exception as error:
             raise error
     def get_Element_size(self,locatorType:str,locator):
         try:
             elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
-            elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
+            #elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
             if elementPresense:
-                    if elementVisible: 
+                    #if elementVisible: 
                             return elementVisible.size
         except Exception as error:
             raise error
     def get_Element_tag_name(self,locatorType:str,locator):
         try:
             elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
-            elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
+            #elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
             if elementPresense:
-                    if elementVisible:
+                    #if elementVisible:
                         return elementVisible.tag_name
         except Exception as error:
             raise error
     def get_Element_text(self,locatorType:str,locator):
         try:
             elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
-            elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
+            #elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
             if elementPresense:
-                    if elementVisible:
+                    #if elementVisible:
                         return elementVisible.text
         except Exception as error:
             raise error
