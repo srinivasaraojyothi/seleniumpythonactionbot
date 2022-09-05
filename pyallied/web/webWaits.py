@@ -37,6 +37,7 @@ class customwebDriverwait:
 
     def WaitFor_PresenseOf_Element_Located(self, xpath):
         try:
+            print(self.customWait,"___________custom")
             return WebDriverWait(self.driver, self.customWait).until(EC.presence_of_element_located((By.XPATH, xpath)))
         except Exception as error:
             raise error
