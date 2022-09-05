@@ -630,7 +630,7 @@ class common(customwebDriverwait):
             if elementPresense:
                 #if elementVisible:
                     #element = self.driver.find_element(By.XPATH, xpath)
-                    actions.scroll_to_element( elementVisible)
+                    actions.scroll_to_element( elementPresense)
                     actions.perform()
         except Exception as error:
             raise error
@@ -655,7 +655,7 @@ class common(customwebDriverwait):
             #elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
             if elementPresense:
                 #if elementVisible:
-                    return elementVisible.value_of_css_property(property_name)
+                    return elementPresense.value_of_css_property(property_name)
         except Exception as error:
             raise error
     def get_Accessible_name(self,xpath):
@@ -664,7 +664,7 @@ class common(customwebDriverwait):
             #elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
             if elementPresense:
                 #if elementVisible:
-                    return elementVisible.accessible_name
+                    return elementPresense.accessible_name
         except Exception as error:
             raise error 
     def get_Aria_role(self,xpath):
@@ -673,7 +673,7 @@ class common(customwebDriverwait):
             #elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
             if elementPresense:
                 #if elementVisible:
-                    return elementVisible.Aria_role
+                    return elementPresense.Aria_role
         except Exception as error:
             raise error 
     '''Internal ID used by selenium.
@@ -691,7 +691,7 @@ class common(customwebDriverwait):
             #elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
             if elementPresense:
                 #if elementVisible:
-                    return elementVisible.id
+                    return elementPresense.id
         except Exception as error:
             raise error
     def Get_location_of_Element(self,xpath):
@@ -700,7 +700,7 @@ class common(customwebDriverwait):
             #elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
             if elementPresense:
                 #if elementVisible:
-                    return elementVisible.location
+                    return elementPresense.location
         except Exception as error:
             raise error
     '''

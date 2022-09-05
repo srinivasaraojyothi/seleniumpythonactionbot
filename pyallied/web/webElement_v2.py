@@ -125,9 +125,9 @@ class common_v2(customwebDriverwait):
     def getAttribute(self,locatorType:str,locator,AttributeName):
         try:
             elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
-            elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)
+            #elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)
             if(elementPresense):
-                if(elementVisible):
+                #if(elementVisible):
                     return elementPresense.get_attribute(AttributeName)
         except Exception as error:
             raise error                  
@@ -144,9 +144,9 @@ class common_v2(customwebDriverwait):
     def getDomAttribute(self,locatorType:str,locator,AttributeName):
         try:
             elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
-            elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)
+            #elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)
             if(elementPresense):
-                if(elementVisible):
+                #if(elementVisible):
                     return elementPresense.get_dom_attribute(AttributeName) 
         except Exception as error:
             raise error
@@ -163,9 +163,9 @@ class common_v2(customwebDriverwait):
     def getProperty(self,locatorType:str,locator,PropertyName):
         try:
             elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
-            elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)
+            #elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)
             if(elementPresense):
-                if(elementVisible):
+                #if(elementVisible):
                     return elementPresense.get_property(PropertyName)
         except Exception as error:
             raise error             
@@ -190,7 +190,7 @@ class common_v2(customwebDriverwait):
             elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)
             if(elementPresense):
                 if(elementVisible):
-                    return elementPresense.is_enabled()  
+                    return elementVisible.is_enabled()  
         except Exception as error:
             raise error
     '''
@@ -571,7 +571,7 @@ class common_v2(customwebDriverwait):
             elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
             #elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
             if elementPresense:
-                    if elementVisible:
+                    #if elementVisible:
                        # actions.scroll_to_element( elementVisible)
                         actions.perform()
         except Exception as error:
@@ -589,7 +589,7 @@ class common_v2(customwebDriverwait):
             #elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
             if elementPresense:
                    # if elementVisible:
-                        elementVisible.submit()
+                        elementPresense.submit()
         except Exception as error:
             raise error
     def get_Value_of_css_property(self,locatorType:str,locator,property_name):
@@ -598,7 +598,7 @@ class common_v2(customwebDriverwait):
             #elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
             if elementPresense:
                     #if elementVisible:
-                        return elementVisible.value_of_css_property(property_name)
+                        return elementPresense.value_of_css_property(property_name)
         except Exception as error:
             raise error
     def get_Accessible_name(self,locatorType:str,locator):
@@ -607,7 +607,7 @@ class common_v2(customwebDriverwait):
             #elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
             if elementPresense:
                     #if elementVisible: 
-                        return elementVisible.accessible_name
+                        return elementPresense.accessible_name
         except Exception as error:
             raise error 
     def get_Aria_role(self,locatorType:str,locator):
@@ -616,7 +616,7 @@ class common_v2(customwebDriverwait):
             #elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
             if elementPresense:
                     #if elementVisible:
-                         return elementVisible.Aria_role
+                         return elementPresense.Aria_role
         except Exception as error:
             raise error 
     '''Internal ID used by selenium.
@@ -634,7 +634,7 @@ class common_v2(customwebDriverwait):
             #elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
             if elementPresense:
                     #if elementVisible: 
-                        return elementVisible.id
+                        return elementPresense.id
         except Exception as error:
             raise error
     def Get_location_of_Element(self,locatorType:str,locator):
@@ -643,7 +643,7 @@ class common_v2(customwebDriverwait):
             #elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
             if elementPresense:
                    # if elementVisible:
-                         return elementVisible.location
+                         return elementPresense.location
         except Exception as error:
             raise error
     '''
@@ -658,7 +658,7 @@ class common_v2(customwebDriverwait):
             #elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
             if elementPresense:
                     #if elementVisible: 
-                         return elementVisible.location_once_scrolled_into_view
+                         return elementPresense.location_once_scrolled_into_view
         except Exception as error:
             raise error          
     '''
@@ -670,7 +670,7 @@ class common_v2(customwebDriverwait):
             #elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
             if elementPresense:
                     #if elementVisible: 
-                        return elementVisible.parent
+                        return elementPresense.parent
         except Exception as error:
             raise error
     '''
@@ -679,10 +679,10 @@ class common_v2(customwebDriverwait):
     def get_size_And_Location(self,locatorType:str,locator):
         try:
             elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
-            elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
+            #elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
             if elementPresense:
-                    if elementVisible: 
-                            return elementVisible.rect
+                    #if elementVisible: 
+                            return elementPresense.rect
         except Exception as error:
             raise error
     def get_element_screenshot_as_base64(self,locatorType:str,locator,name:str):
@@ -724,7 +724,7 @@ class common_v2(customwebDriverwait):
             #elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
             if elementPresense:
                     #if elementVisible: 
-                            return elementVisible.shadow_root
+                            return elementPresense.shadow_root
         except Exception as error:
             raise error
     def get_Element_size(self,locatorType:str,locator):
@@ -733,7 +733,7 @@ class common_v2(customwebDriverwait):
             #elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
             if elementPresense:
                     #if elementVisible: 
-                            return elementVisible.size
+                            return elementPresense.size
         except Exception as error:
             raise error
     def get_Element_tag_name(self,locatorType:str,locator):
@@ -742,7 +742,7 @@ class common_v2(customwebDriverwait):
             #elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
             if elementPresense:
                     #if elementVisible:
-                        return elementVisible.tag_name
+                        return elementPresense.tag_name
         except Exception as error:
             raise error
     def get_Element_text(self,locatorType:str,locator):
@@ -751,7 +751,7 @@ class common_v2(customwebDriverwait):
             #elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
             if elementPresense:
                     #if elementVisible:
-                        return elementVisible.text
+                        return elementPresense.text
         except Exception as error:
             raise error
     def __webElement_Screenshot_Location(self):
