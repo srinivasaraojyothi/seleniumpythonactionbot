@@ -127,10 +127,10 @@ class common(customwebDriverwait):
     def getAttribute(self, xpath,AttributeName):
         try:
             elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
-            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            #elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
             if(elementPresense):
-                if(elementVisible):
-                    return elementVisible.get_attribute(AttributeName)
+                #if(elementVisible):
+                    return elementPresense.get_attribute(AttributeName)
         except Exception as error:
             raise error                  
     
@@ -146,10 +146,10 @@ class common(customwebDriverwait):
     def getDomAttribute(self, xpath,AttributeName):
         try:
             elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
-            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            #elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
             if(elementPresense):
-                if(elementVisible):
-                    return elementVisible.get_dom_attribute(AttributeName)
+                #if(elementVisible):
+                    return elementPresense.get_dom_attribute(AttributeName)
         except Exception as error:
             raise error
 
@@ -165,10 +165,10 @@ class common(customwebDriverwait):
     def getProperty(self, xpath,PropertyName):
         try:
             elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
-            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            #elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
             if(elementPresense):
-                if(elementVisible):
-                    return elementVisible.get_property(PropertyName)
+                #if(elementVisible):
+                    return elementPresense.get_property(PropertyName)
         except Exception as error:
             raise error             
     '''
@@ -715,7 +715,7 @@ class common(customwebDriverwait):
             #elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
             if elementPresense:
                 #if elementVisible:
-                    return elementVisible.location_once_scrolled_into_view
+                    return elementPresense.location_once_scrolled_into_view
         except Exception as error:
             raise error
     def scroll_into_view_by_js(self,xpath):
@@ -728,10 +728,10 @@ class common(customwebDriverwait):
     def get_Prent_of_Element(self,xpath):
         try:
             elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
-            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            #elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
             if elementPresense:
-                if elementVisible:
-                    return elementVisible.parent
+                #if elementVisible:
+                    return elementPresense.parent
         except Exception as error:
             raise error
     '''
@@ -740,10 +740,10 @@ class common(customwebDriverwait):
     def get_size_And_Location(self,xpath):
         try:
             elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
-            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            #elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
             if elementPresense:
-                if elementVisible:
-                    return elementVisible.rect
+                #if elementVisible:
+                    return elementPresense.rect
         except Exception as error:
             raise error
     def get_element_screenshot_as_base64(self,xpath,name:str):
@@ -785,7 +785,7 @@ class common(customwebDriverwait):
             #elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
             if elementPresense:
                # if elementVisible:
-                    return elementVisible.shadow_root
+                    return elementPresense.shadow_root
         except Exception as error:
             raise error
     def get_Element_size(self,xpath):
@@ -794,7 +794,7 @@ class common(customwebDriverwait):
             #elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
             if elementPresense:
                 #if elementVisible:
-                        return elementVisible.size
+                        return elementPresense.size
         except Exception as error:
             raise error
     def get_Element_tag_name(self,xpath):
@@ -803,7 +803,7 @@ class common(customwebDriverwait):
             #elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
             if elementPresense:
                 #if elementVisible:
-                    return elementVisible.tag_name
+                    return elementPresense.tag_name
         except Exception as error:
             raise error
     def get_Element_text(self,xpath):
@@ -812,7 +812,7 @@ class common(customwebDriverwait):
             #elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
             if elementPresense:
                 #if elementVisible:
-                    return elementVisible.text
+                    return elementPresense.text
         except Exception as error:
             raise error
     def __webElement_Screenshot_Location(self):

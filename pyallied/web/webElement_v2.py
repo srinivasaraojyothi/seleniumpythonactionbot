@@ -51,7 +51,7 @@ class common_v2(customwebDriverwait):
             elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)
             if(elementPresense):
                 if(elementVisible):
-                    elementPresense.click()
+                    elementVisible.click()
         except Exception as error:
             raise error            
 
@@ -61,7 +61,7 @@ class common_v2(customwebDriverwait):
             elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)
             if(elementPresense):
                 if(elementVisible):
-                    elementPresense.clear()  
+                    elementVisible.clear()  
         except Exception as error:
             raise error              
     
