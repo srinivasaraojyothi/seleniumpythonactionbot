@@ -721,7 +721,7 @@ class common(customwebDriverwait):
     def scroll_into_view_by_js(self,xpath):
         elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath) 
         if elementPresense:       
-            self.driver.execute_script("arguments[0].scrollIntoView(true);", elementPresense)        
+            self.driver.execute_script("arguments[0].scrollIntoView(true);", self.driver.find_element_by_xpath(xpath))        
     '''
     Internal reference to the WebDriver instance this element was found from.
     '''        

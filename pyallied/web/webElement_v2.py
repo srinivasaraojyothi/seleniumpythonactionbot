@@ -660,11 +660,7 @@ class common_v2(customwebDriverwait):
                     if elementVisible: 
                          return elementVisible.location_once_scrolled_into_view
         except Exception as error:
-            raise error
-    def scroll_into_view_by_js(self,locatorType:str,locator):
-        elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
-        if elementPresense:       
-            self.driver.execute_script("arguments[0].scrollIntoView(true);", elementPresense)            
+            raise error          
     '''
     Internal reference to the WebDriver instance this element was found from.
     '''        
