@@ -25,6 +25,8 @@ class common(customwebDriverwait):
         try:
             if(super().WaitFor_presence_of_all_elements_located(xpath)):
                 return self.driver.find_elements(By.XPATH, xpath)
+            else:
+                self.__raise_element_not_present_exception(xpath)    
         except Exception as error:
             raise error
 
@@ -40,6 +42,11 @@ class common(customwebDriverwait):
             if elementPresense :
                 if elementVisible:
                     return elementVisible
+                else:
+                    self.__raise_element_not_visible_exception(xpath) 
+            else:
+                self.__raise_element_not_present_exception(xpath)           
+
         except Exception as error:
             raise error        
 
@@ -50,6 +57,10 @@ class common(customwebDriverwait):
             if(elementPresense):
                 if(elementVisible):
                     elementVisible.click()
+                else:
+                    self.__raise_element_not_visible_exception(xpath) 
+            else:
+                self.__raise_element_not_present_exception(xpath)                     
         except Exception as error:
             raise error            
 
@@ -60,6 +71,10 @@ class common(customwebDriverwait):
             if(elementPresense):
                 if(elementVisible):
                     elementVisible.clear()
+                else:
+                    self.__raise_element_not_visible_exception(xpath) 
+            else:
+                self.__raise_element_not_present_exception(xpath)                     
         except Exception as error:
             raise error              
     
@@ -73,6 +88,10 @@ class common(customwebDriverwait):
                 if(elementVisible):
             #return WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((xpath)))
                     return elementVisible
+                else:
+                    self.__raise_element_not_visible_exception(xpath) 
+            else:
+                self.__raise_element_not_present_exception(xpath)                     
         except Exception as error:
             raise error    
     
@@ -100,6 +119,10 @@ class common(customwebDriverwait):
             if(elementPresence):
                 if(elementVisibility):
                     elementVisibility.send_keys(text)
+                else:
+                    self.__raise_element_not_visible_exception(xpath) 
+            else:
+                self.__raise_element_not_present_exception(xpath)                     
         except Exception as error:
             raise error
 
@@ -130,7 +153,9 @@ class common(customwebDriverwait):
             #elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
             if(elementPresense):
                 #if(elementVisible):
-                    return elementPresense.get_attribute(AttributeName)
+                    return elementPresense.get_attribute(AttributeName) 
+            else:
+                self.__raise_element_not_present_exception(xpath)                     
         except Exception as error:
             raise error                  
     
@@ -150,6 +175,8 @@ class common(customwebDriverwait):
             if(elementPresense):
                 #if(elementVisible):
                     return elementPresense.get_dom_attribute(AttributeName)
+            else:
+                self.__raise_element_not_present_exception(xpath)                    
         except Exception as error:
             raise error
 
@@ -169,6 +196,8 @@ class common(customwebDriverwait):
             if(elementPresense):
                 #if(elementVisible):
                     return elementPresense.get_property(PropertyName)
+            else:
+                self.__raise_element_not_present_exception(xpath)                    
         except Exception as error:
             raise error             
     '''
@@ -181,6 +210,10 @@ class common(customwebDriverwait):
             if(elementPresense):
                 if(elementVisible):
                     return elementVisible.is_displayed()
+                else:
+                    self.__raise_element_not_visible_exception(xpath) 
+            else:
+                self.__raise_element_not_present_exception(xpath)                     
         except Exception as error:
             raise error             
     '''
@@ -193,6 +226,10 @@ class common(customwebDriverwait):
             if(elementPresense):
                 if(elementVisible):
                     return elementVisible.is_enabled()
+                else:
+                    self.__raise_element_not_visible_exception(xpath) 
+            else:
+                self.__raise_element_not_present_exception(xpath)                     
         except Exception as error:
             raise error
     '''
@@ -207,6 +244,10 @@ class common(customwebDriverwait):
             if(elementPresense):
                 if(elementVisible):
                     return elementVisible.is_selected()
+                else:
+                    self.__raise_element_not_visible_exception(xpath) 
+            else:
+                self.__raise_element_not_present_exception(xpath)                     
         except Exception as error:
             raise error
     '''
@@ -220,6 +261,10 @@ class common(customwebDriverwait):
             if(elementPresense):
                 if(elementVisible):
                     return elementVisible.screenshot(screenShotSavingPath)
+                else:
+                    self.__raise_element_not_visible_exception(xpath) 
+            else:
+                self.__raise_element_not_present_exception(xpath)                     
         except Exception as error:
             raise error
         
@@ -236,6 +281,10 @@ class common(customwebDriverwait):
                     #element = self.driver.find_element(By.XPATH, xpath)
                     actions.move_to_element(element).click(elementVisible)
                     actions.perform()
+                else:
+                    self.__raise_element_not_visible_exception(xpath) 
+            else:
+                self.__raise_element_not_present_exception(xpath)                     
         except Exception as error:
             raise  error    
 
@@ -255,6 +304,10 @@ class common(customwebDriverwait):
                     if elementVisible:
                         actions.click_and_hold(elementVisible)
                         actions.perform()
+                    else:
+                        self.__raise_element_not_visible_exception(xpath) 
+                else:
+                    self.__raise_element_not_present_exception(xpath)                         
             else:
                 actions.click_and_hold()
                 actions.perform()
@@ -272,6 +325,10 @@ class common(customwebDriverwait):
                 if elementVisible:
                     #element = self.driver.find_element(By.XPATH, xpath)
                     actions.move_to_element(elementVisible).perform()
+                else:
+                    self.__raise_element_not_visible_exception(xpath) 
+            else:
+                self.__raise_element_not_present_exception(xpath)                     
         except Exception as error:
             raise error
                 
@@ -287,6 +344,10 @@ class common(customwebDriverwait):
                 if elementVisible:
                     #element = self.driver.find_element(By.XPATH, xpath)
                     actions.move_to_element(elementVisible).click(elementVisible).perform()
+                else:
+                    self.__raise_element_not_visible_exception(xpath) 
+            else:
+                self.__raise_element_not_present_exception(xpath)                     
         except Exception as error:
             raise error
         '''
@@ -313,6 +374,15 @@ class common(customwebDriverwait):
                                 #MovedToelement = self.driver.find_element(By.XPATH, xpathOfMovingTO)
                                 #ClickElement=  self.driver.find_element(By.XPATH, xpathOfElemtToClick)
                                 actions.move_to_element(elementVisible_OfMovingTo).click(elementVisible_ToClick).perform()
+                            else:
+                                self.__raise_element_not_visible_exception(xpathOfElemtToClick) 
+                        else:
+                            self.__raise_element_not_present_exception(xpathOfElemtToClick)  
+                    else:
+                        self.__raise_element_not_visible_exception(xpathOfMovingTO)
+                else:
+                    self.__raise_element_not_present_exception(xpathOfMovingTO)
+
             else:
                 elementPresense_OfMovingTo = super().WaitFor_PresenseOf_Element_Located(xpathOfMovingTO)
                 elementVisible_OfMovingTo = super().WaitFor_VisibilityOf_Element_Located(xpathOfMovingTO)
@@ -321,6 +391,10 @@ class common(customwebDriverwait):
                         #MovedToelement = self.driver.find_element(By.XPATH, xpathOfMovingTO)
                       
                         actions.move_to_element(elementVisible_OfMovingTo).click().perform()
+                    else:
+                        self.__raise_element_not_visible_exception(xpathOfMovingTO)
+                else:
+                    self.__raise_element_not_present_exception(xpathOfMovingTO)                        
         except Exception as error:
             raise error 
         '''
@@ -341,6 +415,10 @@ class common(customwebDriverwait):
                     #element = self.driver.find_element(By.XPATH, xpath)
                     actions.move_to_element_with_offset(elementVisible, xoffset, yoffset)
                     actions.perform()
+                else:
+                    self.__raise_element_not_visible_exception(xpath)
+            else:
+                self.__raise_element_not_present_exception(xpath)                    
         except Exception as error:
             raise error
     def moveToElement_WithOffset_and_click(self, xpath, xoffset, yoffset):
@@ -353,6 +431,10 @@ class common(customwebDriverwait):
                     #element = self.driver.find_element(By.XPATH, xpath)
                     actions.move_to_element_with_offset(elementVisible, xoffset, yoffset).click()
                     actions.perform()
+                else:
+                    self.__raise_element_not_visible_exception(xpath)
+            else:
+                self.__raise_element_not_present_exception(xpath)                     
         except Exception as error:
             raise error 
     def moveTo_location_and_click(self, xoffset, yoffset,clickElementXpath=None):
@@ -367,9 +449,13 @@ class common(customwebDriverwait):
                         #element = self.driver.find_element(By.XPATH, clickElementXpath)
                         actions.move_to_location( xoffset, yoffset).click(elementVisible)
                         actions.perform()
+                    else:
+                        self.__raise_element_not_visible_exception(clickElementXpath)
                 else:
-                    actions.move_to_location( xoffset, yoffset).click()
-                    actions.perform()                       
+                    self.__raise_element_not_present_exception(clickElementXpath)                         
+            else:
+                actions.move_to_location( xoffset, yoffset).click()
+                actions.perform()                       
         except Exception as error:
             raise error  
     '''
@@ -426,6 +512,10 @@ class common(customwebDriverwait):
                         #element = self.driver.find_element(By.XPATH, xpath)
                         actions.key_down(ModifierKey, elementVisible).send_keys(keys)
                         actions.perform()
+                    else:
+                        self.__raise_element_not_visible_exception(xpath)
+                else:
+                    self.__raise_element_not_present_exception(xpath)                        
             else:
                 actions.key_down(ModifierKey).send_keys(keys)
                 actions.perform()
@@ -453,6 +543,10 @@ class common(customwebDriverwait):
                     if elementVisible:
                         #element = self.driver.find_element(By.XPATH, xpath)
                         actions.key_up(ModifierKey, elementVisible).perform()
+                    else:
+                        self.__raise_element_not_visible_exception(xpath)
+                else:
+                    self.__raise_element_not_present_exception(xpath)                        
             else:
 
                 actions.key_up(ModifierKey).perform()
@@ -471,6 +565,10 @@ class common(customwebDriverwait):
                     if elementVisible:
                         #element = self.driver.find_element(By.XPATH, xpath)
                         actions.key_down(ModifierKey,elementVisible).send_keys(keys).key_up(ModifierKey,elementVisible).perform()
+                    else:
+                        self.__raise_element_not_visible_exception(xpath)
+                else:
+                    self.__raise_element_not_present_exception(xpath)                        
             else:
                 actions.key_down(ModifierKey).send_keys(keys).key_up(ModifierKey).perform()
         except Exception as error:
@@ -495,7 +593,10 @@ class common(customwebDriverwait):
                         #element = self.driver.find_element(By.XPATH, xpath)
                         actions.double_click(elementVisible)
                         actions.perform()
-
+                    else:
+                        self.__raise_element_not_visible_exception(xpath)
+                else:
+                    self.__raise_element_not_present_exception(xpath)
             else:
                 actions.double_click()
                 actions.perform()
@@ -518,7 +619,10 @@ class common(customwebDriverwait):
                     if elementVisible:
                         actions.context_click(elementVisible)
                         actions.perform()
-
+                    else:
+                        self.__raise_element_not_visible_exception(xpath)
+                else:
+                    self.__raise_element_not_present_exception(xpath)
             else:
                 actions.context_click()
                 actions.perform() 
@@ -552,6 +656,10 @@ class common(customwebDriverwait):
                     actions.click(elementVisible)
                     actions.send_keys_to_element(elementVisible, *keys_to_send)
                     actions.perform()
+                else:
+                    self.__raise_element_not_visible_exception(xpath)
+            else:
+                self.__raise_element_not_present_exception(xpath)                    
         except Exception as error:
             raise error    
 
@@ -632,6 +740,8 @@ class common(customwebDriverwait):
                     #element = self.driver.find_element(By.XPATH, xpath)
                     actions.scroll_to_element( elementPresense)
                     actions.perform()
+            else:
+                self.__raise_element_not_present_exception(xpath)        
         except Exception as error:
             raise error
     def switch_To_ActiveElement(self):
@@ -647,6 +757,10 @@ class common(customwebDriverwait):
             if elementPresense:
                 if elementVisible:
                     elementVisible.submit()
+                else:
+                    self.__raise_element_not_visible_exception(xpath)
+            else:
+                self.__raise_element_not_present_exception(xpath)                     
         except Exception as error:
             raise error
     def get_Value_of_css_property(self,xpath,property_name):
@@ -656,6 +770,8 @@ class common(customwebDriverwait):
             if elementPresense:
                 #if elementVisible:
                     return elementPresense.value_of_css_property(property_name)
+            else:
+                self.__raise_element_not_present_exception(xpath)                     
         except Exception as error:
             raise error
     def get_Accessible_name(self,xpath):
@@ -665,6 +781,8 @@ class common(customwebDriverwait):
             if elementPresense:
                 #if elementVisible:
                     return elementPresense.accessible_name
+            else:
+                self.__raise_element_not_present_exception(xpath)                     
         except Exception as error:
             raise error 
     def get_Aria_role(self,xpath):
@@ -674,6 +792,8 @@ class common(customwebDriverwait):
             if elementPresense:
                 #if elementVisible:
                     return elementPresense.Aria_role
+            else:
+                self.__raise_element_not_present_exception(xpath)                     
         except Exception as error:
             raise error 
     '''Internal ID used by selenium.
@@ -692,6 +812,8 @@ class common(customwebDriverwait):
             if elementPresense:
                 #if elementVisible:
                     return elementPresense.id
+            else:
+                self.__raise_element_not_present_exception(xpath)                     
         except Exception as error:
             raise error
     def Get_location_of_Element(self,xpath):
@@ -701,6 +823,8 @@ class common(customwebDriverwait):
             if elementPresense:
                 #if elementVisible:
                     return elementPresense.location
+            else:
+                self.__raise_element_not_present_exception(xpath)                     
         except Exception as error:
             raise error
     '''
@@ -716,12 +840,16 @@ class common(customwebDriverwait):
             if elementPresense:
                 #if elementVisible:
                     return elementPresense.location_once_scrolled_into_view
+            else:
+                self.__raise_element_not_present_exception(xpath)                     
         except Exception as error:
             raise error
     def scroll_into_view_by_js(self,xpath):
         elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath) 
         if elementPresense:       
-            self.driver.execute_script("arguments[0].scrollIntoView(true);", self.driver.find_element_by_xpath(xpath))        
+            self.driver.execute_script("arguments[0].scrollIntoView(true);", self.driver.find_element_by_xpath(xpath))  
+        else:
+            self.__raise_element_not_present_exception(xpath)                   
     '''
     Internal reference to the WebDriver instance this element was found from.
     '''        
@@ -732,6 +860,8 @@ class common(customwebDriverwait):
             if elementPresense:
                 #if elementVisible:
                     return elementPresense.parent
+            else:
+                self.__raise_element_not_present_exception(xpath)                 
         except Exception as error:
             raise error
     '''
@@ -744,6 +874,8 @@ class common(customwebDriverwait):
             if elementPresense:
                 #if elementVisible:
                     return elementPresense.rect
+            else:
+                self.__raise_element_not_present_exception(xpath)                     
         except Exception as error:
             raise error
     def get_element_screenshot_as_base64(self,xpath,name:str):
@@ -754,7 +886,10 @@ class common(customwebDriverwait):
                 if elementVisible:
                     with open(self.__webElement_Screenshot_Location()+"/"+name+".jpg", "wb") as fh:
                         fh.write(base64.urlsafe_b64decode(elementVisible.screenshot_as_base64))
-            
+                else:
+                    self.__raise_element_not_visible_exception(xpath)
+            else:
+                self.__raise_element_not_present_exception(xpath)            
             #return element.screenshot_as_base64
         except Exception as error:
             raise error
@@ -768,6 +903,10 @@ class common(customwebDriverwait):
                     with open(result_File, "wb") as fh:
                         fh.write(elementVisible.screenshot_as_png)
                         #Image.open(result_File).save(result_File, 'PNG')
+                else:
+                    self.__raise_element_not_visible_exception(xpath)
+            else:
+                self.__raise_element_not_present_exception(xpath)                        
         except Exception as error:
             raise error
     '''
@@ -786,6 +925,8 @@ class common(customwebDriverwait):
             if elementPresense:
                # if elementVisible:
                     return elementPresense.shadow_root
+            else:
+                self.__raise_element_not_present_exception(xpath)                    
         except Exception as error:
             raise error
     def get_Element_size(self,xpath):
@@ -795,6 +936,8 @@ class common(customwebDriverwait):
             if elementPresense:
                 #if elementVisible:
                         return elementPresense.size
+            else:
+                self.__raise_element_not_present_exception(xpath)                        
         except Exception as error:
             raise error
     def get_Element_tag_name(self,xpath):
@@ -804,6 +947,8 @@ class common(customwebDriverwait):
             if elementPresense:
                 #if elementVisible:
                     return elementPresense.tag_name
+            else:
+                self.__raise_element_not_present_exception(xpath)                    
         except Exception as error:
             raise error
     def get_Element_text(self,xpath):
@@ -813,6 +958,8 @@ class common(customwebDriverwait):
             if elementPresense:
                 #if elementVisible:
                     return elementPresense.text
+            else:
+                self.__raise_element_not_present_exception(xpath)                    
         except Exception as error:
             raise error
     def __webElement_Screenshot_Location(self):
@@ -831,4 +978,9 @@ class common(customwebDriverwait):
             return element
         except Exception as error:
             return error
+    def __raise_element_not_present_exception(self,locator):
+        raise Exception("element not present : "+locator)
+
+    def __raise_element_not_visible_exception(self,locator):
+        raise Exception("element not visible : "+locator)             
         

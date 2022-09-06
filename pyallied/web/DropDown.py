@@ -25,6 +25,8 @@ class DropDownActions(customwebDriverwait):
                 #if(elementVisibility):
                     select = Select(self.driver.find_element(By.XPATH, xpath))
                     select.select_by_value(valueToSelect)
+            else:
+                self.__raise_element_not_present_exception(xpath)                    
         except Exception as error:
             raise error
     def selectDropDownByIndex(self, xpath, indexToSelect):
@@ -35,6 +37,8 @@ class DropDownActions(customwebDriverwait):
                 #if(elementVisibility):
                     select = Select(self.driver.find_element(By.XPATH, xpath))
                     select.select_by_index(indexToSelect)
+            else:
+                self.__raise_element_not_present_exception(xpath)                    
         except Exception as error:
             raise error
     def selectDropDownByVisibleText(self, xpath, textToSelect):
@@ -44,6 +48,8 @@ class DropDownActions(customwebDriverwait):
             if(elementPresense):
                     select = Select(self.driver.find_element(By.XPATH, xpath))
                     select.select_by_visible_text(textToSelect)
+            else:
+                self.__raise_element_not_present_exception(xpath)                    
         except Exception as error:
             raise error
     def deselectAllOptionsInDropDown(self, xpath):
@@ -54,6 +60,8 @@ class DropDownActions(customwebDriverwait):
                 #if(elementVisibility):
                     select = Select(self.driver.find_element(By.XPATH, xpath))
                     select.deselect_all()
+            else:
+                self.__raise_element_not_present_exception(xpath)                    
         except Exception as error:
             raise error
     def getDefaultSelectedDropDownOptions(self, xpath):
@@ -71,6 +79,8 @@ class DropDownActions(customwebDriverwait):
                         elif(i.get_attribute('value')):
                             selectedOptions.append(i.get_attribute('value'))
                     return selectedOptions
+            else:
+                self.__raise_element_not_present_exception(xpath)                    
         except Exception as error:
             raise error
     def getAllOptionInDropDown(self, xpath):
@@ -89,6 +99,8 @@ class DropDownActions(customwebDriverwait):
                             allOptions.append(i.get_attribute('value'))
 
                     return allOptions
+            else:
+                self.__raise_element_not_present_exception(xpath)                    
         except Exception as error:
             raise error
     def deselectByIndex(self, xpath, index):
@@ -99,6 +111,8 @@ class DropDownActions(customwebDriverwait):
                 #if(elementVisibility):
                     select = Select(self.driver.find_element(By.XPATH, xpath))
                     select.deselect_by_index(index)
+            else:
+                self.__raise_element_not_present_exception(xpath)                    
         except Exception as error:
             raise error
     def deselectByValue(self, xpath, value):
@@ -109,6 +123,8 @@ class DropDownActions(customwebDriverwait):
                 #if(elementVisibility):
                     select = Select(self.driver.find_element(By.XPATH, xpath))
                     select.deselect_by_value(value)
+            else:
+                self.__raise_element_not_present_exception(xpath)                    
         except Exception as error:
             raise error
     def deselectByVisibleText(self, xpath, text):
@@ -119,6 +135,8 @@ class DropDownActions(customwebDriverwait):
                 #if(elementVisibility):        
                     select = Select(self.driver.find_element(By.XPATH, xpath))
                     select.deselect_by_visible_text(text)
+            else:
+                self.__raise_element_not_present_exception(xpath)                    
         except Exception as error:
             raise error
     def getFirstSelecteOption(self, xpath):
@@ -137,5 +155,12 @@ class DropDownActions(customwebDriverwait):
                             firstSelectedOption.append(selectedOption.get_attribute('value'))
 
                     return firstSelectedOption 
+            else:
+                self.__raise_element_not_present_exception(xpath)                    
         except Exception as error:
             raise error                    
+    def __raise_element_not_present_exception(self,locator):
+        raise Exception("element not present : "+locator)
+
+    def __raise_element_not_visible_exception(self,locator):
+        raise Exception("element not visible : "+locator)  

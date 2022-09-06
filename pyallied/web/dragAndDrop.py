@@ -33,12 +33,23 @@ class DragAndDrop(customwebDriverwait):
             SourceelElementVisibility=super().WaitFor_VisibilityOf_Element_Located(sourcexpath)
             DestinationElementPresense=super().WaitFor_PresenseOf_Element_Located(destinationxpath)
             DestinationElementVisibility=super().WaitFor_VisibilityOf_Element_Located(destinationxpath)
-            if(SourceelElementPresense and DestinationElementPresense ):
-                if(SourceelElementVisibility and DestinationElementVisibility):
-                    sourceElement = self.driver.find_element(By.XPATH, sourcexpath)
-                    destination = self.driver.find_element(By.XPATH, destinationxpath)
-                    action_chains = ActionChains(self.driver)
-                    action_chains.drag_and_drop(sourceElement, destination).perform()
+            if SourceelElementPresense :
+                if  DestinationElementPresense :
+                    if SourceelElementVisibility :
+                        if DestinationElementVisibility:
+                            sourceElement = self.driver.find_element(By.XPATH, sourcexpath)
+                            destination = self.driver.find_element(By.XPATH, destinationxpath)
+                            action_chains = ActionChains(self.driver)
+                            action_chains.drag_and_drop(sourceElement, destination).perform()
+
+                        else:
+                            self.__raise_element_not_visible_exception(destinationxpath)
+                    else:
+                        self.__raise_element_not_visible_exception(sourcexpath) 
+                else:
+                    self.__raise_element_not_present_exception(destinationxpath)
+            else:
+                self.__raise_element_not_present_exception(sourcexpath)                           
         except Exception as error:
             raise error            
         '''
@@ -59,6 +70,10 @@ class DragAndDrop(customwebDriverwait):
                     action_chains = ActionChains(self.driver)
                     action_chains.drag_and_drop_by_offset(
                         SourceelElementVisibility, xoffset, yoffset).pause(5).perform()
+                else:
+                    self.__raise_element_not_visible_exception(sourcexpath) 
+            else:
+                self.__raise_element_not_present_exception(sourcexpath)                        
         except Exception as error:
             raise error
     def dragElement_ToOffSet_And_Drop(self, sourcexpath, xoffset, yoffset):
@@ -70,6 +85,10 @@ class DragAndDrop(customwebDriverwait):
                     action_chains = ActionChains(self.driver)
 
                     action_chains.move_to_element(SourceelElementVisibility).pause(1).click_and_hold().pause(2).move_by_offset(xoffset, yoffset).pause(2).release().perform()
+                else:
+                    self.__raise_element_not_visible_exception(sourcexpath) 
+            else:
+                self.__raise_element_not_present_exception(sourcexpath)        
         except Exception as error:
             raise error
     def seletools_drag_and_drop_xpath(self, sourcexpath, destinationxpath):
@@ -78,9 +97,21 @@ class DragAndDrop(customwebDriverwait):
             SourceelElementVisibility=super().WaitFor_VisibilityOf_Element_Located(sourcexpath)
             DestinationElementPresense=super().WaitFor_PresenseOf_Element_Located(destinationxpath)
             DestinationElementVisibility=super().WaitFor_VisibilityOf_Element_Located(destinationxpath)
-            if(SourceelElementPresense and DestinationElementPresense ):
-                if(SourceelElementVisibility and DestinationElementVisibility):                  
-                    drag_and_drop(self.driver, SourceelElementVisibility, DestinationElementVisibility)           
+            if(SourceelElementPresense  ):
+                if DestinationElementPresense:
+                    if SourceelElementVisibility:
+                        if DestinationElementVisibility:                  
+                            drag_and_drop(self.driver, SourceelElementVisibility, DestinationElementVisibility)
+                        else:
+                            self.__raise_element_not_visible_exception(destinationxpath)
+                    else:
+                        self.__raise_element_not_visible_exception(sourcexpath)
+                else:
+                    self.__raise_element_not_present_exception(destinationxpath)
+            else:
+                self.__raise_element_not_present_exception(sourcexpath)                
+
+
         except Exception as error:
             raise error
     def seletools_drag_and_drop_css(self, source_css, destination_css):
@@ -89,9 +120,19 @@ class DragAndDrop(customwebDriverwait):
             SourceelElementVisibility=self.__waitFor_visibilityOf_element_located(source_css)
             DestinationElementPresense=self.__waitFor_presenseOf_element_located(destination_css)
             DestinationElementVisibility=self.__waitFor_visibilityOf_element_located(destination_css)
-            if(SourceelElementPresense and DestinationElementPresense ):
-                if(SourceelElementVisibility and DestinationElementVisibility):                   
-                    drag_and_drop(self.driver, SourceelElementVisibility, DestinationElementVisibility)           
+            if(SourceelElementPresense  ):
+                if DestinationElementPresense:
+                    if SourceelElementVisibility:
+                        if DestinationElementVisibility:                   
+                            drag_and_drop(self.driver, SourceelElementVisibility, DestinationElementVisibility) 
+                        else:
+                            self.__raise_element_not_visible_exception(destination_css)
+                    else:
+                        self.__raise_element_not_visible_exception(source_css)
+                else:
+                    self.__raise_element_not_present_exception(destination_css)
+            else:
+                self.__raise_element_not_present_exception(source_css)                                       
         except Exception as error:
             raise error            
     '''
@@ -118,3 +159,8 @@ class DragAndDrop(customwebDriverwait):
             return WebDriverWait(self.driver, self.customWait).until(EC.visibility_of_element_located((By.CSS_SELECTOR, cssLocator)))
         except Exception as error:
             raise error
+    def __raise_element_not_present_exception(self,locator):
+        raise Exception("element not present : "+locator)
+
+    def __raise_element_not_visible_exception(self,locator):
+        raise Exception("element not visible : "+locator) 

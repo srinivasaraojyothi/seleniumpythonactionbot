@@ -25,6 +25,8 @@ class common_v2(customwebDriverwait):
         try:
             if(super().WaitFor_presence_of_all_elements_located_AnyLocatorType(locatorType,locator)):
                 return super().WaitFor_presence_of_all_elements_located_AnyLocatorType(locatorType,locator)
+            else:
+                self.__raise_element_not_present_exception(locator)    
         except Exception as error:
             raise error
 
@@ -40,7 +42,7 @@ class common_v2(customwebDriverwait):
             if(super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)) :
                 return super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
             else:
-                raise Exception(" ** wrong selector/ no selector ** ",locatorType.upper())
+                self.__raise_element_not_present_exception(locator)
                 raise error    
         except Exception as error:
             raise error        
@@ -52,6 +54,12 @@ class common_v2(customwebDriverwait):
             if(elementPresense):
                 if(elementVisible):
                     elementVisible.click()
+                else:
+                    self.__raise_element_not_visible_exception(locator)
+                #raise error
+            else:
+                self.__raise_element_not_present_exception(locator)
+            #raise error          
         except Exception as error:
             raise error            
 
@@ -61,7 +69,11 @@ class common_v2(customwebDriverwait):
             elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)
             if(elementPresense):
                 if(elementVisible):
-                    elementVisible.clear()  
+                    elementVisible.clear()
+                else:
+                    self.__raise_element_not_visible_exception(locator)  
+            else:
+                self.__raise_element_not_present_exception(locator)            
         except Exception as error:
             raise error              
     
@@ -98,6 +110,10 @@ class common_v2(customwebDriverwait):
             if(elementPresence):
                 if(elementVisibility):
                     elementVisibility.send_keys(text)
+                else:
+                    self.__raise_element_not_visible_exception(locator)
+            else:
+                self.__raise_element_not_present_exception(locator)            
         except Exception as error:
             raise error
 
@@ -129,6 +145,8 @@ class common_v2(customwebDriverwait):
             if(elementPresense):
                 #if(elementVisible):
                     return elementPresense.get_attribute(AttributeName)
+            else:        
+                self.__raise_element_not_present_exception(locator)    
         except Exception as error:
             raise error                  
     
@@ -148,6 +166,8 @@ class common_v2(customwebDriverwait):
             if(elementPresense):
                 #if(elementVisible):
                     return elementPresense.get_dom_attribute(AttributeName) 
+            else:        
+                self.__raise_element_not_present_exception(locator)                    
         except Exception as error:
             raise error
 
@@ -167,6 +187,8 @@ class common_v2(customwebDriverwait):
             if(elementPresense):
                 #if(elementVisible):
                     return elementPresense.get_property(PropertyName)
+            else:        
+                self.__raise_element_not_present_exception(locator)                    
         except Exception as error:
             raise error             
     '''
@@ -179,6 +201,10 @@ class common_v2(customwebDriverwait):
             if(elementPresense):
                 if(elementVisible):
                     return elementVisible.is_displayed()
+                else:
+                    self.__raise_element_not_visible_exception(locator)    
+            else:        
+                self.__raise_element_not_present_exception(locator)                    
         except Exception as error:
             raise error             
     '''
@@ -190,7 +216,11 @@ class common_v2(customwebDriverwait):
             elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)
             if(elementPresense):
                 if(elementVisible):
-                    return elementVisible.is_enabled()  
+                    return elementVisible.is_enabled() 
+                else:
+                    self.__raise_element_not_visible_exception(locator)
+            else:
+                self.__raise_element_not_present_exception(locator)             
         except Exception as error:
             raise error
     '''
@@ -205,6 +235,10 @@ class common_v2(customwebDriverwait):
             if(elementPresense):
                 if(elementVisible):
                     return elementVisible.is_selected() 
+                else:
+                    self.__raise_element_not_visible_exception(locator)
+            else:
+                self.__raise_element_not_present_exception(locator)                            
         except Exception as error:
             raise error
     '''
@@ -218,6 +252,10 @@ class common_v2(customwebDriverwait):
             if(elementPresense):
                 if(elementVisible):
                     return elementVisible.screenshot(screenShotSavingPath)
+                else:
+                    self.__raise_element_not_visible_exception(locator)  
+            else:
+                self.__raise_element_not_present_exception(locator)                                        
         except Exception as error:
             raise error
         
@@ -235,6 +273,10 @@ class common_v2(customwebDriverwait):
                 if elementVisible:
                     actions.move_to_element(elementVisible).click(elementVisible)
                     actions.perform()
+                else:
+                    self.__raise_element_not_visible_exception(locator)  
+            else:
+                self.__raise_element_not_present_exception(locator)                    
         except Exception as error:
             raise  error    
 
@@ -254,6 +296,10 @@ class common_v2(customwebDriverwait):
                     if elementVisible :
                         actions.click_and_hold(elementVisible)
                         actions.perform()
+                    else:
+                        self.__raise_element_not_visible_exception(locator)  
+                else:
+                    self.__raise_element_not_present_exception(locator)                        
 
             else:
                 actions.click_and_hold()
@@ -271,6 +317,10 @@ class common_v2(customwebDriverwait):
             if elementPresense:
                 if elementVisible:
                     actions.move_to_element(elementVisible).perform()
+                else:
+                    self.__raise_element_not_visible_exception(locator)  
+            else:
+                self.__raise_element_not_present_exception(locator)                    
         except Exception as error:
             raise error
                 
@@ -285,6 +335,10 @@ class common_v2(customwebDriverwait):
             if elementPresense:
                 if elementVisible:
                     actions.move_to_element(elementVisible).click(elementVisible).perform()
+                else:
+                    self.__raise_element_not_visible_exception(locator)  
+            else:
+                self.__raise_element_not_present_exception(locator)                    
         except Exception as error:
             raise error
         '''
@@ -310,12 +364,27 @@ class common_v2(customwebDriverwait):
                         if elementPresense_LocatorOfElemtToClick:
                             if elementVisible_LocatorOfElemtToClick:
                                 actions.move_to_element(elementVisible_LocatorMovingTO).click(elementVisible_LocatorOfElemtToClick).perform()
+                            else:
+                                self.__raise_element_not_visible_exception(LocatorOfElemtToClick)
+                        else:
+                            self.__raise_element_not_present_exception(LocatorOfElemtToClick)
+                    else:
+                        self.__raise_element_not_visible_exception(LocatorMovingTO)
+                else:
+                    self.__raise_element_not_present_exception(LocatorMovingTO)        
+
+
             else:
                 elementPresense_LocatorMovingTO = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,LocatorMovingTO)
                 elementVisible_LocatorMovingTO = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,LocatorMovingTO)                
                 if elementPresense_LocatorMovingTO:
                     if elementVisible_LocatorMovingTO:                      
-                        actions.move_to_element(elementVisible_LocatorMovingTO).click().perform()       
+                        actions.move_to_element(elementVisible_LocatorMovingTO).click().perform() 
+                    else:
+                        self.__raise_element_not_visible_exception(LocatorMovingTO)
+                else:
+                    self.__raise_element_not_present_exception(LocatorMovingTO)
+
         except Exception as error:
             raise error 
         '''
@@ -335,6 +404,10 @@ class common_v2(customwebDriverwait):
                 if elementVisible:
                     actions.move_to_element_with_offset(elementVisible, xoffset, yoffset)
                     actions.perform()
+                else:
+                    self.__raise_element_not_visible_exception(locator) 
+            else:
+                self.__raise_element_not_present_exception(locator)           
         except Exception as error:
             raise error    
     def moveByOffsett(self, xoffset, yoffset):
@@ -373,7 +446,11 @@ class common_v2(customwebDriverwait):
                 if elementPresense:
                     if elementVisible:
                         actions.key_down(ModifierKey, elementVisible).send_keys(keys)
-                        actions.perform()                    
+                        actions.perform()
+                    else:
+                        self.__raise_element_not_visible_exception(locator)
+                else:
+                     self.__raise_element_not_present_exception(locator)                               
             else:
                 actions.key_down(ModifierKey).send_keys(keys)
                 actions.perform()
@@ -399,7 +476,12 @@ class common_v2(customwebDriverwait):
                 elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)             
                 if elementPresense:
                     if elementVisible:
-                        actions.key_up(ModifierKey, elementVisible).perform()
+                        actions.key_up(ModifierKey, elementVisible).perform()                    
+                    else:
+                        self.__raise_element_not_visible_exception(locator)
+                else:
+                    self.__raise_element_not_present_exception(locator) 
+
             else:
 
                 actions.key_up(ModifierKey).perform()
@@ -417,6 +499,10 @@ class common_v2(customwebDriverwait):
                 if elementPresense:
                     if elementVisible:
                         actions.key_down(ModifierKey,elementVisible).send_keys(keys).key_up(ModifierKey,elementVisible).perform()
+                    else:
+                        self.__raise_element_not_visible_exception(locator)
+                else:
+                    self.__raise_element_not_present_exception(locator)                         
             else:
                 actions.key_down(ModifierKey).send_keys(keys).key_up(ModifierKey).perform()
         except Exception as error:
@@ -440,6 +526,10 @@ class common_v2(customwebDriverwait):
                     if elementVisible:
                         actions.double_click(elementVisible)
                         actions.perform()
+                    else:
+                        self.__raise_element_not_visible_exception(locator)
+                else:
+                    self.__raise_element_not_present_exception(locator)                         
 
             else:
                 actions.double_click()
@@ -463,6 +553,10 @@ class common_v2(customwebDriverwait):
                     if elementVisible:
                         actions.context_click(elementVisible)
                         actions.perform()
+                    else:
+                        self.__raise_element_not_visible_exception(locator)
+                else:
+                    self.__raise_element_not_present_exception(locator)                         
             else:
                 actions.context_click()
                 actions.perform() 
@@ -495,6 +589,10 @@ class common_v2(customwebDriverwait):
                         actions.click(elementVisible)
                         actions.send_keys_to_element(element, *keys_to_send)
                         actions.perform()
+                    else:
+                        self.__raise_element_not_visible_exception(locator)
+                else:
+                    self.__raise_element_not_present_exception(locator)                         
         except Exception as error:
             raise error    
 
@@ -574,6 +672,8 @@ class common_v2(customwebDriverwait):
                     #if elementVisible:
                        # actions.scroll_to_element( elementVisible)
                         actions.perform()
+            else:
+                self.__raise_element_not_present_exception(locator)            
         except Exception as error:
             raise error
     def switch_To_ActiveElement(self):
@@ -590,6 +690,8 @@ class common_v2(customwebDriverwait):
             if elementPresense:
                    # if elementVisible:
                         elementPresense.submit()
+            else:
+                self.__raise_element_not_present_exception(locator)                         
         except Exception as error:
             raise error
     def get_Value_of_css_property(self,locatorType:str,locator,property_name):
@@ -599,6 +701,8 @@ class common_v2(customwebDriverwait):
             if elementPresense:
                     #if elementVisible:
                         return elementPresense.value_of_css_property(property_name)
+            else:
+                self.__raise_element_not_present_exception(locator)                         
         except Exception as error:
             raise error
     def get_Accessible_name(self,locatorType:str,locator):
@@ -608,6 +712,8 @@ class common_v2(customwebDriverwait):
             if elementPresense:
                     #if elementVisible: 
                         return elementPresense.accessible_name
+            else:
+                self.__raise_element_not_present_exception(locator)                         
         except Exception as error:
             raise error 
     def get_Aria_role(self,locatorType:str,locator):
@@ -617,6 +723,8 @@ class common_v2(customwebDriverwait):
             if elementPresense:
                     #if elementVisible:
                          return elementPresense.Aria_role
+            else:
+                self.__raise_element_not_present_exception(locator)                      
         except Exception as error:
             raise error 
     '''Internal ID used by selenium.
@@ -635,6 +743,8 @@ class common_v2(customwebDriverwait):
             if elementPresense:
                     #if elementVisible: 
                         return elementPresense.id
+            else:
+                self.__raise_element_not_present_exception(locator)            
         except Exception as error:
             raise error
     def Get_location_of_Element(self,locatorType:str,locator):
@@ -644,6 +754,8 @@ class common_v2(customwebDriverwait):
             if elementPresense:
                    # if elementVisible:
                          return elementPresense.location
+            else:
+                self.__raise_element_not_present_exception(locator)                           
         except Exception as error:
             raise error
     '''
@@ -659,6 +771,8 @@ class common_v2(customwebDriverwait):
             if elementPresense:
                     #if elementVisible: 
                          return elementPresense.location_once_scrolled_into_view
+            else:
+                self.__raise_element_not_present_exception(locator)                       
         except Exception as error:
             raise error          
     '''
@@ -671,6 +785,8 @@ class common_v2(customwebDriverwait):
             if elementPresense:
                     #if elementVisible: 
                         return elementPresense.parent
+            else:
+                self.__raise_element_not_present_exception(locator)                        
         except Exception as error:
             raise error
     '''
@@ -683,6 +799,8 @@ class common_v2(customwebDriverwait):
             if elementPresense:
                     #if elementVisible: 
                             return elementPresense.rect
+            else:
+                self.__raise_element_not_present_exception(locator)                            
         except Exception as error:
             raise error
     def get_element_screenshot_as_base64(self,locatorType:str,locator,name:str):
@@ -693,6 +811,10 @@ class common_v2(customwebDriverwait):
                     if elementVisible: 
                         with open(self.__webElement_Screenshot_Location()+"/"+name+".jpg", "wb") as fh:
                             fh.write(base64.urlsafe_b64decode(elementVisible.screenshot_as_base64))
+                    else:
+                        self.__raise_element_not_visible_exception(locator)
+            else:
+                self.__raise_element_not_present_exception(locator)                            
             
             #return element.screenshot_as_base64
         except Exception as error:
@@ -706,6 +828,10 @@ class common_v2(customwebDriverwait):
                         result_File=self.__webElement_Screenshot_Location()+"/"+name+".png"
                         with open(result_File, "wb") as fh:
                             fh.write(elementVisible.screenshot_as_png)
+                    else:
+                        self.__raise_element_not_visible_exception(locator)
+            else:
+                self.__raise_element_not_present_exception(locator)                            
                 #Image.open(result_File).save(result_File, 'PNG')
         except Exception as error:
             raise error
@@ -725,6 +851,8 @@ class common_v2(customwebDriverwait):
             if elementPresense:
                     #if elementVisible: 
                             return elementPresense.shadow_root
+            else:
+                self.__raise_element_not_present_exception(locator)                            
         except Exception as error:
             raise error
     def get_Element_size(self,locatorType:str,locator):
@@ -734,6 +862,8 @@ class common_v2(customwebDriverwait):
             if elementPresense:
                     #if elementVisible: 
                             return elementPresense.size
+            else:
+                self.__raise_element_not_present_exception(locator)                            
         except Exception as error:
             raise error
     def get_Element_tag_name(self,locatorType:str,locator):
@@ -743,6 +873,8 @@ class common_v2(customwebDriverwait):
             if elementPresense:
                     #if elementVisible:
                         return elementPresense.tag_name
+            else:
+                self.__raise_element_not_present_exception(locator)                        
         except Exception as error:
             raise error
     def get_Element_text(self,locatorType:str,locator):
@@ -752,6 +884,8 @@ class common_v2(customwebDriverwait):
             if elementPresense:
                     #if elementVisible:
                         return elementPresense.text
+            else:
+                self.__raise_element_not_present_exception(locator)                        
         except Exception as error:
             raise error
     def __webElement_Screenshot_Location(self):
@@ -784,10 +918,21 @@ class common_v2(customwebDriverwait):
             SourceelElementVisibility=super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,sourcexpath)
             DestinationElementPresense=super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,destinationxpath)
             DestinationElementVisibility=super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,destinationxpath)
-            if(SourceelElementPresense and DestinationElementPresense ):
-                if(SourceelElementVisibility and DestinationElementVisibility):
-                    action_chains = ActionChains(self.driver)
-                    action_chains.drag_and_drop(SourceelElementVisibility, DestinationElementVisibility).perform()
+            if(SourceelElementPresense ):
+                if DestinationElementPresense:
+                    if(SourceelElementVisibility ):
+                        if DestinationElementVisibility:
+                            action_chains = ActionChains(self.driver)
+                            action_chains.drag_and_drop(SourceelElementVisibility, DestinationElementVisibility).perform()
+                        else:
+                            self.__raise_element_not_visible_exception(destinationxpath)
+                    else:
+                        self.__raise_element_not_visible_exception(sourcexpath)
+                else:
+                    self.__raise_element_not_present_exception(sourcexpath) 
+            else:
+                self.__raise_element_not_present_exception(destinationxpath)              
+
         except Exception as error:
             raise error            
         '''
@@ -808,6 +953,10 @@ class common_v2(customwebDriverwait):
                     action_chains = ActionChains(self.driver)
                     action_chains.drag_and_drop_by_offset(
                         SourceelElementVisibility, xoffset, yoffset).perform()
+                else:
+                    self.__raise_element_not_visible_exception(sourcexpath)
+            else:
+                self.__raise_element_not_present_exception(sourcexpath)                        
         except Exception as error:
             raise error                
 
@@ -821,6 +970,8 @@ class common_v2(customwebDriverwait):
                 #if(elementVisibility):
                     select = Select(self.findElementBy(locatorType, locator))
                     select.select_by_value(valueToSelect)
+            else:
+                self.__raise_element_not_present_exception(locator)                    
         except Exception as error:
             raise error
     def selectDropDownByIndex(self,locatorType:str,locator, indexToSelect):
@@ -831,6 +982,8 @@ class common_v2(customwebDriverwait):
                 #if(elementVisibility):
                     select = Select(self.findElementBy(locatorType, locator))
                     select.select_by_index(indexToSelect)
+            else:
+                self.__raise_element_not_present_exception(locator)                    
         except Exception as error:
             raise error
     def selectDropDownByVisibleText(self,locatorType:str,locator, textToSelect):
@@ -840,6 +993,8 @@ class common_v2(customwebDriverwait):
             if(elementPresense):
                     select = Select(self.findElementBy(locatorType, locator))
                     select.select_by_visible_text(textToSelect)
+            else:
+                self.__raise_element_not_present_exception(locator)                    
         except Exception as error:
             raise error
     def deselectAllOptionsInDropDown(self,locatorType:str,locator):
@@ -850,6 +1005,8 @@ class common_v2(customwebDriverwait):
                 #if(elementVisibility):
                     select = Select(self.findElementBy(locatorType, locator))
                     select.deselect_all()
+            else:
+                self.__raise_element_not_present_exception(locator)                    
         except Exception as error:
             raise error
     def getDefaultSelectedDropDownOptions(self,locatorType:str,locator):
@@ -867,6 +1024,8 @@ class common_v2(customwebDriverwait):
                         elif(i.get_attribute('value')):
                             selectedOptions.append(i.get_attribute('value'))
                     return selectedOptions
+            else:
+                self.__raise_element_not_present_exception(locator)                    
         except Exception as error:
             raise error
     def getAllOptionInDropDown(self,locatorType:str,locator):
@@ -885,6 +1044,8 @@ class common_v2(customwebDriverwait):
                             allOptions.append(i.get_attribute('value'))
 
                     return allOptions
+            else:
+                self.__raise_element_not_present_exception(locator)                    
         except Exception as error:
             raise error
     def deselectByIndex(self,locatorType:str,locator, index):
@@ -895,6 +1056,8 @@ class common_v2(customwebDriverwait):
                 #if(elementVisibility):
                     select = Select(self.findElementBy(locatorType, locator))
                     select.deselect_by_index(index)
+            else:
+                self.__raise_element_not_present_exception(locator)                    
         except Exception as error:
             raise error
     def deselectByValue(self,locatorType:str,locator, value):
@@ -905,6 +1068,8 @@ class common_v2(customwebDriverwait):
                 #if(elementVisibility):
                     select = Select(self.findElementBy(locatorType, locator))
                     select.deselect_by_value(value)
+            else:
+                self.__raise_element_not_present_exception(locator)                    
         except Exception as error:
             raise error
     def deselectByVisibleText(self,locatorType:str,locator, text):
@@ -915,6 +1080,8 @@ class common_v2(customwebDriverwait):
                 #if(elementVisibility):        
                     select = Select(self.findElementBy(locatorType, locator))
                     select.deselect_by_visible_text(text)
+            else:
+                self.__raise_element_not_present_exception(locator)                    
         except Exception as error:
             raise error
     def getFirstSelecteOption(self,locatorType:str,locator):
@@ -933,6 +1100,8 @@ class common_v2(customwebDriverwait):
                             firstSelectedOption.append(selectedOption.get_attribute('value'))
 
                     return firstSelectedOption 
+            else:
+                self.__raise_element_not_present_exception(locator)                    
         except Exception as error:
             raise error                    
     def switch_To_Frame_ByAnyLocator(self,locatorType:str,locator):
@@ -943,6 +1112,8 @@ class common_v2(customwebDriverwait):
                 #self.driver.switch_to.frame(element)
         except Exception as error:
             raise error
+    def __raise_element_not_present_exception(self,locator):
+        raise Exception("element not present : "+locator)
 
-
-        
+    def __raise_element_not_visible_exception(self,locator):
+        raise Exception("element not visible : "+locator)        
