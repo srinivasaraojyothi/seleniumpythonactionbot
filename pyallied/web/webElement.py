@@ -279,14 +279,29 @@ class common(customwebDriverwait):
             if elementPresense :
                 if elementVisible:
                     #element = self.driver.find_element(By.XPATH, xpath)
-                    actions.move_to_element(element).click(elementVisible)
+                    actions.move_to_element(elementVisible).click(elementVisible)
                     actions.perform()
                 else:
                     self.__raise_element_not_visible_exception(xpath) 
             else:
                 self.__raise_element_not_present_exception(xpath)                     
         except Exception as error:
-            raise  error    
+            raise  error
+    def action_clear_field(self, xpath):
+        try:
+            actions = ActionChains(self.driver)
+            elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
+            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            if elementPresense :
+                if elementVisible:
+                    #element = self.driver.find_element(By.XPATH, xpath)
+                    actions.click(elementVisible).key_down(Keys.CONTROL).send_keys('a').key_up(Keys.CONTROL).send_keys(Keys.BACK_SPACE).pause(1).perform()
+                else:
+                    self.__raise_element_not_visible_exception(xpath) 
+            else:
+                self.__raise_element_not_present_exception(xpath)                     
+        except Exception as error:
+            raise  error                
 
         '''
         Holds down the left mouse button on an element.
@@ -436,7 +451,23 @@ class common(customwebDriverwait):
             else:
                 self.__raise_element_not_present_exception(xpath)                     
         except Exception as error:
-            raise error 
+            raise error
+    def moveToElement_WithOffset_and_drag_and_drop(self, xpath, xoffset_click, yoffset_click,xoffset_move,yoffset_move):
+        try:
+            actions = ActionChains(self.driver)
+            elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
+            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            if elementPresense:
+                if elementVisible:
+                    #element = self.driver.find_element(By.XPATH, xpath)
+                    actions.move_to_element_with_offset(elementVisible, xoffset, yoffset).click_and_hold().move_by_offset(xoffset_move,yoffset_move).release().pause(1).perform()
+                    #actions.perform()
+                else:
+                    self.__raise_element_not_visible_exception(xpath)
+            else:
+                self.__raise_element_not_present_exception(xpath)                     
+        except Exception as error:
+            raise error              
     def moveTo_location_and_click(self, xoffset, yoffset,clickElementXpath=None):
         try:
             actions = ActionChains(self.driver)
@@ -849,7 +880,21 @@ class common(customwebDriverwait):
         if elementPresense:       
             self.driver.execute_script("arguments[0].scrollIntoView(true);", self.driver.find_element_by_xpath(xpath))  
         else:
-            self.__raise_element_not_present_exception(xpath)                   
+            self.__raise_element_not_present_exception(xpath) 
+    def clear_input_field_by_js(self,xpath):
+        elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath) 
+        if elementPresense:       
+            self.driver.execute_script("arguments[0].value = '';", self.driver.find_element_by_xpath(xpath))  
+        else:
+            self.__raise_element_not_present_exception(xpath)
+            
+    def click_by_js(self,xpath):
+        elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath) 
+        if elementPresense:       
+            self.driver.execute_script("arguments[0].click();", self.driver.find_element_by_xpath(xpath))  
+        else:
+            self.__raise_element_not_present_exception(xpath)                 
+
     '''
     Internal reference to the WebDriver instance this element was found from.
     '''        
@@ -951,6 +996,13 @@ class common(customwebDriverwait):
                 self.__raise_element_not_present_exception(xpath)                    
         except Exception as error:
             raise error
+    def click_by_js(self,xpath):
+        try:
+            elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
+            self.driver.execute_script("arguments[0].click();", self.driver.find_element_by_xpath(xpath))
+        except Exception as error:
+            raise error
+
     def get_Element_text(self,xpath):
         try:
             elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
@@ -978,6 +1030,7 @@ class common(customwebDriverwait):
             return element
         except Exception as error:
             return error
+         
     def __raise_element_not_present_exception(self,locator):
         raise Exception("element not present : "+locator)
 
