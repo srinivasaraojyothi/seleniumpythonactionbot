@@ -147,7 +147,51 @@ class DragAndDrop(customwebDriverwait):
             f.close()
             self.driver.execute_script(javascript, source_css, destination_css)
         except Exception as error:
-            raise error    
+            raise error
+    def moveToElement_WithOffset_and_drag_and_drop(self, xpath, xoffset_click, yoffset_click,xoffset_move,yoffset_move):
+        try:
+            actions = ActionChains(self.driver)
+            elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
+            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            if elementPresense:
+                if elementVisible:
+                    #element = self.driver.find_element(By.XPATH, xpath)
+                    actions.move_to_element_with_offset(elementVisible, xoffset, yoffset).click_and_hold().move_by_offset(xoffset_move,yoffset_move).release().pause(1).perform()
+                    #actions.perform()
+                else:
+                    self.__raise_element_not_visible_exception(xpath)
+            else:
+                self.__raise_element_not_present_exception(xpath)                     
+        except Exception as error:
+            raise error   
+
+    def drag_and_drop_with_move_to_element(self, xpath_source,xpath_destination ):
+        try:
+            actions = ActionChains(self.driver)
+            elementPresense_source = super().WaitFor_PresenseOf_Element_Located(xpath_source)
+            elementVisible_source = super().WaitFor_VisibilityOf_Element_Located(xpath_source)
+            elementPresense_destination = super().WaitFor_PresenseOf_Element_Located(xpath_destination)
+            elementVisible_destination = super().WaitFor_VisibilityOf_Element_Located(xpath_destination)            
+            if elementPresense_source:
+                if elementVisible_source:
+                    if elementPresense_destination:
+                        if elementVisible_destination:
+
+                    #element = self.driver.find_element(By.XPATH, xpath)
+                    #actions.move_to_element_with_offset(elementVisible, xoffset, yoffset).click_and_hold().move_by_offset(xoffset_move,yoffset_move).release().pause(1).perform()
+                                actions.move_to_element(elementVisible_source).click_and_hold().move_to_element(elementVisible_destination).click().release().pause(1).perform()
+                    #actions.perform()
+                        else:
+                            self.__raise_element_not_visible_exception(xpath_destination)
+                    else:
+                        self.__raise_element_not_present_exception(xpath_destination)
+                else:
+                    self.__raise_element_not_visible_exception(xpath_source) 
+            else:
+                self.__raise_element_not_present_exception(xpath_source)                                      
+        except Exception as error:
+            raise error  
+
     def __waitFor_presenseOf_element_located(self, cssLocator):
         try:
             return WebDriverWait(self.driver, self.customWait).until(EC.presence_of_element_located((By.CSS_SELECTOR, cssLocator)))

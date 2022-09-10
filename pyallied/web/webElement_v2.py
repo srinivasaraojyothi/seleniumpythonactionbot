@@ -587,7 +587,7 @@ class common_v2(customwebDriverwait):
                 if elementPresense:
                     if elementVisible:
                         actions.click(elementVisible)
-                        actions.send_keys_to_element(element, *keys_to_send)
+                        actions.send_keys_to_element(elementVisible, *keys_to_send)
                         actions.perform()
                     else:
                         self.__raise_element_not_visible_exception(locator)

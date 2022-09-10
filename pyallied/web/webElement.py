@@ -452,22 +452,8 @@ class common(customwebDriverwait):
                 self.__raise_element_not_present_exception(xpath)                     
         except Exception as error:
             raise error
-    def moveToElement_WithOffset_and_drag_and_drop(self, xpath, xoffset_click, yoffset_click,xoffset_move,yoffset_move):
-        try:
-            actions = ActionChains(self.driver)
-            elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
-            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
-            if elementPresense:
-                if elementVisible:
-                    #element = self.driver.find_element(By.XPATH, xpath)
-                    actions.move_to_element_with_offset(elementVisible, xoffset, yoffset).click_and_hold().move_by_offset(xoffset_move,yoffset_move).release().pause(1).perform()
-                    #actions.perform()
-                else:
-                    self.__raise_element_not_visible_exception(xpath)
-            else:
-                self.__raise_element_not_present_exception(xpath)                     
-        except Exception as error:
-            raise error              
+
+                      
     def moveTo_location_and_click(self, xoffset, yoffset,clickElementXpath=None):
         try:
             actions = ActionChains(self.driver)
