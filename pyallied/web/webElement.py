@@ -215,7 +215,7 @@ class common(customwebDriverwait):
     def isElementEnabled(self, xpath):
         try:
 
-            return return self.driver.find_element_by_xpath(xpath).is_enabled()
+            return self.driver.find_element_by_xpath(xpath).is_enabled()
                     
         except Exception as error:
             raise error
@@ -227,7 +227,7 @@ class common(customwebDriverwait):
     def isElementSelected(self, xpath):
         try:
 
-                    return return self.driver.find_element_by_xpath(xpath).is_selected()
+                    return self.driver.find_element_by_xpath(xpath).is_selected()
                      
         except Exception as error:
             raise error
