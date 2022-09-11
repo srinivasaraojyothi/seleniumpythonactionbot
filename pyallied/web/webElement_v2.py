@@ -194,7 +194,52 @@ class common_v2(customwebDriverwait):
     '''
         Whether the element is visible to a user.
     '''
+
     def isElementDisplayed(self,locatorType:str,locator):
+        try:
+            elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
+            elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)
+            if(elementPresense):
+                if(elementVisible):
+                    return elementVisible.is_displayed()
+                else:
+                    self.__raise_element_not_visible_exception(locator)    
+            else:        
+                self.__raise_element_not_present_exception(locator)
+        except Exception as error:
+            raise error
+    '''
+        Returns whether the element is enabled.
+    '''
+    def isElementEnabled(self,locatorType:str,locator):
+        try:
+            elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
+            elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)
+            if(elementPresense):
+                if(elementVisible):
+                    return elementVisible.is_enabled() 
+                else:
+                    self.__raise_element_not_visible_exception(locator)
+        except Exception as error:
+            raise error
+    '''
+        Returns whether the element is selected.
+        Can be used to check if a checkbox or radio button is selected.
+    '''
+    def isElementSelected(self,locatorType:str,locator):
+        try:
+            elementPresense = super().WaitFor_PresenseOf_Element_Located_AnyLocatorType(locatorType,locator)
+            elementVisible = super().WaitFor_Visibility_of_Element_Located_AnyLocatorType(locatorType,locator)
+            if(elementPresense):
+                if(elementVisible):
+                    return elementVisible.is_selected() 
+                else:
+                    self.__raise_element_not_visible_exception(locator)
+        except Exception as error:
+            raise error
+
+
+    def isElementDisplayed_v1(self,locatorType:str,locator):
         try:
             if(locatorType.upper()=="XPATH"):
                 return self.driver.find_element(By.XPATH, locator).is_displayed()
@@ -219,7 +264,7 @@ class common_v2(customwebDriverwait):
     '''
         Returns whether the element is enabled.
     '''
-    def isElementEnabled(self,locatorType:str,locator):
+    def isElementEnabled_v2(self,locatorType:str,locator):
         try:
             if(locatorType.upper()=="XPATH"):
                 return self.driver.find_element(By.XPATH, locator).is_enabled()
@@ -247,7 +292,7 @@ class common_v2(customwebDriverwait):
 
         Can be used to check if a checkbox or radio button is selected.
     '''
-    def isElementSelected(self,locatorType:str,locator):
+    def isElementSelected_v2(self,locatorType:str,locator):
         try:
             if(locatorType.upper()=="XPATH"):
                 return self.driver.find_element(By.XPATH, locator).is_selected()

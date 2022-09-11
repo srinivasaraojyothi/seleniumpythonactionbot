@@ -199,11 +199,52 @@ class common(customwebDriverwait):
             else:
                 self.__raise_element_not_present_exception(xpath)                    
         except Exception as error:
-            raise error             
+            raise error     
+
+    def isElementDisplayed(self, xpath):
+        try:
+            elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
+            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            if(elementPresense):
+                if(elementVisible):
+                    return elementVisible.is_displayed()
+                else:
+                    self.__raise_element_not_visible_exception(xpath) 
+            else:
+                self.__raise_element_not_present_exception(xpath)                     
+        except Exception as error:
+            raise error
+    def isElementEnabled(self, xpath):
+        try:
+            elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
+            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            if(elementPresense):
+                if(elementVisible):
+                    return elementVisible.is_enabled()
+                else:
+                    self.__raise_element_not_visible_exception(xpath) 
+            else:
+                self.__raise_element_not_present_exception(xpath)                     
+
+        except Exception as error:
+            raise error                        
+    def isElementSelected(self, xpath):
+        try:
+            elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
+            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
+            if(elementPresense):
+                if(elementVisible):
+                    return elementVisible.is_selected()
+                else:
+                    self.__raise_element_not_visible_exception(xpath) 
+            else:
+                self.__raise_element_not_present_exception(xpath)                    
+        except Exception as error:
+            raise error
     '''
         Whether the element is visible to a user.
     '''
-    def isElementDisplayed(self, xpath):
+    def isElementDisplayed_v2(self, xpath):
         try:
             return self.driver.find_element_by_xpath(xpath).is_displayed()
                                 
@@ -212,7 +253,7 @@ class common(customwebDriverwait):
     '''
         Returns whether the element is enabled.
     '''
-    def isElementEnabled(self, xpath):
+    def isElementEnabled_v2(self, xpath):
         try:
 
             return self.driver.find_element_by_xpath(xpath).is_enabled()
@@ -224,7 +265,7 @@ class common(customwebDriverwait):
 
         Can be used to check if a checkbox or radio button is selected.
     '''
-    def isElementSelected(self, xpath):
+    def isElementSelected_v2(self, xpath):
         try:
 
                     return self.driver.find_element_by_xpath(xpath).is_selected()
