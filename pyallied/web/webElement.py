@@ -205,15 +205,8 @@ class common(customwebDriverwait):
     '''
     def isElementDisplayed(self, xpath):
         try:
-            elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
-            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
-            if(elementPresense):
-                if(elementVisible):
-                    return elementVisible.is_displayed()
-                else:
-                    self.__raise_element_not_visible_exception(xpath) 
-            else:
-                self.__raise_element_not_present_exception(xpath)                     
+            return self.driver.find_element_by_xpath(xpath).is_displayed()
+                                
         except Exception as error:
             raise error             
     '''
@@ -221,15 +214,9 @@ class common(customwebDriverwait):
     '''
     def isElementEnabled(self, xpath):
         try:
-            elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
-            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
-            if(elementPresense):
-                if(elementVisible):
-                    return elementVisible.is_enabled()
-                else:
-                    self.__raise_element_not_visible_exception(xpath) 
-            else:
-                self.__raise_element_not_present_exception(xpath)                     
+
+            return return self.driver.find_element_by_xpath(xpath).is_enabled()
+                    
         except Exception as error:
             raise error
     '''
@@ -239,15 +226,9 @@ class common(customwebDriverwait):
     '''
     def isElementSelected(self, xpath):
         try:
-            elementPresense = super().WaitFor_PresenseOf_Element_Located(xpath)
-            elementVisible = super().WaitFor_VisibilityOf_Element_Located(xpath)
-            if(elementPresense):
-                if(elementVisible):
-                    return elementVisible.is_selected()
-                else:
-                    self.__raise_element_not_visible_exception(xpath) 
-            else:
-                self.__raise_element_not_present_exception(xpath)                     
+
+                    return return self.driver.find_element_by_xpath(xpath).is_selected()
+                     
         except Exception as error:
             raise error
     '''
