@@ -197,21 +197,21 @@ class common_v2(customwebDriverwait):
     def isElementDisplayed(self,locatorType:str,locator):
         try:
             if(locatorType.upper()=="XPATH"):
-                return self.driver.find_element((By.XPATH, locator)).is_displayed()
+                return self.driver.find_element(By.XPATH, locator).is_displayed()
             elif(locatorType.upper()=="ID"):
-                return self.driver.find_element((By.ID, locator)).is_displayed()                
+                return self.driver.find_element(By.ID, locator).is_displayed()                
             elif(locatorType.upper()=="CLASS_NAME"):
-                return self.driver.find_element((By.CLASS_NAME, locator)).is_displayed()
+                return self.driver.find_element(By.CLASS_NAME, locator).is_displayed()
             elif(locatorType.upper()=="CSS_SELECTOR"):
-                return self.driver.find_element((By.CSS_SELECTOR, locator)).is_displayed()
+                return self.driver.find_element(By.CSS_SELECTOR, locator).is_displayed()
             elif(locatorType.upper()=="LINK_TEXT"):
-                return self.driver.find_element((By.LINK_TEXT, locator)).is_displayed()
+                return self.driver.find_element(By.LINK_TEXT, locator).is_displayed()
             elif(locatorType.upper()=="NAME"):
-                return self.driver.find_element((By.NAME, locator)).is_displayed()
+                return self.driver.find_element(By.NAME, locator).is_displayed()
             elif(locatorType.upper()=="PARTIAL_LINK_TEXT"):
-                return self.driver.find_element((By.PARTIAL_LINK_TEXT, locator)).is_displayed()
+                return self.driver.find_element(By.PARTIAL_LINK_TEXT, locator).is_displayed()
             elif(locatorType.upper()=="TAG_NAME"):
-                return self.driver.find_element((By.TAG_NAME, locator)).is_displayed()                
+                return self.driver.find_element(By.TAG_NAME, locator).is_displayed()                
             else:
                 raise Exception(" ** wrong selector/ no selector ** ",locatorType.upper())    
         except Exception as error:
@@ -222,21 +222,21 @@ class common_v2(customwebDriverwait):
     def isElementEnabled(self,locatorType:str,locator):
         try:
             if(locatorType.upper()=="XPATH"):
-                return self.driver.find_element((By.XPATH, locator)).is_enabled()
+                return self.driver.find_element(By.XPATH, locator).is_enabled()
             elif(locatorType.upper()=="ID"):
-                return self.driver.find_element((By.ID, locator)).is_enabled()                
+                return self.driver.find_element(By.ID, locator).is_enabled()                
             elif(locatorType.upper()=="CLASS_NAME"):
-                return self.driver.find_element((By.CLASS_NAME, locator)).is_enabled()
+                return self.driver.find_element(By.CLASS_NAME, locator).is_enabled()
             elif(locatorType.upper()=="CSS_SELECTOR"):
-                return self.driver.find_element((By.CSS_SELECTOR, locator)).is_enabled()
+                return self.driver.find_element(By.CSS_SELECTOR, locator).is_enabled()
             elif(locatorType.upper()=="LINK_TEXT"):
-                return self.driver.find_element((By.LINK_TEXT, locator)).is_enabled()
+                return self.driver.find_element(By.LINK_TEXT, locator).is_enabled()
             elif(locatorType.upper()=="NAME"):
-                return self.driver.find_element((By.NAME, locator)).is_enabled()
+                return self.driver.find_element(By.NAME, locator).is_enabled()
             elif(locatorType.upper()=="PARTIAL_LINK_TEXT"):
-                return self.driver.find_element((By.PARTIAL_LINK_TEXT, locator)).is_enabled()
+                return self.driver.find_element(By.PARTIAL_LINK_TEXT, locator).is_enabled()
             elif(locatorType.upper()=="TAG_NAME"):
-                return self.driver.find_element((By.TAG_NAME, locator)).is_enabled()                
+                return self.driver.find_element(By.TAG_NAME, locator).is_enabled()                
             else:
                 raise Exception(" ** wrong selector/ no selector ** ",locatorType.upper())    
         except Exception as error:
@@ -250,21 +250,21 @@ class common_v2(customwebDriverwait):
     def isElementSelected(self,locatorType:str,locator):
         try:
             if(locatorType.upper()=="XPATH"):
-                return self.driver.find_element((By.XPATH, locator)).is_selected()
+                return self.driver.find_element(By.XPATH, locator).is_selected()
             elif(locatorType.upper()=="ID"):
-                return self.driver.find_element((By.ID, locator)).is_selected()                
+                return self.driver.find_element(By.ID, locator).is_selected()                
             elif(locatorType.upper()=="CLASS_NAME"):
-                return self.driver.find_element((By.CLASS_NAME, locator)).is_selected()
+                return self.driver.find_element(By.CLASS_NAME, locator).is_selected()
             elif(locatorType.upper()=="CSS_SELECTOR"):
-                return self.driver.find_element((By.CSS_SELECTOR, locator)).is_selected()
+                return self.driver.find_element(By.CSS_SELECTOR, locator).is_selected()
             elif(locatorType.upper()=="LINK_TEXT"):
-                return self.driver.find_element((By.LINK_TEXT, locator)).is_selected()
+                return self.driver.find_element(By.LINK_TEXT, locator).is_selected()
             elif(locatorType.upper()=="NAME"):
-                return self.driver.find_element((By.NAME, locator)).is_selected()
+                return self.driver.find_element(By.NAME, locator).is_selected()
             elif(locatorType.upper()=="PARTIAL_LINK_TEXT"):
-                return self.driver.find_element((By.PARTIAL_LINK_TEXT, locator)).is_selected()
+                return self.driver.find_element(By.PARTIAL_LINK_TEXT, locator).is_selected()
             elif(locatorType.upper()=="TAG_NAME"):
-                return self.driver.find_element((By.TAG_NAME, locator)).is_selected()                
+                return self.driver.find_element(By.TAG_NAME, locator).is_selected()                
             else:
                 raise Exception(" ** wrong selector/ no selector ** ",locatorType.upper())    
         except Exception as error:
