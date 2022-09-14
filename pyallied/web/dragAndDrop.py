@@ -156,7 +156,7 @@ class DragAndDrop(customwebDriverwait):
             if elementPresense:
                 if elementVisible:
                     #element = self.driver.find_element(By.XPATH, xpath)
-                    actions.move_to_element_with_offset(elementVisible, xoffset, yoffset).click_and_hold().move_by_offset(xoffset_move,yoffset_move).release().pause(1).perform()
+                    actions.move_to_element_with_offset(elementVisible, xoffset_click, yoffset_click).click_and_hold().move_by_offset(xoffset_move,yoffset_move).release().pause(1).perform()
                     #actions.perform()
                 else:
                     self.__raise_element_not_visible_exception(xpath)
