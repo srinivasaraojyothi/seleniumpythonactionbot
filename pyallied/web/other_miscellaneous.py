@@ -1,27 +1,20 @@
-from mailbox import Mailbox
-from re import A
-import cv2
-import numpy as np
-import easyocr
-import matplotlib.pyplot as pl
-from PIL import Image, ImageChops, ImageDraw
-from pyallied.web.webWaits import customwebDriverwait
-import textract
 import os
-import slate3k
-import pandas as pd
-import PyPDF2
-from imap_tools import MailBox
-from imap_tools import AND, OR
 from datetime import date
-from base64 import b64decode
-import codecs
+
+import PyPDF2
+import easyocr
+from PIL import Image, ImageChops, ImageDraw
+from imap_tools import AND
+from imap_tools import MailBox
+
+from pyallied.web.webWaits import customwebDriverwait
 
 
 class miscellaneous(customwebDriverwait):
     def __init__(self, driver):
         super().__init__(driver)
         self.driver = driver
+
     '''
     returns the embedded text in the image.
     It returns a list of detected text, with each text element containing three types of information. 
@@ -35,7 +28,7 @@ class miscellaneous(customwebDriverwait):
             data = reader.readtext(path)
             for i in data:
                 textList.append(i[1])
-            #print(type(data),"---obj trype---")
+            # print(type(data),"---obj trype---")
             # return reader.readtext(path)
             return textList
         except Exception as error:
@@ -52,7 +45,7 @@ class miscellaneous(customwebDriverwait):
         except Exception as error:
             raise error
 
-    def new_gray(self,size, color):
+    def new_gray(self, size, color):
         img = Image.new('L', size)
         dr = ImageDraw.Draw(img)
         dr.rectangle((0, 0) + size, color)
@@ -91,10 +84,10 @@ class miscellaneous(customwebDriverwait):
             file = open(file1, 'rb')
 
             pdfRead = PyPDF2.PdfFileReader(file)
-            #print(pdfRead.getDocumentInfo().title,' ----title----')
+            # print(pdfRead.getDocumentInfo().title,' ----title----')
             output = []
             readData = pdfRead.getPage(0)
-            #print(readData.extractText(),' ----single----')
+            # print(readData.extractText(),' ----single----')
             for page in pdfRead.pages:
                 output.append(page.extractText().replace("\n", " "))
             file.close()
@@ -106,43 +99,44 @@ class miscellaneous(customwebDriverwait):
         try:
             mailbox = MailBox(host, port)
             mailbox.login(userName, password)
-            #responses =mailbox.idle.wait(timeout=60)
+            # responses =mailbox.idle.wait(timeout=60)
             mailData = {}
             path = ''
             fileName = ''
-            #file2 = open(r"D:/Users/sjyothi/Repos/pythonseleniumFramework/testdata/MyFile2.txt", "w+")
+            # file2 = open(r"D:/Users/sjyothi/Repos/pythonseleniumFramework/testdata/MyFile2.txt", "w+")
             # data=''
             # if responses:
             # print(responses,'-----respon')
             # for msg in mailbox.fetch():
-            if(searchDate != None):
+            if (searchDate != None):
                 spliData = searchDate.split("/")
                 year = int(spliData[0])
                 month = int(spliData[1])
                 day = int(spliData[2])
                 for msg in mailbox.fetch(AND(date=date(year, month, day))):
-                    if(msg.subject in searchString):
+                    if (msg.subject in searchString):
                         # print(msg.attachments,'--attach---')
-                        if(msg.attachments):
+                        if (msg.attachments):
                             # print(msg.date.strftime,"----------------yes--------")
                             cwd = os.getcwd()
-                            if(not os.path.exists(cwd+"/tmp")):
-                                path = os.mkdir(cwd+"/tmp")
+                            if (not os.path.exists(cwd + "/tmp")):
+                                path = os.mkdir(cwd + "/tmp")
                                 # print(path,"---path---")
                             else:
-                                path = cwd+"/tmp"
+                                path = cwd + "/tmp"
                             for att in msg.attachments:
                                 # print(pd.DataFrame(data=att.payload),"-----------------------------------")
 
-                                with open(path+'/{}'.format(att.filename), 'wb') as f:
+                                with open(path + '/{}'.format(att.filename), 'wb') as f:
                                     # print('----',att.filename)
                                     fileName = att.filename
                                     f.write(att.payload)
 
-                                mailData[msg.date_str] = msg.text.replace("\r\n", " "), msg.subject, self.pdf_content_reader(
-                                    path+"/"+fileName)
+                                mailData[msg.date_str] = msg.text.replace("\r\n",
+                                                                          " "), msg.subject, self.pdf_content_reader(
+                                    path + "/" + fileName)
                         else:
-                            #print(msg.date_str.replace(" ",""),"----------------yes--------")
+                            # print(msg.date_str.replace(" ",""),"----------------yes--------")
 
                             mailData[msg.date_str] = msg.text.replace(
                                 "\r\n", " "), msg.subject
@@ -154,26 +148,27 @@ class miscellaneous(customwebDriverwait):
                 month = date.today().month
                 day = date.today().day
                 for msg in mailbox.fetch(AND(date=date(Year, month, day))):
-                    if(msg.subject in searchString):
+                    if (msg.subject in searchString):
                         # print(msg.attachments,'--attach---')
-                        if(msg.attachments):
+                        if (msg.attachments):
                             # print(msg.date.strftime,"----------------yes--------")
                             cwd = os.getcwd()
-                            if(not os.path.exists(cwd+"/tmp")):
-                                path = os.mkdir(cwd+"/tmp")
+                            if (not os.path.exists(cwd + "/tmp")):
+                                path = os.mkdir(cwd + "/tmp")
                                 # print(path,"---path---")
                             else:
-                                path = cwd+"/tmp"
+                                path = cwd + "/tmp"
                             for att in msg.attachments:
                                 # print(pd.DataFrame(data=att.payload),"-----------------------------------")
 
-                                with open(path+'/{}'.format(att.filename), 'wb') as f:
+                                with open(path + '/{}'.format(att.filename), 'wb') as f:
                                     # print('----',att.filename)
                                     fileName = att.filename
                                     f.write(att.payload)
 
-                                mailData[msg.date_str] = msg.text.replace("\r\n", " "), msg.subject, self.pdf_content_reader(
-                                    path+"/"+fileName)
+                                mailData[msg.date_str] = msg.text.replace("\r\n",
+                                                                          " "), msg.subject, self.pdf_content_reader(
+                                    path + "/" + fileName)
                         else:
                             # print(msg.date.time+"_"+msg.date.today,"----------------yes--------")
 

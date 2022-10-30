@@ -27,15 +27,18 @@ if TYPE_CHECKING:
 
     Orientation = Literal['portrait', 'landscape']
 
+
     class _MarginOpts(TypedDict, total=False):
         left: float
         right: float
         top: float
         bottom: float
 
+
     class _PageOpts(TypedDict, total=False):
         width: float
         height: float
+
 
     class _PrintOpts(TypedDict, total=False):
         margin: _MarginOpts

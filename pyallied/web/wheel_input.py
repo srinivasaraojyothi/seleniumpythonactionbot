@@ -14,11 +14,10 @@
 # KIND, either express or implied.  See the License for the
 # specific language governing permissions and limitations
 # under the License.
-from selenium.webdriver.common.actions import interaction
-from selenium.webdriver.common.actions.input_device import InputDevice
-
 from typing import Union
 
+from selenium.webdriver.common.actions import interaction
+from selenium.webdriver.common.actions.input_device import InputDevice
 from selenium.webdriver.remote.webelement import WebElement
 
 
